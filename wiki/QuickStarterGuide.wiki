@@ -7,7 +7,4 @@ Inventory Control system - update and track goods for a grocery. Sub-system to d
 
 = How to Get QT SDK and QT Development Environment =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+QT Creator link:http://qt.nokia.com/downloads
