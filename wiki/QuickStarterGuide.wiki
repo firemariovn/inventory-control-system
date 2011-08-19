@@ -1,11 +1,11 @@
-#summary Quick Starter Guide for Inventory Control Project.
+#summary Quick Starter Guide for Our Team-members.
 
 = Introduction =
 
 Inventory Control system - update and track goods for a grocery. Sub-system to dynamically issue stock-up requests for goods near depletion. Sub-system to track and warn of impending expiry of goods should be included as well.
 
 
-= Details =
+= How to Get QT SDK and QT Development Environment =
 
 Add your content here.  Format your content with:
   * Text in *bold* or _italic_
