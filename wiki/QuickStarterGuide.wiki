@@ -12,7 +12,7 @@ QT Creator link:http://qt.nokia.com/downloads   [We use QT Version 4.7]
 QT Programming Tutorial:http://doc.qt.nokia.com/4.7/index.html
 
 Chinese QT Programming Guide:http://hi.baidu.com/yafeilinux/blog/item/3446ff0b2c591635b0351d31.html 
-
+ 
 = Setup Development Environment = 
 
-
+  * Checkout Codes
