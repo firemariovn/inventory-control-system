@@ -1,4 +1,6 @@
+#summary Entity-relationship modeling is a database modeling method
 #labels E-R
+
 = Entity-relationship model =
 
 According to our last discussion, I designed 4 entities(Category, Goods, Batch, Staff) based on our inventory system.
