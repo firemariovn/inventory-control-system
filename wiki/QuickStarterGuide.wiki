@@ -18,3 +18,6 @@ Frequently Asked QT Programming Questions(Chinese):http://blog.csdn.net/starclou
 = Setup Development Environment = 
 
   * Checkout Codes
+
+= Business Knowledge =
+Warehouse Inbound and Storage:http://inventory-control-system.googlecode.com/files/WarehouseOperationsHandout2.pdf
