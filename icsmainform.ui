@@ -619,7 +619,7 @@
       <x>490</x>
       <y>280</y>
       <width>521</width>
-      <height>331</height>
+      <height>241</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="RightBottomVerticalLayout">
@@ -640,7 +640,7 @@
         <widget class="QLabel" name="label">
          <property name="geometry">
           <rect>
-           <x>20</x>
+           <x>40</x>
            <y>20</y>
            <width>62</width>
            <height>16</height>
@@ -653,7 +653,7 @@
         <widget class="QDateEdit" name="dateEdit">
          <property name="geometry">
           <rect>
-           <x>100</x>
+           <x>110</x>
            <y>10</y>
            <width>121</width>
            <height>25</height>
@@ -673,7 +673,7 @@
         <widget class="QLabel" name="label_2">
          <property name="geometry">
           <rect>
-           <x>1</x>
+           <x>10</x>
            <y>60</y>
            <width>91</width>
            <height>20</height>
@@ -686,7 +686,7 @@
         <widget class="QComboBox" name="comboBox">
          <property name="geometry">
           <rect>
-           <x>100</x>
+           <x>110</x>
            <y>60</y>
            <width>111</width>
            <height>26</height>
@@ -849,6 +849,40 @@
          </property>
          <property name="text">
           <string>30,000</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_4">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>530</y>
+      <width>521</width>
+      <height>161</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="OtherVerticalLayout">
+     <item>
+      <widget class="QDockWidget" name="dockWidget_2">
+       <property name="features">
+        <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
+       </property>
+       <property name="windowTitle">
+        <string>Warning Notice</string>
+       </property>
+       <widget class="QWidget" name="dockWidgetContents_2">
+        <widget class="QTableWidget" name="tableWidget">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>521</width>
+           <height>192</height>
+          </rect>
          </property>
         </widget>
        </widget>
