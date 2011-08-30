@@ -16,6 +16,10 @@ Chinese QT Programming Guide:
  * http://www.cppblog.com/biao/category/9973.html
 
 Frequently Asked QT Programming Questions(Chinese):http://blog.csdn.net/starcloud_zxt/article/details/5185470
+
+= How to Use Issue Tracker of Google Code =
+ *Quick Start:http://code.google.com/p/support/wiki/IssueTracker#Quick_start
+ *Integration with version control:http://code.google.com/p/support/wiki/IssueTracker#Integration_with_version_control
  
 = Setup Development Environment = 
 
