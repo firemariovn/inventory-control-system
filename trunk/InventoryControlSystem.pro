@@ -11,11 +11,13 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        icsmainform.cpp \
-    icsloginform.cpp
+    icsloginform.cpp \
+    icsmainform.cpp
 
-HEADERS  += icsmainform.h \
-    icsloginform.h
+HEADERS  += \
+    icsloginform.h \
+    icsmainform.h
 
-FORMS    += icsmainform.ui \
-    icsloginform.ui
+FORMS    += \
+    icsloginform.ui \
+    icsmainform.ui
