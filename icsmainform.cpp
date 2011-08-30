@@ -8,7 +8,7 @@ ICSMainForm::ICSMainForm(QWidget *parent) :
     ui->setupUi(this);
 
      // add status bar message
-     statusBar()->showMessage("Now you are in the mainform of Inventory Control System");
+     statusBar()->showMessage("Status:Now you are in the mainform of Inventory Control System");
 
 
 
