@@ -1,13 +1,13 @@
 #ifndef ICSMAINFORM_H
 #define ICSMAINFORM_H
 
-#include <QWidget>
+#include <QMainWindow>
 
 namespace Ui {
     class ICSMainForm;
 }
 
-class ICSMainForm : public QWidget
+class ICSMainForm : public QMainWindow
 {
     Q_OBJECT
 
