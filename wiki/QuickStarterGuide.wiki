@@ -20,6 +20,7 @@ Frequently Asked QT Programming Questions(Chinese):http://blog.csdn.net/starclou
 = How to Use Issue Tracker of Google Code =
  * Quick Start:http://code.google.com/p/support/wiki/IssueTracker#Quick_start
  * Integration with version control:http://code.google.com/p/support/wiki/IssueTracker#Integration_with_version_control
+http://www.cppblog.com/lingjingqiu/archive/2011/03/09/141435.html
  
 = Setup Development Environment = 
 
