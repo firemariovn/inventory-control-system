@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += sql
 
 TARGET = InventoryControlSystem
 TEMPLATE = app
@@ -12,11 +13,14 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
     icsloginform.cpp \
-    icsmainform.cpp
+    icsmainform.cpp \
+    goods.cpp
 
 HEADERS  += \
     icsloginform.h \
-    icsmainform.h
+    icsmainform.h \
+    database.h \
+    goods.h
 
 FORMS    += \
     icsloginform.ui \

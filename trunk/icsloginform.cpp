@@ -8,6 +8,7 @@ ICSLoginForm::ICSLoginForm(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->pwdLineEdit->setEchoMode(QLineEdit::Password);
+
 }
 
 ICSLoginForm::~ICSLoginForm()
