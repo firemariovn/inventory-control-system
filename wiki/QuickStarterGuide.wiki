@@ -16,6 +16,7 @@ Chinese QT Programming Guide:
  * http://www.cppblog.com/biao/category/9973.html
  * http://www.devbean.info/category/qt/page/2/
  * http://konglingchun.is-programmer.com/posts/12676.html
+ * http://blog.ezcn8.com/?p=93
 
 Frequently Asked QT Programming Questions(Chinese):http://blog.csdn.net/starcloud_zxt/article/details/5185470
 
