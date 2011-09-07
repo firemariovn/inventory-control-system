@@ -14,13 +14,15 @@ TEMPLATE = app
 SOURCES += main.cpp\
     icsloginform.cpp \
     icsmainform.cpp \
-    goods.cpp
+    goods.cpp \
+    staff.cpp
 
 HEADERS  += \
     icsloginform.h \
     icsmainform.h \
     database.h \
-    goods.h
+    goods.h \
+    staff.h
 
 FORMS    += \
     icsloginform.ui \
