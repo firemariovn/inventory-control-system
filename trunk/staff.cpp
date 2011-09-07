@@ -50,9 +50,9 @@ Staff::Staff(int id){
             this->sid = query.value(0).toInt();
             this->name = query.value(1).toString();
 
-            this->password= query.value(2).toInt();
-            this->title = query.value(3).toInt();
-            this->roleid = query.value(3).toInt();
+            this->password= query.value(2).toString();
+            this->title = query.value(3).toString();
+            this->roleid = query.value(4).toInt();
 
         }
 
