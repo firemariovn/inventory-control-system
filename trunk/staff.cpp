@@ -25,7 +25,7 @@ void Staff::setName(QString name){
 }
 
 QString Staff::getPassword(){
-  this->password = password;
+ return password;
 }
 
 void Staff::setPassword(QString password){
