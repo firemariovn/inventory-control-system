@@ -46,6 +46,7 @@ private:
          int bid;
          float unitPrice;
          int quantity;
+         // 0 = inbound, 1= outbound
          int type;
          QDateTime btime;
          QDateTime expiredDate;
