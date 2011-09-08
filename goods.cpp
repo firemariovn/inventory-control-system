@@ -68,4 +68,13 @@ QSqlTableModel* Goods::getTableModel(){
     return model;
 }
 
+bool Goods::addGoods(){
 
+    QSqlQuery query;
+    query.prepare("insert into Goods(name, depletionline)""values(?,?)");
+    query.addBindValue(this->name);
+    query.addBindValue(this->depletionLine);
+     return query.exec();
+
+    ;
+}
