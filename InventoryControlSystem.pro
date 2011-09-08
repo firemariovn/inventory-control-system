@@ -17,7 +17,8 @@ SOURCES += main.cpp\
     goods.cpp \
     staff.cpp \
     category.cpp \
-    warning.cpp
+    warning.cpp \
+    batch.cpp
 
 HEADERS  += \
     icsloginform.h \
