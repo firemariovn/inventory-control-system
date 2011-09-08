@@ -1,6 +1,8 @@
 #include <QMessageBox>
 #include "icsloginform.h"
 #include "ui_icsloginform.h"
+#include "database.h"
+#include "staff.h"
 
 ICSLoginForm::ICSLoginForm(QWidget *parent) :
     QDialog(parent),
@@ -19,14 +21,22 @@ ICSLoginForm::~ICSLoginForm()
 void ICSLoginForm::on_loginButton_clicked()
 {
     //Check if the user is authorized
-    if(ui->usrLineEdit->text()==tr("admin")&&ui->pwdLineEdit->text()==tr("admin"))
-
+    //createConnection();
+    Staff * loginer=new Staff();
+    loginer->setName(ui->usrLineEdit->text());
+    loginer->setPassword(ui->pwdLineEdit->text());
+    if(loginer->login())
         accept();
-    else{
+    else
+
         QMessageBox::warning(this,tr("Warning"),tr("user name or password error!"),QMessageBox::Yes);
         //clear all infomation of user label and password label
         ui->usrLineEdit->clear();
         ui->pwdLineEdit->clear();
         ui->usrLineEdit->setFocus();
     }
-    }
+
+void ICSLoginForm::on_exitButton_clicked()
+{
+    close();
+}
