@@ -15,14 +15,19 @@ SOURCES += main.cpp\
     icsloginform.cpp \
     icsmainform.cpp \
     goods.cpp \
-    staff.cpp
+    staff.cpp \
+    category.cpp \
+    warning.cpp
 
 HEADERS  += \
     icsloginform.h \
     icsmainform.h \
     database.h \
     goods.h \
-    staff.h
+    staff.h \
+    batch.h \
+    category.h \
+    warning.h
 
 FORMS    += \
     icsloginform.ui \
