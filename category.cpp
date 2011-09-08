@@ -24,7 +24,17 @@ void Category::setCid(int cid){
   this->cid = cid;
 }
 
+Category::~Category()
+{
+}
 
+bool Category::addCategory()
+{
+    QSqlQuery query;
+    query.prepare("insert into Category(name)""values(?)");
+    query.addBindValue(this->name);
+    return query.exec();
+}
 
 Category::Category(int id){
     QSqlQuery query;
