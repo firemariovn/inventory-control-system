@@ -38,7 +38,13 @@ int Goods::getGid(){
 void Goods::setGid(int gid){
  this->gid = gid;
 }
+int Goods::getcatid(){
+  return catid;
+}
 
+void Goods::setcatid(int catid){
+ this->catid = catid;
+}
 
 
 
@@ -71,8 +77,9 @@ QSqlTableModel* Goods::getTableModel(){
 bool Goods::addGoods(){
 
     QSqlQuery query;
-    query.prepare("insert into Goods(name, depletionline)""values(?,?)");
+    query.prepare("insert into Goods(name,catid,depletionline)""values(?,?,?)");
     query.addBindValue(this->name);
+    query.addBindValue(this->catid);
     query.addBindValue(this->depletionLine);
      return query.exec();
 
