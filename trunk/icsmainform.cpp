@@ -108,3 +108,18 @@ void ICSMainForm::on_pushButton_5_clicked()
 
 
 }
+
+void ICSMainForm::on_pushButton_4_clicked()
+{
+    Goods *g=new Goods();
+    g->setName(ui->lineEdit->text());
+    g->setDepletionLine(ui->spinBox_3->value());
+    g->setcatid((ui->comboBox_2->currentIndex())+1);
+    if(g->addGoods()){
+        QSqlTableModel *model = Goods::getTableModel();
+        model->select();
+        ui->goodsTableView->setModel(model);
+        ui->goodsTableView->reset();
+         qDebug()<<"ok!\n";
+        }
+}
