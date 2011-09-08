@@ -24,6 +24,9 @@ public:
      int getGid();
      void setGid(int gid);
 
+     int getcatid();
+     void setcatid(int catid);
+
      bool addGoods();
      bool deleteGoods();
      bool updateGoods();
@@ -37,6 +40,6 @@ private:
  QString name;
  int depletionLine;
  int totalQuantity;
-
+ int catid;
 };
 #endif // GOODS_H
