@@ -14,6 +14,11 @@ class ICSMainForm : public QMainWindow
 public:
     explicit ICSMainForm(QWidget *parent = 0);
     ~ICSMainForm();
+    void bindCategory();
+    void bindGoods();
+
+private slots:
+    void on_pushButton_5_clicked();
 
 private:
     Ui::ICSMainForm *ui;

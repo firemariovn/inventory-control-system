@@ -76,5 +76,5 @@ bool Goods::addGoods(){
     query.addBindValue(this->depletionLine);
      return query.exec();
 
-    ;
+
 }
