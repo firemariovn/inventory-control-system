@@ -1,17 +1,25 @@
 #include "icsmainform.h"
 #include "ui_icsmainform.h"
 #include "goods.h"
+#include "batch.h"
+#include "category.h"
 
 ICSMainForm::ICSMainForm(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::ICSMainForm)
 {
-    Goods *g = new Goods(1);
     ui->setupUi(this);
-    QSqlTableModel *model = Goods::getTableModel();
-    model->select();
-    ui->goodsTableView->setModel(model);
+    QSqlTableModel *goodsModel = Goods::getTableModel();
+    goodsModel->select();
+    ui->goodsTableView->setModel(goodsModel);
 
+    QSqlTableModel *batchModel = Batch::getTableModel();
+    batchModel->select();
+    ui->warehouseTableView->setModel(batchModel);
+
+    QSqlTableModel *categoryModel = Category::getTableModel();
+    categoryModel->select();
+    ui->categoryTableView->setModel(categoryModel);
 
 
 
