@@ -3,7 +3,7 @@
 #include <QSqlQuery>
 #include <QDebug>
 #include <database.h>
-
+#include <QSqlDatabase>
 Staff::Staff(){
 
 }
@@ -33,6 +33,8 @@ void Staff::setPassword(QString password){
 }
 
 QString Staff::getTitle(){
+
+
   return title;
 }
 
@@ -60,19 +62,20 @@ Staff::Staff(int id){
 
 bool Staff::login(){
 
+    //createConnection();
     QSqlQuery query;
-    query.exec("SELECT sid FROM Staff WHERE name = :name and password = :password");
-    query.bindValue(":name", this->name);
-    query.bindValue(":password", this->password);
+    query.prepare("SELECT sid FROM Staff WHERE name = ? and password = ?");
+    query.addBindValue( this->name);
+    query.addBindValue( this->password);
     query.exec();
+    //query.next();
+    //qDebug() << query.value(0).toString();
 
+    if(query.next())
+        return true;
 
-    while (query.next()) {
-       return true;
-
-        }
-
-    return false;
+    else
+        return false;
 
 
 }
