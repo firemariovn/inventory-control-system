@@ -38,6 +38,7 @@ int Goods::getGid(){
 void Goods::setGid(int gid){
  this->gid = gid;
 }
+
 int Goods::getcatid(){
   return catid;
 }
@@ -45,7 +46,6 @@ int Goods::getcatid(){
 void Goods::setcatid(int catid){
  this->catid = catid;
 }
-
 
 
 Goods::Goods(int id){
@@ -77,11 +77,16 @@ QSqlTableModel* Goods::getTableModel(){
 bool Goods::addGoods(){
 
     QSqlQuery query;
-    query.prepare("insert into Goods(name,catid,depletionline)""values(?,?,?)");
-    query.addBindValue(this->name);
-    query.addBindValue(this->catid);
-    query.addBindValue(this->depletionLine);
-     return query.exec();
+      query.prepare("insert into Goods(name,catid,depletionline)""values(?,?,?)");
+      query.addBindValue(this->name);
+      query.addBindValue(this->catid);
+      query.addBindValue(this->depletionLine);
+       return query.exec();
 
-
+}
+QSqlQueryModel * Goods::statistic(QString goodsID, QString fromDate, QString toDate)
+{
+     QSqlQueryModel *model = new QSqlQueryModel();
+     model->setQuery("select sum(case type when 1 then quantity else 0 end) ,sum(case type when 1 then quantity *unitprice else 0 end),sum(case type when 0 then quantity else 0 end) ,sum(case type when 0 then quantity *unitprice else 0 end)from Batch where gid ="+goodsID+" and (btime between '"+fromDate+"' and '"+toDate+"')");
+     return model;
 }
