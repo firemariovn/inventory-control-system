@@ -20,9 +20,13 @@ public:
 private slots:
     void on_pushButton_5_clicked();
 
+    void on_pbtnSatistics_clicked();
+
+    void on_comboBox_3_currentIndexChanged(const QString &arg1);
+
     void on_pushButton_4_clicked();
 
-    void on_inboundSubmitBtn_clicked();
+    void on_pushButton_6_clicked();
 
 private:
     Ui::ICSMainForm *ui;

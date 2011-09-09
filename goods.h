@@ -26,10 +26,10 @@ public:
 
      int getcatid();
      void setcatid(int catid);
-
      bool addGoods();
      bool deleteGoods();
      bool updateGoods();
+     static  QSqlQueryModel * statistic(QString goodsID,QString fromDate, QString toDate);
 
 
 
@@ -41,5 +41,6 @@ private:
  int depletionLine;
  int totalQuantity;
  int catid;
+
 };
 #endif // GOODS_H
