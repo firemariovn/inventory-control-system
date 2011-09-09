@@ -126,5 +126,9 @@ void ICSMainForm::on_pushButton_4_clicked()
 
 void ICSMainForm::on_inboundSubmitBtn_clicked()
 {
+    Batch *b = new Batch();
+    b->setBatchNumber(ui->spinBox_BatchNo_Inbound->text());
+    b->setBTime(ui->dateTimeEdit_inbound->dateTime());
+
 
 }
