@@ -198,7 +198,7 @@
           </rect>
          </property>
         </widget>
-        <widget class="QDateTimeEdit" name="dateTimeEdit_4">
+        <widget class="QDateTimeEdit" name="dateTimeEdit_inbound">
          <property name="geometry">
           <rect>
            <x>330</x>
@@ -283,7 +283,7 @@
           <string>Date:</string>
          </property>
         </widget>
-        <widget class="QSpinBox" name="spinBox_9">
+        <widget class="QSpinBox" name="spinBox_BatchNo_Inbound">
          <property name="geometry">
           <rect>
            <x>110</x>
