@@ -123,3 +123,8 @@ void ICSMainForm::on_pushButton_4_clicked()
          qDebug()<<"ok!\n";
         }
 }
+
+void ICSMainForm::on_inboundSubmitBtn_clicked()
+{
+
+}
