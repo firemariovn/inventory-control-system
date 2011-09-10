@@ -19,7 +19,7 @@ public:
          void setGid(int gid);
 
          float getUnitPrice();
-         void setUnitPrice(int unitPrice);
+         void setUnitPrice(float unitPrice);
 
          int getQuantity();
          void setQuantity(int quantity);

@@ -67,7 +67,7 @@ float Batch::getUnitPrice()
     return unitPrice;
 }
 
-void Batch::setUnitPrice(int unitPrice)
+void Batch::setUnitPrice(float unitPrice)
 {
     this->unitPrice = unitPrice;
 }

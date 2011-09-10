@@ -221,6 +221,10 @@ void ICSMainForm::on_pushButton_15_clicked() // add warehouse outbound
     {
         QMessageBox::warning(this,tr("ok"),tr("Out Bound Successful!"),QMessageBox::Yes);
         bindGoods();
+        QSqlTableModel *model = Batch::getTableModel();
+        model->select();
+        ui->warehouseTableView->setModel(model);
+        ui->warehouseTableView->reset();
     }
     else
     {
@@ -243,6 +247,10 @@ void ICSMainForm::on_pushButton_12_clicked() //add warehouse inbound
     {
         QMessageBox::warning(this,tr("ok"),tr("Inbound Successful!"),QMessageBox::Yes);
         bindGoods();
+        QSqlTableModel *model = Batch::getTableModel();
+        model->select();
+        ui->warehouseTableView->setModel(model);
+        ui->warehouseTableView->reset();
     }
     else
     {
