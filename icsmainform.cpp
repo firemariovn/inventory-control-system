@@ -203,3 +203,49 @@ void ICSMainForm::on_pushButton_6_clicked()
 {
     ui->lineEdit_2->clear();
 }
+
+
+
+void ICSMainForm::on_pushButton_15_clicked() // add warehouse outbound
+{
+    Batch batch;
+    batch.setBatchNumber(ui->spinBox_13->text());
+    batch.setBTime(ui->dateTimeEdit_6->dateTime());
+    batch.setGid(ui->comboBox_7->currentIndex() + 1);
+    batch.setQuantity(ui->spinBox_12->value());
+    batch.setUnitPrice(ui->doubleSpinBox_6->value());
+    batch.setExpiredDate(ui->dateEdit_7->dateTime());
+    batch.setType(1);
+
+    if(batch.addBatch())
+    {
+        QMessageBox::warning(this,tr("ok"),tr("Out Bound Successful!"),QMessageBox::Yes);
+        bindGoods();
+    }
+    else
+    {
+       QMessageBox::warning(this,tr("failed"),tr("Operation failed!"),QMessageBox::Yes);
+    }
+}
+
+void ICSMainForm::on_pushButton_12_clicked() //add warehouse inbound
+{
+    Batch batch;
+    batch.setBatchNumber(ui->spinBox_9->text());
+    batch.setBTime(ui->dateTimeEdit_4->dateTime());
+    batch.setGid(ui->comboBox_5->currentIndex() + 1);
+    batch.setQuantity(ui->spinBox_8->value());
+    batch.setUnitPrice(ui->doubleSpinBox_4->value());
+    batch.setExpiredDate(ui->dateEdit_5->dateTime());
+    batch.setType(0);
+
+    if(batch.addBatch())
+    {
+        QMessageBox::warning(this,tr("ok"),tr("Inbound Successful!"),QMessageBox::Yes);
+        bindGoods();
+    }
+    else
+    {
+       QMessageBox::warning(this,tr("failed"),tr("Operation failed!"),QMessageBox::Yes);
+    }
+}
