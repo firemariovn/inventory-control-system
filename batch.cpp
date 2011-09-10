@@ -47,6 +47,16 @@ void Batch::setBid(int bid)
     this->bid = bid;
 }
 
+int Batch::getGid()
+{
+    return gid;
+}
+
+void Batch::setGid(int gid)
+{
+    this->gid = gid;
+}
+
 float Batch::getUnitPrice()
 {
     return unitPrice;
@@ -107,4 +117,17 @@ void Batch::setBTime(QDateTime btime)
     this->btime = btime;
 }
 
+bool Batch::addBatch()
+{
+    QSqlQuery query;
+    query.prepare("insert into Batch(gid,unitprice,quantity,expireddate,type,batchnumber,btime)""values(?,?,?,?,?,?,?)");
+    query.addBindValue(this->gid);
+    query.addBindValue(this->unitPrice);
+    query.addBindValue(this->quantity);
+    query.addBindValue(this->expiredDate);
+    query.addBindValue(this->type);
+    query.addBindValue(this->batchNumber);
+    query.addBindValue(this->btime);
+    return query.exec();
+}
 

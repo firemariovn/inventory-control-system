@@ -15,6 +15,9 @@ public:
          int getBid();
          void setBid(int bid);
 
+         int getGid();
+         void setGid(int gid);
+
          float getUnitPrice();
          void setUnitPrice(int unitPrice);
 
@@ -44,6 +47,7 @@ public:
 
 private:
          int bid;
+         int gid;
          float unitPrice;
          int quantity;
          // 0 = inbound, 1= outbound
