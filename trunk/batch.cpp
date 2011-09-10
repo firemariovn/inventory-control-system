@@ -8,6 +8,10 @@ Batch::Batch()
 {
 }
 
+Batch::~Batch()
+{
+}
+
 Batch::Batch(int id)
 {
     QSqlQuery query;
@@ -28,7 +32,8 @@ Batch::Batch(int id)
     }
 }
 
-QSqlTableModel* Batch::getTableModel(){
+QSqlTableModel* Batch::getTableModel()
+{
 
     QSqlTableModel *model = new QSqlTableModel();
     model->setTable("Batch");
