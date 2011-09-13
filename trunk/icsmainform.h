@@ -30,8 +30,6 @@ private slots:
 
     void on_pushButton_15_clicked();
 
-    void on_bnt_submit_outBound_clicked();
-
     void on_pushButton_12_clicked();
 
 private:
