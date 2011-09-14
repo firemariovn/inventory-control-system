@@ -51,7 +51,7 @@ void Warning::setBid(int bid){
 
 Warning::Warning(int id){
     QSqlQuery query;
-    query.exec("SELECT wid,wtime,wmsg,wtype,bid FROM Warning WHERE wid = :id");
+    query.prepare("SELECT wid,wtime,wmsg,wtype,bid FROM Warning WHERE wid = :id");
     query.bindValue(":id", id);
     query.exec();
 

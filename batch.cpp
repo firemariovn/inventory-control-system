@@ -15,7 +15,7 @@ Batch::~Batch()
 Batch::Batch(int id)
 {
     QSqlQuery query;
-    query.exec("SELECT bid,gid,unitprice,quantity,expireddate, type, batchnumber,btime FROM Batch WHERE bid = :id");
+    query.prepare("SELECT bid,gid,unitprice,quantity,expireddate, type, batchnumber,btime FROM Batch WHERE bid = :id");
     query.bindValue(":id", id);
     query.exec();
     int gid = 0;

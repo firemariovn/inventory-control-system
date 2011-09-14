@@ -3,6 +3,7 @@
 #include "goods.h"
 #include "batch.h"
 #include "category.h"
+#include "staff.h"
 #include <QSqlRecord>
 #include <QtGui>
 #include <QTextCodec>
@@ -217,6 +218,7 @@ void ICSMainForm::on_outboundSubmitButton_clicked() // add warehouse outbound
     batch.setExpiredDate(ui->dateEdit_7->dateTime());
     batch.setType(1);
 
+
     if(batch.addBatch())
     {
         QMessageBox::warning(this,tr("ok"),tr("Out Bound Successful!"),QMessageBox::Yes);
@@ -225,6 +227,12 @@ void ICSMainForm::on_outboundSubmitButton_clicked() // add warehouse outbound
         model->select();
         ui->warehouseTableView->setModel(model);
         ui->warehouseTableView->reset();
+
+
+        int gid = batch.getGid();
+        Goods *g = new Goods(gid);
+        int currentQuantity = g->getTotalQuantity() - batch.getQuantity();
+        Goods::updateGoodsQuantity(gid,currentQuantity);
     }
     else
     {
@@ -251,6 +259,12 @@ void ICSMainForm::on_inboundSubmitButton_clicked() //add warehouse inbound
         model->select();
         ui->warehouseTableView->setModel(model);
         ui->warehouseTableView->reset();
+
+        int gid = batch.getGid();
+        Goods *g = new Goods(gid);
+        int currentQuantity = batch.getQuantity() + g->getTotalQuantity();
+        Goods::updateGoodsQuantity(gid,currentQuantity);
+
     }
     else
     {

@@ -38,7 +38,7 @@ bool Category::addCategory()
 
 Category::Category(int id){
     QSqlQuery query;
-    query.exec("SELECT cid,name FROM Category WHERE cid = :id");
+    query.prepare("SELECT cid,name FROM Category WHERE cid = :id");
     query.bindValue(":id", id);
     query.exec();
 
