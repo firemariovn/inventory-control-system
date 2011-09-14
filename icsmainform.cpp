@@ -28,6 +28,13 @@ ICSMainForm::ICSMainForm(QWidget *parent) :
     categoryModel->select();
     ui->categoryTableView->setModel(categoryModel);
 
+    QSqlTableModel *warningModel = Warning::getTableModel();
+    warningModel->removeColumn(1);
+    warningModel->removeColumn(3);
+    warningModel->select();
+
+    ui->warningTableView->setModel(warningModel);
+    ui->warningTableView->resizeColumnToContents(2);
 
 
     ui->deTo->setDate(QDate::currentDate());
@@ -220,25 +227,12 @@ void ICSMainForm::on_outboundSubmitButton_clicked() // add warehouse outbound
 
     int gid = batch.getGid();
     Goods *g = new Goods(gid);
-    int currentQuantity = g->getTotalQuantity() - batch.getQuantity();
-    Warning* w = Staff::checkIfGoodsNearDepletion(&batch,g,currentQuantity);
+    int afterOutboundQuantity = g->getTotalQuantity() - batch.getQuantity();
 
-    if(w!=NULL){
-        if(w->getWtype()==0){
+    if(afterOutboundQuantity>0){
 
-          QMessageBox::warning(this,tr("failed"),w->getWmsg(),QMessageBox::Yes);
+    Warning* w = Staff::checkIfGoodsNearDepletion(&batch,g,afterOutboundQuantity);
 
-        }
-
-        if(w->getWtype()==1){
-
-          QMessageBox::warning(this,tr("failed"),w->getWmsg(),QMessageBox::Yes);
-
-        }
-
-
-
-    }else{
 
     if(batch.addBatch())
     {
@@ -250,7 +244,7 @@ void ICSMainForm::on_outboundSubmitButton_clicked() // add warehouse outbound
         ui->warehouseTableView->reset();
 
         //Update totalquantity of Goods and then refresh GoodsTableView
-        Goods::updateGoodsQuantity(gid,currentQuantity);
+        Goods::updateGoodsQuantity(gid,afterOutboundQuantity);
         QSqlTableModel *goodsModel = Goods::getTableModel();
         goodsModel->select();
         ui->goodsTableView->setModel(goodsModel);
@@ -260,8 +254,12 @@ void ICSMainForm::on_outboundSubmitButton_clicked() // add warehouse outbound
     {
        QMessageBox::warning(this,tr("failed"),tr("Operation failed!"),QMessageBox::Yes);
     }
+    }else{
+
+      QMessageBox::warning(this,tr("failed"),tr("No enough goods to sell!"),QMessageBox::Yes);
     }
 }
+
 
 void ICSMainForm::on_inboundSubmitButton_clicked() //add warehouse inbound
 {

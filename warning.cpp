@@ -69,6 +69,18 @@ Warning::Warning(int id){
 
 }
 
+bool Warning::addWarning(){
+
+    QSqlQuery query;
+      query.prepare("insert into Warning(bid,wtype,wmsg,wtime)""values(?,?,?,?)");
+      query.addBindValue(this->bid);
+      query.addBindValue(this->wtype);
+      query.addBindValue(this->wmsg);
+      query.addBindValue(this->wtime);
+       return query.exec();
+
+}
+
 QSqlTableModel* Warning::getTableModel(){
 
     QSqlTableModel *model = new QSqlTableModel();
