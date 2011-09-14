@@ -1,6 +1,10 @@
 #ifndef STAFF_H
 #define STAFF_H
 #include <QSqlTableModel>
+#include "warning.h"
+#include "goods.h"
+#include "batch.h"
+
 class Staff{
 public:
      Staff();
@@ -8,6 +12,7 @@ public:
     ~Staff();
 
      static QSqlTableModel* getTableModel();
+     static Warning* checkIfGoodsNearDepletion(Batch* b,Goods* g, int quantity);
 
      int getSid();
      void setSid(int sid);
@@ -28,6 +33,10 @@ public:
      bool deleteStaff();
      bool updateStaff();
      bool login();
+
+
+
+
 
 
 

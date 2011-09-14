@@ -1,4 +1,5 @@
 #include "staff.h"
+#include "batch.h"
 #include <QSqlTableModel>
 #include <QSqlQuery>
 #include <QDebug>
@@ -88,3 +89,28 @@ QSqlTableModel* Staff::getTableModel(){
     return model;
 }
 
+ Warning* Staff::checkIfGoodsNearDepletion(Batch* b,Goods* g, int quantity){
+     Warning *w = new Warning();
+
+     QString goodsName = g->getName();
+     int depletionLine = g->getDepletionLine();
+     if(g->getTotalQuantity() <= g->getDepletionLine() ){
+         w->setWmsg("Please purchase more"+goodsName+ "Because The current quantity of "+goodsName+" is smaller than its depletion line :"+depletionLine+".");
+         w->setWtime(QDateTime::currentDateTime());
+         w->setWtype(0);
+         w->setBid(b->getBid());
+         return w;
+     }
+
+     if(quantity<=g->getDepletionLine()){
+         w->setWmsg("Recommend purchase more "+goodsName+ "Because after you sell this batch, the quantity of "+goodsName+" is smaller than its depletion line :"+depletionLine+".");
+         w->setWtime(QDateTime::currentDateTime());
+         w->setWtype(1);
+         w->setBid(b->getBid());
+         return w;
+
+     }
+
+
+     return NULL;
+}

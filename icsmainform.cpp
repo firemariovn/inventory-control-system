@@ -218,6 +218,27 @@ void ICSMainForm::on_outboundSubmitButton_clicked() // add warehouse outbound
     batch.setExpiredDate(ui->dateEdit_7->dateTime());
     batch.setType(1);
 
+    int gid = batch.getGid();
+    Goods *g = new Goods(gid);
+    int currentQuantity = g->getTotalQuantity() - batch.getQuantity();
+    Warning* w = Staff::checkIfGoodsNearDepletion(&batch,g,currentQuantity);
+
+    if(w!=NULL){
+        if(w->getWtype()==0){
+
+          QMessageBox::warning(this,tr("failed"),w->getWmsg(),QMessageBox::Yes);
+
+        }
+
+        if(w->getWtype()==1){
+
+          QMessageBox::warning(this,tr("failed"),w->getWmsg(),QMessageBox::Yes);
+
+        }
+
+
+
+    }else{
 
     if(batch.addBatch())
     {
@@ -229,9 +250,6 @@ void ICSMainForm::on_outboundSubmitButton_clicked() // add warehouse outbound
         ui->warehouseTableView->reset();
 
         //Update totalquantity of Goods and then refresh GoodsTableView
-        int gid = batch.getGid();
-        Goods *g = new Goods(gid);
-        int currentQuantity = g->getTotalQuantity() - batch.getQuantity();
         Goods::updateGoodsQuantity(gid,currentQuantity);
         QSqlTableModel *goodsModel = Goods::getTableModel();
         goodsModel->select();
@@ -241,6 +259,7 @@ void ICSMainForm::on_outboundSubmitButton_clicked() // add warehouse outbound
     else
     {
        QMessageBox::warning(this,tr("failed"),tr("Operation failed!"),QMessageBox::Yes);
+    }
     }
 }
 
@@ -254,6 +273,7 @@ void ICSMainForm::on_inboundSubmitButton_clicked() //add warehouse inbound
     batch.setUnitPrice(ui->doubleSpinBox_4->value());
     batch.setExpiredDate(ui->dateEdit_5->dateTime());
     batch.setType(0);
+    int gid = batch.getGid();
 
     if(batch.addBatch())
     {
@@ -265,7 +285,6 @@ void ICSMainForm::on_inboundSubmitButton_clicked() //add warehouse inbound
         ui->warehouseTableView->reset();
 
         //Update totalquantity of Goods and then refresh GoodsTableView
-        int gid = batch.getGid();
         Goods *g = new Goods(gid);
         int currentQuantity = batch.getQuantity() + g->getTotalQuantity();
         Goods::updateGoodsQuantity(gid,currentQuantity);
@@ -273,6 +292,7 @@ void ICSMainForm::on_inboundSubmitButton_clicked() //add warehouse inbound
         goodsModel->select();
         ui->goodsTableView->setModel(goodsModel);
         ui->goodsTableView->reset();
+
 
 
 
