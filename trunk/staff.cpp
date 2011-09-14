@@ -44,7 +44,7 @@ void Staff::setTitle(QString title){
 
 Staff::Staff(int id){
     QSqlQuery query;
-    query.exec("SELECT sid,name,password,title,roleid FROM Staff WHERE sid = :id");
+    query.prepare("SELECT sid,name,password,title,roleid FROM Staff WHERE sid = :id");
     query.bindValue(":id", id);
     query.exec();
 

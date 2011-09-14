@@ -50,7 +50,7 @@ void Goods::setcatid(int catid){
 
 Goods::Goods(int id){
     QSqlQuery query;
-    query.exec("SELECT gid,name,catid,depletionline,totalquantity FROM Goods WHERE gid = :id");
+    query.prepare("SELECT gid,name,catid,depletionline,totalquantity FROM Goods WHERE gid = :id");
     query.bindValue(":id", id);
     query.exec();
     int catid = 0;
@@ -84,6 +84,18 @@ bool Goods::addGoods(){
        return query.exec();
 
 }
+
+bool Goods::updateGoodsQuantity(int goodsID, int quantity){
+
+    QSqlQuery query;
+    query.prepare("update Goods set totalquantity = :quantity where gid = :id");
+    query.bindValue(":quantity",quantity);
+    query.bindValue(":id",goodsID);
+
+
+    return query.exec();
+}
+
 QSqlQueryModel * Goods::statistic(QString goodsID, QString fromDate, QString toDate)
 {
      QSqlQueryModel *model = new QSqlQueryModel();

@@ -30,7 +30,7 @@ public:
      bool deleteGoods();
      bool updateGoods();
      static  QSqlQueryModel * statistic(QString goodsID,QString fromDate, QString toDate);
-
+     static bool updateGoodsQuantity(int goodsID,int quantity);
 
 
 
