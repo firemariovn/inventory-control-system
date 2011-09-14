@@ -228,11 +228,15 @@ void ICSMainForm::on_outboundSubmitButton_clicked() // add warehouse outbound
         ui->warehouseTableView->setModel(model);
         ui->warehouseTableView->reset();
 
-
+        //Update totalquantity of Goods and then refresh GoodsTableView
         int gid = batch.getGid();
         Goods *g = new Goods(gid);
         int currentQuantity = g->getTotalQuantity() - batch.getQuantity();
         Goods::updateGoodsQuantity(gid,currentQuantity);
+        QSqlTableModel *goodsModel = Goods::getTableModel();
+        goodsModel->select();
+        ui->goodsTableView->setModel(goodsModel);
+        ui->goodsTableView->reset();
     }
     else
     {
@@ -260,10 +264,19 @@ void ICSMainForm::on_inboundSubmitButton_clicked() //add warehouse inbound
         ui->warehouseTableView->setModel(model);
         ui->warehouseTableView->reset();
 
+        //Update totalquantity of Goods and then refresh GoodsTableView
         int gid = batch.getGid();
         Goods *g = new Goods(gid);
         int currentQuantity = batch.getQuantity() + g->getTotalQuantity();
         Goods::updateGoodsQuantity(gid,currentQuantity);
+        QSqlTableModel *goodsModel = Goods::getTableModel();
+        goodsModel->select();
+        ui->goodsTableView->setModel(goodsModel);
+        ui->goodsTableView->reset();
+
+
+
+
 
     }
     else
