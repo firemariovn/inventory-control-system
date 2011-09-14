@@ -94,19 +94,28 @@ QSqlTableModel* Staff::getTableModel(){
 
      QString goodsName = g->getName();
      int depletionLine = g->getDepletionLine();
-     if(g->getTotalQuantity() <= g->getDepletionLine() ){
-         w->setWmsg("Please purchase more"+goodsName+ "Because The current quantity of "+goodsName+" is smaller than its depletion line :"+depletionLine+".");
+     qDebug()<<depletionLine;
+     if(g->getTotalQuantity() <= depletionLine ){
+       QString msg = QString("Please purchase more %1.Because The current quantity of %2 is smaller than its depletion line :%3.");
+         w->setWmsg(msg.arg(goodsName).arg(goodsName).arg(depletionLine));
          w->setWtime(QDateTime::currentDateTime());
          w->setWtype(0);
          w->setBid(b->getBid());
+
+         w->addWarning();
+
          return w;
      }
 
-     if(quantity<=g->getDepletionLine()){
-         w->setWmsg("Recommend purchase more "+goodsName+ "Because after you sell this batch, the quantity of "+goodsName+" is smaller than its depletion line :"+depletionLine+".");
+     if(quantity<=depletionLine){
+         QString msg = QString("Recommend purchase more %1.Because after you sell this batch, the quantity of %2 is smaller than its depletion line :%3.");
+         w->setWmsg(msg.arg(goodsName).arg(goodsName).arg(depletionLine));
+
          w->setWtime(QDateTime::currentDateTime());
          w->setWtype(1);
          w->setBid(b->getBid());
+
+         w->addWarning();
          return w;
 
      }

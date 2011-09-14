@@ -37,6 +37,8 @@ private:
  int wid;
  QDateTime wtime;
  QString wmsg;
+ //wtype = 0 The current quantity of this goods is smaller than its depletion line
+ //wtype = 1 after you sell this batch, the quantity of this goods is smaller than its depletion line
  int wtype;
  int bid;
 

@@ -919,7 +919,7 @@
         <string>Warning Notice</string>
        </property>
        <widget class="QWidget" name="dockWidgetContents_2">
-        <widget class="QTableWidget" name="tableWidget">
+        <widget class="QTableView" name="warningTableView">
          <property name="geometry">
           <rect>
            <x>0</x>
