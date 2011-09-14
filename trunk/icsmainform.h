@@ -28,9 +28,9 @@ private slots:
 
     void on_pushButton_6_clicked();
 
-    void on_pushButton_15_clicked();
+    void on_outboundSubmitButton_clicked();
 
-    void on_pushButton_12_clicked();
+    void on_inboundSubmitButton_clicked();
 
 private:
     Ui::ICSMainForm *ui;

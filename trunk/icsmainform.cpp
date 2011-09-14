@@ -102,14 +102,14 @@ void ICSMainForm::on_pushButton_5_clicked() //add category
            category.setName(name);
            if(category.addCategory())
            {
-               QMessageBox::warning(this,tr("Succeed!"),tr("Category has been successful added£¡"),QMessageBox::Yes);
+               QMessageBox::warning(this,tr("Succeed!"),tr("Category has been successful added"),QMessageBox::Yes);
                ui->lineEdit_2->clear();
                bindCategory();
            }
            else
            {
 
-              QMessageBox::warning(this,tr("Failed"),tr("Unknown reason£¬operation was failed!"),QMessageBox::Yes);
+              QMessageBox::warning(this,tr("Failed"),tr("Unknown reasonoperation was failed!"),QMessageBox::Yes);
 
            }
        }
@@ -206,7 +206,7 @@ void ICSMainForm::on_pushButton_6_clicked()
 
 
 
-void ICSMainForm::on_pushButton_15_clicked() // add warehouse outbound
+void ICSMainForm::on_outboundSubmitButton_clicked() // add warehouse outbound
 {
     Batch batch;
     batch.setBatchNumber(ui->spinBox_13->text());
@@ -232,7 +232,7 @@ void ICSMainForm::on_pushButton_15_clicked() // add warehouse outbound
     }
 }
 
-void ICSMainForm::on_pushButton_12_clicked() //add warehouse inbound
+void ICSMainForm::on_inboundSubmitButton_clicked() //add warehouse inbound
 {
     Batch batch;
     batch.setBatchNumber(ui->spinBox_9->text());
