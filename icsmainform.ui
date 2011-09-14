@@ -97,7 +97,7 @@
      <item>
       <widget class="QTabWidget" name="tabWidget">
        <property name="currentIndex">
-        <number>2</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="tab">
         <attribute name="title">
@@ -250,7 +250,7 @@
           <string>Goods Name:</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="pushButton_12">
+        <widget class="QPushButton" name="inboundSubmitButton">
          <property name="geometry">
           <rect>
            <x>270</x>
@@ -372,7 +372,7 @@
           <bool>true</bool>
          </property>
         </widget>
-        <widget class="QPushButton" name="pushButton_15">
+        <widget class="QPushButton" name="outboundSubmitButton">
          <property name="geometry">
           <rect>
            <x>270</x>
