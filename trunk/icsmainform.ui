@@ -688,7 +688,7 @@
     </property>
     <layout class="QVBoxLayout" name="RightBottomVerticalLayout">
      <item>
-      <widget class="QDockWidget" name="dockWidget_4">
+      <widget class="QDockWidget" name="statisticsDockWidget">
        <property name="font">
         <font>
          <pointsize>13</pointsize>
