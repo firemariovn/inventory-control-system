@@ -20,8 +20,7 @@ Add your content here.  Format your content with:
   * Headings, paragraphs, and lists
   * Automatic links to other wiki pages
 
-<a href="http://docs.google.com/viewer?url=http%3A%2F%2Flabs.google.com%2Fpapers%2Fbigtable-osdi06.pdf">Use Case Description</a>
-
+<iframe src="http://docs.google.com/viewer?url=http%3A%2F%2Flabs.google.com%2Fpapers%2Fbigtable-osdi06.pdf&embedded=true" width="600" height="780" style="border: none;"></iframe>
 = Class Diagram =
 
 Add your content here.  Format your content with:
