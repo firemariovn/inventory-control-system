@@ -14,7 +14,7 @@ Add your content here.  Format your content with:
 
 
 = Use Case Diagram =
-[http://code.google.com/ http://code.google.com/images/code_sm.png]
+
 
 Warehouse outbound: The main function of this use cases to insert warehouse outbound records.And there are four parameters were involved in the use case, which include batch number, date, goods name, quantity and unit price.
 
@@ -36,6 +36,7 @@ Maintain database, backup database and restore database are the use case to prov
 
 = Class Diagram =
 
+http://inventory-control-system.googlecode.com/files/ER%20Diagram.png
 Add your content here.  Format your content with:
   * Text in *bold* or _italic_
   * Headings, paragraphs, and lists
