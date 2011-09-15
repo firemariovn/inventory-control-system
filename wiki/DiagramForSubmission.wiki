@@ -14,7 +14,7 @@ Add your content here.  Format your content with:
 
 
 = Use Case Diagram =
-http://inventory-control-system.googlecode.com/files/Use_Case_Diagram.jpg
+
 
 
 Warehouse outbound: The main function of this use cases to insert warehouse outbound records.And there are four parameters were involved in the use case, which include batch number, date, goods name, quantity and unit price.
