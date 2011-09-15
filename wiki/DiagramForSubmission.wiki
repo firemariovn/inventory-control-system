@@ -28,7 +28,6 @@ http://inventory-control-system.googlecode.com/files/Use_Case_Diagram.png
   * category: In our system, we divided all the goods into variety of categories, in that case we can manage the goods more efficient. And each category has a unique ID.
 
   * Use cases of set warning line of depletion and set warning line of expiry should be operating when add a new goods, using these two warning lines we can prevent the goods in the grocery from out of data.
-Add your content here.  Format your content with:
 
   * Database, backup database and restore database are the use case to provide some functions to process the issues on database, such as backup and restoring the database.
 
