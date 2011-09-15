@@ -2,7 +2,7 @@
 
 = Introduction =
 
-This is an inventory control system that suitable for the small grocery. Our system aims to manage the information about the input and output for a range of goods, which may appear in a grocery. Further services the system can provide includes track and warn of impending expiry of goods and divide the goods into categories. Three actors would be involved in this system, which are worker, manager and administer. Add your content here.
+This is an inventory control system that suitable for the small grocery. Our system aims to manage the information about the input and output for a range of goods, which may appear in a grocery. Further services the system can provide includes track and warn of impending expiry of goods and divide the goods into categories. Three actors would be involved in this system, which are worker, manager and administer. 
 
 
 = Details =
@@ -17,23 +17,20 @@ Add your content here.  Format your content with:
 http://inventory-control-system.googlecode.com/files/Use_Case_Diagram.png
 
 
-Warehouse outbound: The main function of this use cases to insert warehouse outbound records.And there are four parameters were involved in the use case, which include batch number, date, goods name, quantity and unit price.
+  * Outbound: The main function of this use cases to insert warehouse outbound records.And there are four parameters were involved in the use case, which include batch number, date, goods name, quantity and unit price.
 
-Warehouse inbound: The function is to insert warehouse outbound records. The parameters include batch number, date, goods name, quantity, unit price and expired date.
+  * Inbound: The function is to insert warehouse outbound records. The parameters include batch number, date, goods name, quantity, unit price and expired date.
 
-View goods info: The function is in order to select all the records from database and display them to users.
+  * Goods info: The function is in order to select all the records from database and display them to users.
 
-Setting expiry time is the case to valid the expiry time inputted is not less than the current date.
+  * Setting expiry time is the case to valid the expiry time inputted is not less than the current date.
 
-Select category: In our system, we divided all the goods into variety of categories, in that case we can manage the goods more efficient. And each category has a unique ID.
+  * category: In our system, we divided all the goods into variety of categories, in that case we can manage the goods more efficient. And each category has a unique ID.
 
-The use cases of set warning line of depletion and set warning line of expiry should be operating when add a new goods, using these two warning lines we can prevent the goods in the grocery from out of data.
+  * Use cases of set warning line of depletion and set warning line of expiry should be operating when add a new goods, using these two warning lines we can prevent the goods in the grocery from out of data.
 Add your content here.  Format your content with:
 
-Maintain database, backup database and restore database are the use case to provide some functions to process the issues on database, such as backup and restoring the database.
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+  * Database, backup database and restore database are the use case to provide some functions to process the issues on database, such as backup and restoring the database.
 
 = Class Diagram =
 
