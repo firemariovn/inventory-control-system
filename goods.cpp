@@ -100,5 +100,6 @@ QSqlQueryModel * Goods::statistic(QString goodsID, QString fromDate, QString toD
 {
      QSqlQueryModel *model = new QSqlQueryModel();
      model->setQuery("select sum(case type when 1 then quantity else 0 end) ,sum(case type when 1 then quantity *unitprice else 0 end),sum(case type when 0 then quantity else 0 end) ,sum(case type when 0 then quantity *unitprice else 0 end)from Batch where gid ="+goodsID+" and (btime between '"+fromDate+"' and '"+toDate+"')");
+     qDebug()<<"select sum(case type when 1 then quantity else 0 end) ,sum(case type when 1 then quantity *unitprice else 0 end),sum(case type when 0 then quantity else 0 end) ,sum(case type when 0 then quantity *unitprice else 0 end)from Batch where gid ="+goodsID+" and (btime between '"+fromDate+"' and '"+toDate+"')";
      return model;
 }

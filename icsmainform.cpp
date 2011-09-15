@@ -134,8 +134,8 @@ void ICSMainForm::on_pbtnSatistics_clicked()
     ui->lbOutbound->clear();
     ui->lbInbound->clear();
 
-    QString dateFrom = ui->deFrom->date().toString("yyyy-M-d");
-    QString dateTo = ui->deTo->date().toString("yyyy-M-d");
+    QString dateFrom = ui->deFrom->date().toString("yyyy-M-dd");
+    QString dateTo = ui->deTo->date().toString("yyyy-M-dd");
     QString goodsId = ui->comboBox->itemData(ui->comboBox->currentIndex(), Qt::UserRole).toString();
 //    QSqlQuery query;
 
@@ -150,12 +150,15 @@ void ICSMainForm::on_pbtnSatistics_clicked()
 
 //    }
     QSqlQueryModel *model = Goods::statistic(goodsId,dateFrom,dateTo);
-    qDebug()<<model->record(0).value(0).toString();
-    if(!model->record(0).value(0).isNull())
-    {
+//    qDebug()<<model->record(0).value(0).toString();
+//    qDebug()<<model->record(0).value(1).toString();
+//    qDebug()<<model->record(0).value(2).toString();
+//    qDebug()<<model->record(0).value(3).toString();
+    //if(!model->record(0).value(0).isNull())
+    //{
         ui->lbOutbound->setText(model->record(0).value(0).toString()+ " items /$"+ model->record(0).value(1).toString());
         ui->lbInbound->setText(model->record(0).value(2).toString()+ " items /$"+ model->record(0).value(3).toString());
-    }
+    //}
 
 //    query.exec("select sum(quantity),sum(quantity *unitprice) from Batch where type=1 and gid ="+goodsId +" and (btime between '"+dateFrom+"' and '"+dateTo+"')");
 //    while(query.next())
