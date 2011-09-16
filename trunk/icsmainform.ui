@@ -681,7 +681,7 @@
     <property name="geometry">
      <rect>
       <x>490</x>
-      <y>280</y>
+      <y>260</y>
       <width>521</width>
       <height>241</height>
      </rect>
@@ -904,7 +904,7 @@
     <property name="geometry">
      <rect>
       <x>490</x>
-      <y>530</y>
+      <y>500</y>
       <width>521</width>
       <height>161</height>
      </rect>
@@ -925,7 +925,7 @@
            <x>0</x>
            <y>0</y>
            <width>521</width>
-           <height>141</height>
+           <height>131</height>
           </rect>
          </property>
         </widget>
@@ -934,6 +934,11 @@
      </item>
     </layout>
    </widget>
+   <zorder>verticalLayoutWidget</zorder>
+   <zorder>verticalLayoutWidget_2</zorder>
+   <zorder>verticalLayoutWidget_3</zorder>
+   <zorder>verticalLayoutWidget_4</zorder>
+   <zorder>statisticsDockWidget</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
