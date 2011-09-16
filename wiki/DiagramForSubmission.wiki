@@ -39,4 +39,4 @@ Actually there are 6 classes designed in our inventory control system. Attribute
 
 = E-R Diagram =
 
-http://inventory-control-system.googlecode.com/files/ER%20Diagram.png
+http://inventory-control-system.googlecode.com/files/ER.png
