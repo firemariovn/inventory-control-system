@@ -130,7 +130,7 @@
          </property>
          <property name="date">
           <date>
-           <year>2011</year>
+           <year>2012</year>
            <month>1</month>
            <day>1</day>
           </date>
@@ -204,7 +204,7 @@
           </rect>
          </property>
         </widget>
-        <widget class="QDateTimeEdit" name="dateTimeEdit_4">
+        <widget class="QDateTimeEdit" name="inboundDateTimeEdit">
          <property name="geometry">
           <rect>
            <x>330</x>
@@ -941,7 +941,7 @@
      <x>0</x>
      <y>0</y>
      <width>1024</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <property name="defaultUp">
