@@ -24,8 +24,8 @@ public:
          int getQuantity();
          void setQuantity(int quantity);
 
-         QDateTime getExpiredDate();
-         void setExpiredDate(QDateTime expiredDate);
+         QDate getExpiredDate();
+         void setExpiredDate(QDate expiredDate);
 
          int getType();
          void setType(int type);
@@ -53,7 +53,7 @@ private:
          // 0 = inbound, 1= outbound
          int type;
          QDateTime btime;
-         QDateTime expiredDate;
+         QDate expiredDate;
          QString batchNumber;
 
 };

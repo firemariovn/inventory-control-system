@@ -225,7 +225,7 @@ void ICSMainForm::on_outboundSubmitButton_clicked() // add warehouse outbound
     batch.setGid(ui->comboBox_7->currentIndex() + 1);
     batch.setQuantity(ui->spinBox_12->value());
     batch.setUnitPrice(ui->doubleSpinBox_6->value());
-    batch.setExpiredDate(ui->dateEdit_7->dateTime());
+    batch.setExpiredDate(ui->dateEdit_7->date());
     batch.setType(1);
 
     int gid = batch.getGid();
@@ -272,7 +272,7 @@ void ICSMainForm::on_inboundSubmitButton_clicked() //add warehouse inbound
     batch.setGid(ui->comboBox_5->currentIndex() + 1);
     batch.setQuantity(ui->spinBox_8->value());
     batch.setUnitPrice(ui->doubleSpinBox_4->value());
-    batch.setExpiredDate(ui->dateEdit_5->dateTime());
+    batch.setExpiredDate(ui->dateEdit_5->date());
     batch.setType(0);
     int gid = batch.getGid();
 
