@@ -44,7 +44,7 @@ QSqlTableModel* Batch::getTableModel()
 
 int Batch::getBid()
 {
-    return bid;
+    return this->bid;
 }
 
 void Batch::setBid(int bid)
@@ -54,7 +54,7 @@ void Batch::setBid(int bid)
 
 int Batch::getGid()
 {
-    return gid;
+    return this->gid;
 }
 
 void Batch::setGid(int gid)
@@ -64,7 +64,7 @@ void Batch::setGid(int gid)
 
 float Batch::getUnitPrice()
 {
-    return unitPrice;
+    return this->unitPrice;
 }
 
 void Batch::setUnitPrice(float unitPrice)
@@ -74,7 +74,7 @@ void Batch::setUnitPrice(float unitPrice)
 
 int Batch::getQuantity()
 {
-    return quantity;
+    return this->quantity;
 }
 
 void Batch::setQuantity(int quantity)
@@ -84,7 +84,7 @@ void Batch::setQuantity(int quantity)
 
 QDate Batch::getExpiredDate()
 {
-    return expiredDate;
+    return this->expiredDate;
 }
 
 void Batch::setExpiredDate(QDate expiredDate)
@@ -94,7 +94,7 @@ void Batch::setExpiredDate(QDate expiredDate)
 
 int Batch::getType()
 {
-    return type;
+    return this->type;
 }
 
 void Batch::setType(int type)
@@ -104,7 +104,7 @@ void Batch::setType(int type)
 
 QString Batch::getBatchNumber()
 {
-    return batchNumber;
+    return this->batchNumber;
 }
 
 void Batch::setBatchNumber(QString batchNumber)
@@ -114,7 +114,7 @@ void Batch::setBatchNumber(QString batchNumber)
 
 QDateTime Batch::getBTime()
 {
-    return btime;
+    return this->btime;
 }
 
 void Batch::setBTime(QDateTime btime)
@@ -133,7 +133,15 @@ bool Batch::addBatch()
     query.addBindValue(this->type);
     query.addBindValue(this->batchNumber);
     query.addBindValue(this->btime.toString("yyyy-MM-dd hh:mm:ss"));
-
-    return query.exec();
+    if(query.exec())
+    {
+        query.exec("select last_insert_rowid()");
+        while (query.next())
+        {
+            this->bid = query.value(0).toInt();
+        }
+        return true;
+    }
+    return false;
 }
 
