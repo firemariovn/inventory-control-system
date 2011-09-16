@@ -35,9 +35,10 @@ ICSMainForm::ICSMainForm(QWidget *parent) :
 
     ui->warningTableView->setModel(warningModel);
     ui->warningTableView->resizeColumnToContents(2);
-    //Initially, set the time of inboundDateTimeEdit to current time
-    ui->inboundDateTimeEdit->setDateTime(QDateTime::currentDateTime());
 
+    //Initially, set the time of inboundDateTimeEdit and outboundDateTimeEdit to current time
+    ui->inboundDateTimeEdit->setDateTime(QDateTime::currentDateTime());
+    ui->outboundDateTimeEdit->setDateTime(QDateTime::currentDateTime());
 
     ui->deTo->setDate(QDate::currentDate());
     ui->deFrom->setDate(QDate::currentDate().addMonths(-1));
@@ -223,7 +224,7 @@ void ICSMainForm::on_outboundSubmitButton_clicked() // add warehouse outbound
 {
     Batch batch;
     batch.setBatchNumber(ui->spinBox_13->text());
-    batch.setBTime(ui->dateTimeEdit_6->dateTime());
+    batch.setBTime(ui->outboundDateTimeEdit->dateTime());
     batch.setGid(ui->comboBox_7->currentIndex() + 1);
     batch.setQuantity(ui->spinBox_12->value());
     batch.setUnitPrice(ui->doubleSpinBox_6->value());

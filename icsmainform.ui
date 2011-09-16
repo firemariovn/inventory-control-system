@@ -97,7 +97,7 @@
      <item>
       <widget class="QTabWidget" name="tabWidget">
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="tab">
         <attribute name="title">
@@ -352,7 +352,7 @@
           <string>Quantity:</string>
          </property>
         </widget>
-        <widget class="QDateTimeEdit" name="dateTimeEdit_6">
+        <widget class="QDateTimeEdit" name="outboundDateTimeEdit">
          <property name="geometry">
           <rect>
            <x>330</x>
