@@ -76,7 +76,7 @@ bool Warning::addWarning(){
       query.addBindValue(this->bid);
       query.addBindValue(this->wtype);
       query.addBindValue(this->wmsg);
-      query.addBindValue(this->wtime);
+      query.addBindValue(this->wtime.toString("yyyy-MM-dd hh:mm:ss"));
        return query.exec();
 
 }

@@ -35,6 +35,8 @@ ICSMainForm::ICSMainForm(QWidget *parent) :
 
     ui->warningTableView->setModel(warningModel);
     ui->warningTableView->resizeColumnToContents(2);
+    //Initially, set the time of inboundDateTimeEdit to current time
+    ui->inboundDateTimeEdit->setDateTime(QDateTime::currentDateTime());
 
 
     ui->deTo->setDate(QDate::currentDate());
@@ -267,14 +269,17 @@ void ICSMainForm::on_outboundSubmitButton_clicked() // add warehouse outbound
 void ICSMainForm::on_inboundSubmitButton_clicked() //add warehouse inbound
 {
     Batch batch;
+    QDateTime inboundDateTime = ui->inboundDateTimeEdit->dateTime();
+    QDateTime expiredDate = ui->dateEdit_5->dateTime();
     batch.setBatchNumber(ui->spinBox_9->text());
-    batch.setBTime(ui->dateTimeEdit_4->dateTime());
+    batch.setBTime(inboundDateTime);
     batch.setGid(ui->comboBox_5->currentIndex() + 1);
     batch.setQuantity(ui->spinBox_8->value());
     batch.setUnitPrice(ui->doubleSpinBox_4->value());
     batch.setExpiredDate(ui->dateEdit_5->date());
     batch.setType(0);
     int gid = batch.getGid();
+    if(inboundDateTime<expiredDate){
 
     if(batch.addBatch())
     {
@@ -303,5 +308,10 @@ void ICSMainForm::on_inboundSubmitButton_clicked() //add warehouse inbound
     else
     {
        QMessageBox::warning(this,tr("failed"),tr("Operation failed!"),QMessageBox::Yes);
+    }
+
+    }else{
+
+     QMessageBox::warning(this,tr("failed"),tr("You cannot buy this batch of goods Because the goods has been expired!"),QMessageBox::Yes);
     }
 }
