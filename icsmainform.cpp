@@ -4,6 +4,7 @@
 #include "batch.h"
 #include "category.h"
 #include "staff.h"
+#include "database.h"
 #include <QSqlRecord>
 #include <QtGui>
 #include <QTextCodec>
@@ -68,6 +69,19 @@ ICSMainForm::~ICSMainForm()
 
 void ICSMainForm::on_dbCheckTimer_timeout(){
     qDebug()<<QDateTime::currentDateTime().toString();
+    checkoutAllGoodsNearDepletion();
+
+
+
+   //Refresh Warning Table Views
+    QSqlTableModel *warningModel = Warning::getTableModel();
+    warningModel->removeColumns(0,2);
+     warningModel->removeColumn(2);
+    warningModel->select();
+
+    ui->warningTableView->setModel(warningModel);
+    ui->warningTableView->resizeColumnToContents(0);
+
 }
 
 void ICSMainForm::bindCategory()
