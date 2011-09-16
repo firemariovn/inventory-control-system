@@ -10,7 +10,7 @@ public:
          Batch(int id);
         ~Batch();
 
-         static QSqlTableModel* getTableModel();
+         static QSqlQueryModel* getTableModel();
 
          int getBid();
          void setBid(int bid);

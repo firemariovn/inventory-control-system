@@ -66,11 +66,10 @@ Goods::Goods(int id){
 }
 
 
-QSqlTableModel* Goods::getTableModel(){
+QSqlQueryModel* Goods::getTableModel(){
 
-    QSqlTableModel *model = new QSqlTableModel();
-    model->setTable("Goods");
-    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    QSqlQueryModel *model = new QSqlQueryModel();
+    model->setQuery("select g.gid, g.name , c.name as 'category', g.depletionline, g.totalquantity from Goods as g join Category as c on c.cid = g.catid");
     return model;
 }
 

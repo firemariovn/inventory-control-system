@@ -32,12 +32,11 @@ Batch::Batch(int id)
     }
 }
 
-QSqlTableModel* Batch::getTableModel()
+QSqlQueryModel* Batch::getTableModel()
 {
 
-    QSqlTableModel *model = new QSqlTableModel();
-    model->setTable("Batch");
-    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    QSqlQueryModel *model = new QSqlQueryModel();
+    model->setQuery("select b.bid, g.name, b.unitprice, b.quantity, b.expireddate, b.type, b.btime, b.batchnumber from Batch as b join Goods as g on b.gid=g.gid");
     return model;
 }
 

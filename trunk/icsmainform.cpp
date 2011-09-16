@@ -16,12 +16,10 @@ ICSMainForm::ICSMainForm(QWidget *parent) :
 {
     QTextCodec::setCodecForTr(QTextCodec::codecForLocale());
     ui->setupUi(this);
-    QSqlTableModel *goodsModel = Goods::getTableModel();
-    goodsModel->select();
+    QSqlQueryModel *goodsModel = Goods::getTableModel();
     ui->goodsTableView->setModel(goodsModel);
 
-    QSqlTableModel *batchModel = Batch::getTableModel();
-    batchModel->select();
+    QSqlQueryModel *batchModel = Batch::getTableModel();
     ui->warehouseTableView->setModel(batchModel);
 
     QSqlTableModel *categoryModel = Category::getTableModel();
@@ -95,8 +93,8 @@ void ICSMainForm::bindCategory()
 
 void ICSMainForm::bindGoods()
 {
-    QSqlTableModel *model = Goods::getTableModel();
-    model->select();
+    QSqlQueryModel *model = Goods::getTableModel();
+
     ui->comboBox->clear();//clear all the comobox items before bind
     ui->comboBox_5->clear();
     ui->comboBox_7->clear();
@@ -232,8 +230,8 @@ void ICSMainForm::on_pushButton_4_clicked() //add goods
        g->setcatid(ui->comboBox_2->itemData(ui->comboBox_2->currentIndex(), Qt::UserRole).toInt());
        if(g->addGoods())
        {
-           QSqlTableModel *model = Goods::getTableModel();
-           model->select();
+           QSqlQueryModel *model = Goods::getTableModel();
+
            ui->goodsTableView->setModel(model);
            ui->goodsTableView->reset();
             qDebug()<<"ok!\n";
@@ -269,15 +267,15 @@ void ICSMainForm::on_outboundSubmitButton_clicked() // add warehouse outbound
     {
         QMessageBox::warning(this,tr("ok"),tr("Out Bound Successful!"),QMessageBox::Yes);
         bindGoods();
-        QSqlTableModel *model = Batch::getTableModel();
-        model->select();
+        QSqlQueryModel *model = Batch::getTableModel();
+
         ui->warehouseTableView->setModel(model);
         ui->warehouseTableView->reset();
 
         //Update totalquantity of Goods and then refresh GoodsTableView
         Goods::updateGoodsQuantity(gid,afterOutboundQuantity);
-        QSqlTableModel *goodsModel = Goods::getTableModel();
-        goodsModel->select();
+        QSqlQueryModel *goodsModel = Goods::getTableModel();
+
         ui->goodsTableView->setModel(goodsModel);
         ui->goodsTableView->reset();
     }
@@ -326,8 +324,8 @@ void ICSMainForm::on_inboundSubmitButton_clicked() //add warehouse inbound
     {
         QMessageBox::warning(this,tr("ok"),tr("Inbound Successful!"),QMessageBox::Yes);
         bindGoods();
-        QSqlTableModel *model = Batch::getTableModel();
-        model->select();
+        QSqlQueryModel *model = Batch::getTableModel();
+
         ui->warehouseTableView->setModel(model);
         ui->warehouseTableView->reset();
 
@@ -335,8 +333,8 @@ void ICSMainForm::on_inboundSubmitButton_clicked() //add warehouse inbound
         Goods *g = new Goods(gid);
         int currentQuantity = batch.getQuantity() + g->getTotalQuantity();
         Goods::updateGoodsQuantity(gid,currentQuantity);
-        QSqlTableModel *goodsModel = Goods::getTableModel();
-        goodsModel->select();
+        QSqlQueryModel *goodsModel = Goods::getTableModel();
+
         ui->goodsTableView->setModel(goodsModel);
         ui->goodsTableView->reset();
 

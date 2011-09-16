@@ -10,7 +10,7 @@ public:
      Goods(int id);
     ~Goods();
 
-     static QSqlTableModel* getTableModel();
+     static QSqlQueryModel* getTableModel();
 
      QString getName();
      void setName(QString name);
