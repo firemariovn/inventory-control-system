@@ -47,6 +47,13 @@ ICSMainForm::ICSMainForm(QWidget *parent) :
     bindGoods();
 
 
+    //Set a timer to check Database
+    QTimer *dbCheckTimer = new QTimer(this);
+
+    //Start a task to check database every 6 hours(21600000 ms)
+    dbCheckTimer->start(5000);
+    connect(dbCheckTimer,SIGNAL(timeout()),this,SLOT(on_dbCheckTimer_timeout()));
+
 
     // add status bar message
      statusBar()->showMessage("Status:Now you are in the mainform of Inventory Control System");
@@ -55,9 +62,14 @@ ICSMainForm::ICSMainForm(QWidget *parent) :
 
 }
 
+
 ICSMainForm::~ICSMainForm()
 {
     delete ui;
+}
+
+void ICSMainForm::on_dbCheckTimer_timeout(){
+    qDebug()<<QDateTime::currentDateTime().toString();
 }
 
 void ICSMainForm::bindCategory()

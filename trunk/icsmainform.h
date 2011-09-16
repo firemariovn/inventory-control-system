@@ -32,8 +32,11 @@ private slots:
 
     void on_inboundSubmitButton_clicked();
 
+    void on_dbCheckTimer_timeout();
+
 private:
     Ui::ICSMainForm *ui;
+
 };
 
 #endif // ICSMAINFORM_H
