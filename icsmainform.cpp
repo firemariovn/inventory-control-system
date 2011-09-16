@@ -27,12 +27,12 @@ ICSMainForm::ICSMainForm(QWidget *parent) :
     ui->categoryTableView->setModel(categoryModel);
 
     QSqlTableModel *warningModel = Warning::getTableModel();
-    warningModel->removeColumn(1);
-    warningModel->removeColumn(3);
+    warningModel->removeColumns(0,2);
+     warningModel->removeColumn(2);
     warningModel->select();
 
     ui->warningTableView->setModel(warningModel);
-    ui->warningTableView->resizeColumnToContents(2);
+    ui->warningTableView->resizeColumnToContents(0);
 
     //Initially, set the time of inboundDateTimeEdit and outboundDateTimeEdit to current time
     ui->inboundDateTimeEdit->setDateTime(QDateTime::currentDateTime());
