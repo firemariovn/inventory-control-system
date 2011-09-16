@@ -97,6 +97,7 @@ QSqlTableModel* Staff::getTableModel(){
      if(g->getTotalQuantity() <= depletionLine ){
        QString msg = QString("Please purchase more %1.Because The current quantity of %2 is smaller than its depletion line :%3.");
          w->setWmsg(msg.arg(goodsName).arg(goodsName).arg(depletionLine));
+         qDebug()<<msg.arg(goodsName).arg(goodsName).arg(depletionLine);
          w->setWtime(QDateTime::currentDateTime());
          w->setWtype(0);
          w->setBid(b->getBid());
