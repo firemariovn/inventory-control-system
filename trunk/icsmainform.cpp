@@ -146,51 +146,66 @@ void ICSMainForm::on_pushButton_5_clicked() //add category
 
 void ICSMainForm::on_pbtnSatistics_clicked()
 {
-    ui->lbOutbound->clear();
-    ui->lbInbound->clear();
+    QDate df =  ui->deFrom->date();
+    QDate dt =ui->deTo->date();
+    if(df<=dt)
+    {
+            ui->lbOutbound->clear();
+            ui->lbInbound->clear();
 
-    QString dateFrom = ui->deFrom->date().toString("yyyy-M-dd");
-    QString dateTo = ui->deTo->date().toString("yyyy-M-dd");
-    QString goodsId = ui->comboBox->itemData(ui->comboBox->currentIndex(), Qt::UserRole).toString();
-//    QSqlQuery query;
+            QString dateFrom = ui->deFrom->date().toString("yyyy-MM-dd");
+            QString dateTo = ui->deTo->date().addDays(1).toString("yyyy-MM-dd");
+            QString goodsId = ui->comboBox->itemData(ui->comboBox->currentIndex(), Qt::UserRole).toString();
+            //    QSqlQuery query;
 
-//    query.exec("select sum(quantity),sum(quantity *unitprice) from Batch where type=0 and gid ="+goodsId+" and (btime between '"+dateFrom+"' and '"+dateTo+"')");
+            //    query.exec("select sum(quantity),sum(quantity *unitprice) from Batch where type=0 and gid ="+goodsId+" and (btime between '"+dateFrom+"' and '"+dateTo+"')");
 
-//    while(query.next())
-//    {
-//        if(!query.value(0).toString().isNull())
-//        {
-//            ui->lbOutbound->setText(query.value(0).toString()+"items /$"+query.value(1).toString());
-//        }
+            //    while(query.next())
+            //    {
+            //        if(!query.value(0).toString().isNull())
+            //        {
+            //            ui->lbOutbound->setText(query.value(0).toString()+"items /$"+query.value(1).toString());
+            //        }
 
-//    }
-    QSqlQueryModel *model = Goods::statistic(goodsId,dateFrom,dateTo);
-//    qDebug()<<model->record(0).value(0).toString();
-//    qDebug()<<model->record(0).value(1).toString();
-//    qDebug()<<model->record(0).value(2).toString();
-//    qDebug()<<model->record(0).value(3).toString();
-    //if(!model->record(0).value(0).isNull())
-    //{
-        ui->lbOutbound->setText(model->record(0).value(0).toString()+ " items /$"+ model->record(0).value(1).toString());
-        ui->lbInbound->setText(model->record(0).value(2).toString()+ " items /$"+ model->record(0).value(3).toString());
-    //}
+            //    }
+            QSqlQueryModel *model = Goods::statistic(goodsId,dateFrom,dateTo);
+            //    qDebug()<<model->record(0).value(0).toString();
+            //    qDebug()<<model->record(0).value(1).toString();
+            //    qDebug()<<model->record(0).value(2).toString();
+            //    qDebug()<<model->record(0).value(3).toString();
+            if(!model->record(0).value(0).isNull())
+            {
+                  ui->lbOutbound->setText(model->record(0).value(0).toString()+ " items /$"+ model->record(0).value(1).toString());
+                  ui->lbInbound->setText(model->record(0).value(2).toString()+ " items /$"+ model->record(0).value(3).toString());
+            }
+            else
+            {
+                  ui->lbOutbound->setText("0 items /$0");
+                  ui->lbInbound->setText("0 items /$0");
+            }
 
-//    query.exec("select sum(quantity),sum(quantity *unitprice) from Batch where type=1 and gid ="+goodsId +" and (btime between '"+dateFrom+"' and '"+dateTo+"')");
-//    while(query.next())
-//    {
-//        if(!query.value(0).toString().isNull())
-//        {
-//            ui->lbInbound->setText(query.value(0).toString()+" items /$"+query.value(1).toString());
-//        }
-//    }
-//    model->clear();
+            //    query.exec("select sum(quantity),sum(quantity *unitprice) from Batch where type=1 and gid ="+goodsId +" and (btime between '"+dateFrom+"' and '"+dateTo+"')");
+            //    while(query.next())
+            //    {
+            //        if(!query.value(0).toString().isNull())
+            //        {
+            //            ui->lbInbound->setText(query.value(0).toString()+" items /$"+query.value(1).toString());
+            //        }
+            //    }
+            //    model->clear();
 
-//    *model= Goods::statistic(goodsId,"1",dateFrom,dateTo);
-//    qDebug()<<model->record(0).value(0).toString();
-//    if(!model->record(0).value(0).isNull())
-//    {
-//        ui->lbInbound->setText(model->record(0).value(0).toString()+ "items /$"+ model->record(0).value(1).toString());
-//    }
+            //    *model= Goods::statistic(goodsId,"1",dateFrom,dateTo);
+            //    qDebug()<<model->record(0).value(0).toString();
+            //    if(!model->record(0).value(0).isNull())
+            //    {
+            //        ui->lbInbound->setText(model->record(0).value(0).toString()+ "items /$"+ model->record(0).value(1).toString());
+            //    }
+      }
+      else
+     {
+            QMessageBox::warning(this,tr("Error"),tr("Starting time selected is greater than ending time! "),QMessageBox::Yes);
+
+     }
 
 
 }
