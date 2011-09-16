@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1024</width>
-    <height>768</height>
+    <width>1015</width>
+    <height>730</height>
    </rect>
   </property>
   <property name="contextMenuPolicy">
@@ -33,7 +33,7 @@
      <item>
       <widget class="QTabWidget" name="leftTabWidget">
        <property name="currentIndex">
-        <number>2</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="warehouseTab">
         <attribute name="title">
@@ -42,10 +42,10 @@
         <widget class="QTableView" name="warehouseTableView">
          <property name="geometry">
           <rect>
-           <x>-5</x>
-           <y>1</y>
+           <x>-10</x>
+           <y>0</y>
            <width>471</width>
-           <height>711</height>
+           <height>621</height>
           </rect>
          </property>
         </widget>
@@ -57,10 +57,10 @@
         <widget class="QTableView" name="goodsTableView">
          <property name="geometry">
           <rect>
-           <x>-5</x>
-           <y>1</y>
+           <x>0</x>
+           <y>0</y>
            <width>471</width>
-           <height>651</height>
+           <height>631</height>
           </rect>
          </property>
         </widget>
@@ -75,7 +75,7 @@
            <x>0</x>
            <y>0</y>
            <width>471</width>
-           <height>651</height>
+           <height>631</height>
           </rect>
          </property>
         </widget>
@@ -925,7 +925,7 @@
            <x>0</x>
            <y>0</y>
            <width>521</width>
-           <height>192</height>
+           <height>141</height>
           </rect>
          </property>
         </widget>
@@ -940,7 +940,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1024</width>
+     <width>1015</width>
      <height>22</height>
     </rect>
    </property>
