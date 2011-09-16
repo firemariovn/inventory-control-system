@@ -25,7 +25,7 @@ Batch::Batch(int id)
         gid = query.value(1).toInt();
         this->unitPrice = query.value(2).toFloat();
         this->quantity = query.value(3).toInt();
-        this->expiredDate = query.value(4).toDateTime();
+        this->expiredDate = query.value(4).toDate();
         this->type = query.value(5).toInt();
         this->batchNumber = query.value(6).toString();
         this->btime = query.value(7).toDateTime();
@@ -82,12 +82,12 @@ void Batch::setQuantity(int quantity)
     this->quantity = quantity;
 }
 
-QDateTime Batch::getExpiredDate()
+QDate Batch::getExpiredDate()
 {
     return expiredDate;
 }
 
-void Batch::setExpiredDate(QDateTime expiredDate)
+void Batch::setExpiredDate(QDate expiredDate)
 {
     this->expiredDate = expiredDate;
 }
@@ -132,7 +132,8 @@ bool Batch::addBatch()
     query.addBindValue(this->expiredDate);
     query.addBindValue(this->type);
     query.addBindValue(this->batchNumber);
-    query.addBindValue(this->btime);
+    query.addBindValue(this->btime.toString("yyyy-MM-dd hh:mm:ss"));
+
     return query.exec();
 }
 
