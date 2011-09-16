@@ -237,18 +237,6 @@ void ICSMainForm::on_outboundSubmitButton_clicked() // add warehouse outbound
 
     if(afterOutboundQuantity>0){
 
-    Warning* w = Staff::checkIfGoodsNearDepletion(&batch,g,afterOutboundQuantity);
-    if(w!=NULL){
-        QSqlTableModel *warningModel = Warning::getTableModel();
-        warningModel->removeColumn(1);
-        warningModel->removeColumn(3);
-        warningModel->select();
-
-        ui->warningTableView->setModel(warningModel);
-        ui->warningTableView->resizeColumnToContents(2);
-        QMessageBox::warning(this,tr("failed"),w->getWmsg(),QMessageBox::Yes);
-
-    }
 
     if(batch.addBatch())
     {
@@ -270,6 +258,21 @@ void ICSMainForm::on_outboundSubmitButton_clicked() // add warehouse outbound
     {
        QMessageBox::warning(this,tr("failed"),tr("Operation failed!"),QMessageBox::Yes);
     }
+
+    Warning* w = Staff::checkIfGoodsNearDepletion(&batch,g,afterOutboundQuantity);
+    if(w!=NULL){
+        QSqlTableModel *warningModel = Warning::getTableModel();
+        warningModel->removeColumn(1);
+        warningModel->removeColumn(3);
+        warningModel->select();
+
+        ui->warningTableView->setModel(warningModel);
+        ui->warningTableView->resizeColumnToContents(2);
+        QMessageBox::warning(this,tr("failed"),w->getWmsg(),QMessageBox::Yes);
+
+    }
+
+
     }else{
 
       QMessageBox::warning(this,tr("failed"),tr("No enough goods to sell!"),QMessageBox::Yes);
