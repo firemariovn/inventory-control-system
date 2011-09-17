@@ -29,7 +29,11 @@ http://inventory-control-system.googlecode.com/files/Use_Case_Diagram.png
 
 http://inventory-control-system.googlecode.com/files/Class.jpg
 
-Actually there are 6 classes designed in our inventory control system. Attributes in each class are private, and the functions to get these attributes are not shown in the class diagram. As shown in the figures, the worker class is a parent class with two son classes.They represent two different roles: manager and administer.The category ID in the goods class represent the category of goods which is associate with the category class. There are some differences between addnewgoods function and updategoods function.Addnewgoods function means add goods of new category then updategoods function means update number of some goods.
+Actually there are 6 classes designed in our inventory control system. Attributes in each class are private, and the functions to get these attributes are not shown in the class diagram. 
+
+  * Worker class is a parent class with two son classes.They represent two different roles: manager and administer.
+  * Category ID in the goods class represent the category of goods which is associate with the category class. 
+  * There are some differences between addnewgoods function and updategoods function.Addnewgoods function means add goods of new category then updategoods function means update number of some goods.
 
 = E-R Diagram =
 
