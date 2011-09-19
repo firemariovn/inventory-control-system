@@ -4,12 +4,12 @@
 #include "batch.h"
 #include "category.h"
 #include "staff.h"
-#include "database.h"
 #include <QSqlRecord>
 #include <QtGui>
 #include <QTextCodec>
 #include <QSqlQuery>
 #include <QDebug>
+#include "database.h"
 
 ICSMainForm::ICSMainForm(QWidget *parent) :
     QMainWindow(parent),
@@ -56,7 +56,11 @@ ICSMainForm::ICSMainForm(QWidget *parent) :
 
     // add status bar message
      statusBar()->showMessage("Status:Now you are in the mainform of Inventory Control System");
-
+     Staff * loginer=new Staff();
+     if(!loginer->ismanager)
+     {
+         ui->statisticsDockWidget->hide();
+     }
 
 
 }
@@ -239,17 +243,23 @@ void ICSMainForm::on_comboBox_3_currentIndexChanged(const QString &arg1) //bind 
 void ICSMainForm::on_pushButton_4_clicked() //add goods
 {
     Goods *g=new Goods();
+    if(ui->lineEdit->text()==NULL)
+    {
+        QMessageBox::warning(this,tr("Warning"),tr("goods name can not be null!"),QMessageBox::Yes);
+    }
+    else{
        g->setName(ui->lineEdit->text());
        g->setDepletionLine(ui->spinBox_3->value());
        g->setcatid(ui->comboBox_2->itemData(ui->comboBox_2->currentIndex(), Qt::UserRole).toInt());
        if(g->addGoods())
        {
            QSqlQueryModel *model = Goods::getTableModel();
-
+           //model->select();
            ui->goodsTableView->setModel(model);
            ui->goodsTableView->reset();
             qDebug()<<"ok!\n";
            }
+    }
 }
 
 void ICSMainForm::on_pushButton_6_clicked()
@@ -367,4 +377,10 @@ void ICSMainForm::on_inboundSubmitButton_clicked() //add warehouse inbound
 
      QMessageBox::warning(this,tr("failed"),tr("You cannot buy this batch of goods Because the goods has been expired!"),QMessageBox::Yes);
     }
+}
+
+
+void ICSMainForm::on_pushButton_3_clicked()
+{
+    ui->lineEdit->clear();
 }

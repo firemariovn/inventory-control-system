@@ -35,7 +35,8 @@ public:
      bool login();
 
 
-
+public:
+     static bool ismanager;
 
 
 

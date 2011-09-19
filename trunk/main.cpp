@@ -2,7 +2,7 @@
 #include "icsmainform.h"
 #include "icsloginform.h"
 #include "database.h"
-
+#include "staff.h"
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -11,11 +11,14 @@ int main(int argc, char *argv[])
      return 0;
     }
 
-    ICSMainForm  mainForm;
+
     ICSLoginForm loginForm;
 
 
     if(loginForm.exec()==QDialog::Accepted){
+        ICSMainForm  mainForm;
+        //Staff *loginer=new Staff();
+
         mainForm.show();
         return a.exec();
     }

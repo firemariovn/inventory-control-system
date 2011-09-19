@@ -10,7 +10,8 @@ ICSLoginForm::ICSLoginForm(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->pwdLineEdit->setEchoMode(QLineEdit::Password);
-
+    ui->comboBox->addItem("Grocery Manager");
+    ui->comboBox->addItem("Grocery Worker");
 }
 
 ICSLoginForm::~ICSLoginForm()
@@ -25,6 +26,14 @@ void ICSLoginForm::on_loginButton_clicked()
     Staff * loginer=new Staff();
     loginer->setName(ui->usrLineEdit->text());
     loginer->setPassword(ui->pwdLineEdit->text());
+    if(ui->comboBox->currentIndex()==0)
+    {
+        loginer->ismanager=true;
+    }
+    else
+    {
+        loginer->ismanager=false;
+    }
     if(loginer->login())
         accept();
     else

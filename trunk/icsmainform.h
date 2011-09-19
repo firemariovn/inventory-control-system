@@ -34,6 +34,8 @@ private slots:
 
     void on_dbCheckTimer_timeout();
 
+    void on_pushButton_3_clicked();
+
 private:
     Ui::ICSMainForm *ui;
 
