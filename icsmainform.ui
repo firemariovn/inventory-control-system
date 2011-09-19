@@ -97,7 +97,7 @@
      <item>
       <widget class="QTabWidget" name="tabWidget">
        <property name="currentIndex">
-        <number>1</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="tab">
         <attribute name="title">
@@ -934,11 +934,6 @@
      </item>
     </layout>
    </widget>
-   <zorder>verticalLayoutWidget</zorder>
-   <zorder>verticalLayoutWidget_2</zorder>
-   <zorder>verticalLayoutWidget_3</zorder>
-   <zorder>verticalLayoutWidget_4</zorder>
-   <zorder>statisticsDockWidget</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -946,7 +941,7 @@
      <x>0</x>
      <y>0</y>
      <width>1015</width>
-     <height>22</height>
+     <height>23</height>
     </rect>
    </property>
    <property name="defaultUp">

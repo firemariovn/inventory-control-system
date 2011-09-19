@@ -110,5 +110,5 @@ QSqlTableModel* Staff::getTableModel(){
 
      return NULL;
 }
-
+bool Staff::ismanager=true;
 
