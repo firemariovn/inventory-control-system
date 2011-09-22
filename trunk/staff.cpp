@@ -110,5 +110,24 @@ QSqlTableModel* Staff::getTableModel(){
 
      return NULL;
 }
-bool Staff::ismanager=true;
+ bool Staff::isManager(){
+     QSqlQuery query;
+     query.prepare("SELECT roleid FROM Staff WHERE name = ? and password = ?");
+     query.addBindValue( this->name);
+     query.addBindValue( this->password);
+     query.exec();
+     query.next();
+     //qDebug() << query.value(0).toString();
+     if(query.value(0).toInt()==2)
+     {
+         //this->ismanager=true;
+         return true;
+     }
+     else
+     {
+         //this->ismanager=false;
+         return false;
+     }
+ }
+ bool Staff::ismanager=true;
 

@@ -33,6 +33,7 @@ public:
      bool deleteStaff();
      bool updateStaff();
      bool login();
+     bool isManager();
 
 
 public:
