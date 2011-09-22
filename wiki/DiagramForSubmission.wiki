@@ -34,6 +34,7 @@ Actually there are 6 classes designed in our inventory control system. Attribute
   * Worker class is a parent class with two son classes.They represent two different roles: manager and administer.
   * Category ID in the goods class represent the category of goods which is associate with the category class. 
   * There are some differences between addnewgoods function and updategoods function.Addnewgoods function means add goods of new category then updategoods function means update number of some goods.
+  * Expiry and depletion are two son classes of warning. They overload the serWarningMessage function separately. 
 
 = E-R Diagram =
 
