@@ -14,7 +14,7 @@ This is an inventory control system that suitable for the small grocery. Our sys
 ||Name||Responsibility||
 ||Wang Ding||Team Leader, System Architecture||
 ||Lu Mukai||Use Case Design||
-||Zhao Longwen||Class Diagram Design|
+||Zhao Longwen||Class Diagram Design||
 ||Luo Di||System Testing,Documentation||
 
 
