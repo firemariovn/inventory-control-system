@@ -16,7 +16,7 @@ This is an inventory control system that suitable for the small grocery. Our sys
 ||Lu Mukai||Use Case Design & Implementation(Add Category, Statistics)||
 ||Zhao Longwen||Class Diagram Design & Implementation(Login, Add Goods)||
 ||Wang Yabin||Database Desgin,E-R Diagram Design& Implementation(Deliver Stock,Report Impending Expiry)||
-||Luo Di||System Testing,Documentation||
+||Luo Di||System Testing,Documentation(Maintain Project Wiki, Combine the documents from others into the one )||
 
 
 = Use Case Diagram =
