@@ -12,10 +12,10 @@ This is an inventory control system that suitable for the small grocery. Our sys
 
 = Team Member=
 ||Name||Responsibility||
-||Wang Ding||Team Leader, System Architecture||
-||Lu Mukai||Use Case Design||
-||Zhao Longwen||Class Diagram Design||
-||Wang Yabin||Database Desgin,E-R Diagram||
+||Wang Ding||Team Leader, System Architecture Design & Implementation||
+||Lu Mukai||Use Case Design & Implementation||
+||Zhao Longwen||Class Diagram Design & Implementation||
+||Wang Yabin||Database Desgin,E-R Diagram & Implementation||
 ||Luo Di||System Testing,Documentation||
 
 
