@@ -12,10 +12,10 @@ This is an inventory control system that suitable for the small grocery. Our sys
 
 = Team Member=
 ||Name||Responsibility||
-||Wang Ding||||
-||Lu Mukai||QT Creator||
-||Zhao Longwen||SQLite||
-||Luo Di||Nokia QT||
+||Wang Ding||Team Leader, System Architecture||
+||Lu Mukai||Use Case Design||
+||Zhao Longwen||Class Diagram Design|
+||Luo Di||System Testing,Documentation||
 
 
 = Use Case Diagram =
