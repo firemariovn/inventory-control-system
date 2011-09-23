@@ -8,6 +8,7 @@ This is an inventory control system that suitable for the small grocery. Our sys
 ||Development Language||C++||
 ||Development Tool||QT Creator||
 ||Database||SQLite||
+||GUI Framework||Nokia QT||
 
 
 
