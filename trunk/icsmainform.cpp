@@ -144,6 +144,9 @@ void ICSMainForm::on_pushButton_5_clicked() //add category
                QMessageBox::warning(this,tr("Succeed!"),tr("Category has been successful added"),QMessageBox::Yes);
                ui->lineEdit_2->clear();
                bindCategory();
+               QSqlTableModel *categoryModel = Category::getTableModel();
+               categoryModel->select();
+               ui->categoryTableView->setModel(categoryModel);
            }
            else
            {
