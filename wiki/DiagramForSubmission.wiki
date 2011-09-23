@@ -10,6 +10,12 @@ This is an inventory control system that suitable for the small grocery. Our sys
 ||Database||SQLite||
 ||GUI Framework||Nokia QT||
 
+= Team Member=
+||Name||Responsibility||
+||Wang Ding||||
+||Lu Mukai||QT Creator||
+||Zhao Longwen||SQLite||
+||Luo Di||Nokia QT||
 
 
 = Use Case Diagram =
