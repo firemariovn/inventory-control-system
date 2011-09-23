@@ -97,11 +97,11 @@
      <item>
       <widget class="QTabWidget" name="tabWidget">
        <property name="currentIndex">
-        <number>2</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="tab">
         <attribute name="title">
-         <string>Warehouse Inbound</string>
+         <string>Order Stock</string>
         </attribute>
         <widget class="QSpinBox" name="spinBox_8">
          <property name="geometry">
@@ -308,7 +308,7 @@
        </widget>
        <widget class="QWidget" name="tab_2">
         <attribute name="title">
-         <string>Warehouse Outbound</string>
+         <string>Deliver Stock</string>
         </attribute>
         <widget class="QLabel" name="label_35">
          <property name="geometry">
@@ -941,7 +941,7 @@
      <x>0</x>
      <y>0</y>
      <width>1015</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
    <property name="defaultUp">
