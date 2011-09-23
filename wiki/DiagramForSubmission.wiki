@@ -12,10 +12,10 @@ This is an inventory control system that suitable for the small grocery. Our sys
 
 = Team Member=
 ||Name||Responsibility||
-||Wang Ding||Team Leader, System Architecture Design & Implementation(Order Stock)||
+||Wang Ding||Team Leader, System Architecture Design & Implementation(Order Stock,Dynamically issue stock-up request)||
 ||Lu Mukai||Use Case Design & Implementation(Add Category, Statistics)||
 ||Zhao Longwen||Class Diagram Design & Implementation(Login, Add Goods)||
-||Wang Yabin||Database Desgin,E-R Diagram Design& Implementation(Deliver Stock)||
+||Wang Yabin||Database Desgin,E-R Diagram Design& Implementation(Deliver Stock,Report Impending Expiry)||
 ||Luo Di||System Testing,Documentation||
 
 
