@@ -23,6 +23,8 @@ ICSMainForm::ICSMainForm(QWidget *parent) :
     QSqlQueryModel *batchModel = Batch::getTableModel();
     ui->warehouseTableView->setModel(batchModel);
 
+
+
     QSqlTableModel *categoryModel = Category::getTableModel();
     categoryModel->select();
     ui->categoryTableView->setModel(categoryModel);
