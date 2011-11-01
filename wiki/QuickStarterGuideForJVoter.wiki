@@ -1,4 +1,4 @@
-#summary Quick Starter Guide for Our Team-members.
+#summary Quick Starter Guide for JVoter.
 
 = Introduction =
 
