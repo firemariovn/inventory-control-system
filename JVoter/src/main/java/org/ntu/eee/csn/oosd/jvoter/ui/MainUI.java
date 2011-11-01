@@ -60,10 +60,10 @@ public class MainUI {
 		frame.getContentPane().add(panel);
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JButton initialiteVoteButton = new JButton("Initialite a Vote");
+		JButton initialiteVoteButton = new JButton("Initiate a Vote");
 		panel.add(initialiteVoteButton);
 		
-		JButton unRepliedVotesButton = new JButton("Unreplied Votes");
+		JButton unRepliedVotesButton = new JButton("Unreplied Votes[0]");
 		panel.add(unRepliedVotesButton);
 		
 		JButton viewAllButton = new JButton("View All Votes");
