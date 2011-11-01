@@ -11,6 +11,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EtchedBorder;
 
+/**
+ * This is the Main Frame of JVoter in UI Layer
+ *  
+ * @author WangDing
+ *
+ */
 public class MainUI {
 
 	private JFrame frame;
