@@ -23,12 +23,6 @@ Eclipse 3.5 (Galileo)
 http://dl.google.com/eclipse/inst/d2wbpro/latest/3.5
 
 Note: If you are having trouble installing from the update sites, please see the installation instructions in the documentation.
-
-
-= How to Use Issue Tracker of Google Code =
- * Quick Start:http://code.google.com/p/support/wiki/IssueTracker#Quick_start
- * Integration with version control:http://code.google.com/p/support/wiki/IssueTracker#Integration_with_version_control
- * http://www.cppblog.com/lingjingqiu/archive/2011/03/09/141435.html
  
 = Network Programming =
  * Network Socket Programming: http://52android.blog.51cto.com/2554429/482954
