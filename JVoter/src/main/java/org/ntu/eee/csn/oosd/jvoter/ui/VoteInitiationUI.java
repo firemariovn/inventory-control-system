@@ -110,7 +110,7 @@ public class VoteInitiationUI extends JPanel{
 		panel.add(tfOption4, "6, 12, fill, default");
 		tfOption4.setColumns(10);
 		
-		JLabel lblOption5 = new JLabel("Option 5:");
+		JLabel lblOption5 = new JLabel("Deadline:");
 		panel.add(lblOption5, "2, 14");
 		
 		tfOption5 = new JTextField();
