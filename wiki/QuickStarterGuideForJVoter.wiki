@@ -2,32 +2,37 @@
 
 = Introduction =
 
-Inventory Control system - update and track goods for a grocery. Sub-system to dynamically issue stock-up requests for goods near depletion. Sub-system to track and warn of impending expiry of goods should be included as well.
+
+= How to Get Eclipse and Windows Builder Pro =
+
+ * Download Eclipse JavaEE Edition 3.7:http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/indigosr1
+
+ * Following the steps below to Install Windows Builder Pro(http://code.google.com/javadevtools/download-wbpro.html) on you Eclipse:
 
 
-= How to Get QT SDK and QT Development Environment =
+If you are already familiar with installing Eclipse plugins, you can just use the update site URL below for your version of Eclipse.
+For bleeding edge features and bug fixes, see the WindowBuilder Pro (BETA) installation page.
+..
+Eclipse 3.7 (Indigo)
+http://dl.google.com/eclipse/inst/d2wbpro/latest/3.7
 
-QT Creator link:http://qt.nokia.com/downloads   (We use QT Version 4.7)
+Eclipse 3.6 (Helios)
+http://dl.google.com/eclipse/inst/d2wbpro/latest/3.6
 
-QT Programming Tutorial:http://doc.qt.nokia.com/4.7/index.html
+Eclipse 3.5 (Galileo)
+http://dl.google.com/eclipse/inst/d2wbpro/latest/3.5
 
-Chinese QT Programming Guide:
- * http://hi.baidu.com/yafeilinux/blog/item/3446ff0b2c591635b0351d31.html 
- * http://www.cppblog.com/biao/category/9973.html
- * http://www.devbean.info/category/qt/page/2/
- * http://konglingchun.is-programmer.com/posts/12676.html
- * http://blog.ezcn8.com/?p=93
+Note: If you are having trouble installing from the update sites, please see the installation instructions in the documentation.
 
-Frequently Asked QT Programming Questions(Chinese):http://blog.csdn.net/starcloud_zxt/article/details/5185470
 
 = How to Use Issue Tracker of Google Code =
  * Quick Start:http://code.google.com/p/support/wiki/IssueTracker#Quick_start
  * Integration with version control:http://code.google.com/p/support/wiki/IssueTracker#Integration_with_version_control
  * http://www.cppblog.com/lingjingqiu/archive/2011/03/09/141435.html
  
+= Network Programming =
+ * Network Socket Programming: http://52android.blog.51cto.com/2554429/482954
+
 = Setup Development Environment = 
 
   * Checkout Codes
-
-= Business Knowledge =
-Warehouse Inbound and Storage:http://inventory-control-system.googlecode.com/files/WarehouseOperationsHandout2.pdf
