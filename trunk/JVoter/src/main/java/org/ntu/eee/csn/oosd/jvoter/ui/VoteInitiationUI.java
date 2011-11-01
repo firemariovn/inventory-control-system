@@ -18,15 +18,15 @@ import javax.swing.border.EtchedBorder;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 
-public class VoteUI extends JPanel{
+public class VoteInitiationUI extends JPanel{
 	private JTextField tfVoteName;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	public VoteUI() {
+	private JTextField tfOption1;
+	private JTextField tfOption2;
+	private JTextField tfOption3;
+	private JTextField tfOption4;
+	private JTextField tfOption5;
+	private JTextField tfDesc;
+	public VoteInitiationUI() {
 		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		setLayout(null);
 		
@@ -34,8 +34,8 @@ public class VoteUI extends JPanel{
 		scrollPane.setBounds(311, 35, 133, 509);
 		add(scrollPane);
 		
-		JList list = new JList();
-		scrollPane.setViewportView(list);
+		JList onlineUserlist = new JList();
+		scrollPane.setViewportView(onlineUserlist);
 		
 		JLabel lblOnlineUsers = new JLabel("Online Users:");
 		lblOnlineUsers.setBounds(317, 6, 114, 26);
@@ -78,48 +78,48 @@ public class VoteUI extends JPanel{
 		JLabel lblDescription = new JLabel("Description:");
 		panel.add(lblDescription, "2, 4");
 		
-		textField_5 = new JTextField();
-		panel.add(textField_5, "6, 4, fill, default");
-		textField_5.setColumns(10);
+		tfDesc = new JTextField();
+		panel.add(tfDesc, "6, 4, fill, default");
+		tfDesc.setColumns(10);
 		
-		JLabel lblOption = new JLabel("Option 1:");
-		panel.add(lblOption, "2, 6");
+		JLabel lblOption1 = new JLabel("Option 1:");
+		panel.add(lblOption1, "2, 6");
 		
-		textField = new JTextField();
-		panel.add(textField, "6, 6, fill, default");
-		textField.setColumns(10);
+		tfOption1 = new JTextField();
+		panel.add(tfOption1, "6, 6, fill, default");
+		tfOption1.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("Option 2:");
-		panel.add(lblNewLabel, "2, 8");
+		JLabel lblOpion2 = new JLabel("Option 2:");
+		panel.add(lblOpion2, "2, 8");
 		
-		textField_1 = new JTextField();
-		panel.add(textField_1, "6, 8, fill, default");
-		textField_1.setColumns(10);
+		tfOption2 = new JTextField();
+		panel.add(tfOption2, "6, 8, fill, default");
+		tfOption2.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Option 3:");
-		panel.add(lblNewLabel_1, "2, 10");
+		JLabel lblOption3 = new JLabel("Option 3:");
+		panel.add(lblOption3, "2, 10");
 		
-		textField_2 = new JTextField();
-		panel.add(textField_2, "6, 10, fill, default");
-		textField_2.setColumns(10);
+		tfOption3 = new JTextField();
+		panel.add(tfOption3, "6, 10, fill, default");
+		tfOption3.setColumns(10);
 		
-		JLabel lblOption_1 = new JLabel("Option 4:");
-		panel.add(lblOption_1, "2, 12");
+		JLabel lblOption4 = new JLabel("Option 4:");
+		panel.add(lblOption4, "2, 12");
 		
-		textField_3 = new JTextField();
-		panel.add(textField_3, "6, 12, fill, default");
-		textField_3.setColumns(10);
+		tfOption4 = new JTextField();
+		panel.add(tfOption4, "6, 12, fill, default");
+		tfOption4.setColumns(10);
 		
-		JLabel lblOption_2 = new JLabel("Option 5:");
-		panel.add(lblOption_2, "2, 14");
+		JLabel lblOption5 = new JLabel("Option 5:");
+		panel.add(lblOption5, "2, 14");
 		
-		textField_4 = new JTextField();
-		panel.add(textField_4, "6, 14, fill, default");
-		textField_4.setColumns(10);
+		tfOption5 = new JTextField();
+		panel.add(tfOption5, "6, 14, fill, default");
+		tfOption5.setColumns(10);
 		
-		JLabel lblVoteForm = new JLabel("Vote Form:");
+		JLabel lblVoteForm = new JLabel("Initiate A Vote:");
 		lblVoteForm.setFont(new Font("Lucida Grande", Font.BOLD, 17));
-		lblVoteForm.setBounds(16, 6, 133, 26);
+		lblVoteForm.setBounds(16, 6, 147, 26);
 		add(lblVoteForm);
 		
 		JPanel buttonPanel = new JPanel();
@@ -128,10 +128,10 @@ public class VoteUI extends JPanel{
 		add(buttonPanel);
 		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JButton btnNewButton = new JButton("Send");
-		buttonPanel.add(btnNewButton);
+		JButton sendButton = new JButton("Send");
+		buttonPanel.add(sendButton);
 		
-		JButton btnNewButton_1 = new JButton("Cancel");
-		buttonPanel.add(btnNewButton_1);
+		JButton cancelButton = new JButton("Cancel");
+		buttonPanel.add(cancelButton);
 	}
 }
