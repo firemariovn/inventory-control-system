@@ -27,6 +27,7 @@ public class Voter {
 	}
 
 	public void setHostAddress(String hostAddress) {
+		
 		this.hostAddress = hostAddress;
 	}
 
