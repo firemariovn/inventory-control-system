@@ -18,7 +18,7 @@ public class VoteListUI extends JPanel{
 		add(lblVoteList);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(6, 44, 315, 317);
+		scrollPane.setBounds(6, 44, 418, 453);
 		add(scrollPane);
 		
 		JList voteList = new JList();

@@ -24,7 +24,7 @@ public class VoteInitiationUI extends JPanel{
 	private JTextField tfOption2;
 	private JTextField tfOption3;
 	private JTextField tfOption4;
-	private JTextField tfOption5;
+	private JTextField tfDeadline;
 	private JTextField tfDesc;
 	public VoteInitiationUI() {
 		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
@@ -110,12 +110,12 @@ public class VoteInitiationUI extends JPanel{
 		panel.add(tfOption4, "6, 12, fill, default");
 		tfOption4.setColumns(10);
 		
-		JLabel lblOption5 = new JLabel("Deadline:");
-		panel.add(lblOption5, "2, 14");
+		JLabel lblDeadline = new JLabel("Deadline:");
+		panel.add(lblDeadline, "2, 14");
 		
-		tfOption5 = new JTextField();
-		panel.add(tfOption5, "6, 14, fill, default");
-		tfOption5.setColumns(10);
+		tfDeadline = new JTextField();
+		panel.add(tfDeadline, "6, 14, fill, default");
+		tfDeadline.setColumns(10);
 		
 		JLabel lblVoteForm = new JLabel("Initiate A Vote:");
 		lblVoteForm.setFont(new Font("Lucida Grande", Font.BOLD, 17));
