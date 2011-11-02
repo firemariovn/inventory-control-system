@@ -2,6 +2,8 @@ package org.ntu.eee.csn.oosd.jvoter.model;
 
 import java.net.InetAddress;
 
+import org.apache.log4j.Logger;
+
 /**
  * 
  * 
@@ -9,6 +11,12 @@ import java.net.InetAddress;
  * 
  */
 public class Voter {
+	
+	/**
+	 * Please use LOGGER to records the vote the user has initiated and 
+     * participated.
+	 */
+	private static Logger LOGGER = Logger.getLogger(Voter.class);
 
 	private String hostAddress;
 
