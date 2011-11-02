@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.ntu.eee.csn.oosd.jvoter.util.JVoterProtocol;
+
 /**
  * An instance of vote is used to save the vote content when initiating a vote
  * 
@@ -29,6 +31,7 @@ public class Vote implements Serializable {
 	Date deadline = new Date();
 
 	public String getVoteID() {
+	 
 		return voteID;
 	}
 
