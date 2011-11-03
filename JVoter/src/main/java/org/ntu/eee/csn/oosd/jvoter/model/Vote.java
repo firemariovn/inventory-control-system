@@ -1,9 +1,15 @@
 package org.ntu.eee.csn.oosd.jvoter.model;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.ntu.eee.csn.oosd.jvoter.util.DBUtil;
 import org.ntu.eee.csn.oosd.jvoter.util.JVoterProtocol;
 
 /**
@@ -29,6 +35,12 @@ public class Vote implements Serializable {
 	String initiator;
 
 	Date deadline = new Date();
+	
+	DBUtil db = new DBUtil();
+	Connection conn = null;
+	Statement stmt=null;
+	ResultSet rs = null;
+	String sql = null;
 
 	public String getVoteID() {
 	 
@@ -70,7 +82,43 @@ public class Vote implements Serializable {
 	public void setDeadline(Date deadline) {
 		this.deadline = deadline;
 	}
-
 	
-	
+	public void addVote(String voteID, String desc, String initiator, String dateLine){	
+		try {
+			sql = "INSERT INTO vote VALUES(?, ?, ?, ?)";
+			conn = db.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1,voteID);
+			ps.setString(2, desc);
+			ps.setString(3, initiator);
+			ps.setString(4, dateLine);
+			ps.execute(sql);
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+		}
+		
+	}
+	public void deleteVote(String voteID){
+		try {
+			sql = "delete vote where voteid=?";
+			conn = db.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1,voteID);
+			ps.execute(sql);
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+		}
+	}
 }
