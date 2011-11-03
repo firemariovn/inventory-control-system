@@ -6,8 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.ntu.eee.csn.oosd.jvoter.util.DBUtil;
 import org.ntu.eee.csn.oosd.jvoter.util.JVoterProtocol;
@@ -83,34 +88,34 @@ public class Vote implements Serializable {
 		this.deadline = deadline;
 	}
 	
-	public void addVote(String voteID, String desc, String initiator, String dateLine){	
+	public void add(){
+		SimpleDateFormat   formatter   =   new   SimpleDateFormat   ("yyyy-MM-dd HH:mm:ss");
 		try {
-			sql = "INSERT INTO vote VALUES(?, ?, ?, ?)";
+			sql = "INSERT INTO VOTE(VOTEID, DESC, INITIATOR, DEADLINE) VALUES(?,?,?,?)";
 			conn = db.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1,voteID);
+			ps.setString(1, voteID);
 			ps.setString(2, desc);
 			ps.setString(3, initiator);
-			ps.setString(4, dateLine);
-			ps.execute(sql);
+			ps.setString(4, formatter.format(deadline));
+			ps.executeUpdate();
 			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally{
 		}
-		
 	}
-	public void deleteVote(String voteID){
+	public void delete(){
 		try {
-			sql = "delete vote where voteid=?";
+			sql = "delete from vote where voteid=?";
 			conn = db.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1,voteID);
-			ps.execute(sql);
+			ps.executeUpdate();
 			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -118,7 +123,39 @@ public class Vote implements Serializable {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally{
 		}
 	}
+	public List all(){
+		DateFormat format= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");   
+		List<Vote> list = new LinkedList<Vote>();
+		try {
+			sql = "select * from vote";
+			conn = db.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery(sql);
+
+			while(rs.next()){
+				Vote tmpVote = new Vote();
+				tmpVote.setVoteID(rs.getString("voteid"));
+				tmpVote.setDesc(rs.getString("desc"));
+				tmpVote.setInitiator(rs.getString("initiator"));
+				list.add(tmpVote);
+				try {
+					tmpVote.setDeadline(format.parse(rs.getString("deadline")));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 }
