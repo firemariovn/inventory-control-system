@@ -67,6 +67,8 @@ public class VoteTest extends TestCase {
 		tVote.setInitiator(initiator);
 		tVote.setDeadline(deadline);
 		tVote.add();
-	    //tVote.delete("junit234");
+		
+		assertEquals("", "");
+	    tVote.delete();
 	}
 }
