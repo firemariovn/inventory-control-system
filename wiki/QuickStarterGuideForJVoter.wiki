@@ -27,6 +27,8 @@ Note: If you are having trouble installing from the update sites, please see the
 = Network Programming =
  * Network Socket Programming: http://52android.blog.51cto.com/2554429/482954
 
+ * Java Multicast Socket : http://li-sir.iteye.com/blog/837344
+
 = Setup Development Environment = 
 
   * Checkout Codes
