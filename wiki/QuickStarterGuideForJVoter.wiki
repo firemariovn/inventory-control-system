@@ -28,7 +28,7 @@ Note: If you are having trouble installing from the update sites, please see the
  * Network Socket Programming: http://52android.blog.51cto.com/2554429/482954
 
  * Java Multicast Socket : http://li-sir.iteye.com/blog/837344
-
+ * MulticastSocket Implement:  http://book.51cto.com/art/200809/89225.htm
 = Setup Development Environment = 
 
   * Checkout Codes
