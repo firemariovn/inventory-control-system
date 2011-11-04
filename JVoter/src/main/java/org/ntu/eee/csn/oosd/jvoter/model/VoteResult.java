@@ -1,5 +1,6 @@
 package org.ntu.eee.csn.oosd.jvoter.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -16,6 +17,7 @@ public class VoteResult extends Vote {
 	 * vote, I put this key-value pair "2:20" to a hashmap.
 	 */
 	HashMap result = new HashMap();
+	
 
 	public VoteResult() {
 
