@@ -55,6 +55,8 @@ public class VoteTest extends TestCase {
 
 	public void testVoteTable(){
 		
+		
+		
 		LOGGER.info("testVoteTable");
 		//fail("Not yet implemented");
 		Vote tVote = new Vote();
@@ -71,5 +73,6 @@ public class VoteTest extends TestCase {
 		tVote.add();
 		assertEquals(voteID, tVote.select(voteID).getVoteID());
 	    tVote.delete();
+	
 	}
 }
