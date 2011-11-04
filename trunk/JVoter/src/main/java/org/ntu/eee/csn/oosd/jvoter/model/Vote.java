@@ -16,6 +16,7 @@ import java.util.List;
 
 import org.ntu.eee.csn.oosd.jvoter.util.DBUtil;
 import org.ntu.eee.csn.oosd.jvoter.util.JVoterProtocol;
+import org.omg.CORBA.TRANSACTION_MODE;
 
 /**
  * An instance of vote is used to save the vote content when initiating a vote
@@ -41,7 +42,7 @@ public class Vote implements Serializable {
 
 	Date deadline = new Date();
 	
-	DBUtil db = new DBUtil();
+	transient DBUtil db = new DBUtil();
 	Connection conn = null;
 	Statement stmt=null;
 	ResultSet rs = null;
@@ -49,6 +50,11 @@ public class Vote implements Serializable {
 	
 	SimpleDateFormat   format   =   new   SimpleDateFormat   ("yyyy-MM-dd HH:mm:ss");
 
+	public String getUniqueID(){
+		return DBUtil.generateGUID();
+		
+		
+	}
 	public String getVoteID() {
 	 
 		return voteID;
