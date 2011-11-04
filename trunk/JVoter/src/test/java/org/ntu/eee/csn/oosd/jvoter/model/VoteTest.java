@@ -58,17 +58,18 @@ public class VoteTest extends TestCase {
 		LOGGER.info("testVoteTable");
 		//fail("Not yet implemented");
 		Vote tVote = new Vote();
-		String voteID = "junit456";
+		String voteID = "testVote";
 		String desc = "which unit test do you like?";
 		String initiator = "junit";
 		Date deadline = new Date();
+		
 		tVote.setVoteID(voteID);
 		tVote.setDesc(desc);
 		tVote.setInitiator(initiator);
 		tVote.setDeadline(deadline);
-		tVote.add();
 		
-		assertEquals("", "");
+		tVote.add();
+		assertEquals(voteID, tVote.select(voteID).getVoteID());
 	    tVote.delete();
 	}
 }
