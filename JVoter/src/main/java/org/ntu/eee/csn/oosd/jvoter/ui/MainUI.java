@@ -4,12 +4,22 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EtchedBorder;
+
+import org.pushingpixels.substance.api.SubstanceLookAndFeel;
+import org.pushingpixels.substance.api.skin.BusinessBlackSteelSkin;
+import org.pushingpixels.substance.api.skin.CremeCoffeeSkin;
+import org.pushingpixels.substance.api.skin.MarinerSkin;
+import org.pushingpixels.substance.api.skin.OfficeBlue2007Skin;
+import org.pushingpixels.substance.api.skin.OfficeSilver2007Skin;
+import org.pushingpixels.substance.api.skin.TwilightSkin;
 
 /**
  * This is the Main Frame of JVoter in UI Layer
@@ -25,8 +35,11 @@ public class MainUI {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+		JFrame.setDefaultLookAndFeelDecorated(true);
+		JDialog.setDefaultLookAndFeelDecorated(true);
+		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
+				SubstanceLookAndFeel.setSkin(new CremeCoffeeSkin());
 				try {
 					MainUI window = new MainUI();
 					window.frame.setVisible(true);
