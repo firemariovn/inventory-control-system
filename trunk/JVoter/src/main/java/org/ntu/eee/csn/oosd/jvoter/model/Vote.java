@@ -46,6 +46,8 @@ public class Vote implements Serializable {
 	Statement stmt=null;
 	ResultSet rs = null;
 	String sql = null;
+	
+	SimpleDateFormat   format   =   new   SimpleDateFormat   ("yyyy-MM-dd HH:mm:ss");
 
 	public String getVoteID() {
 	 
@@ -89,7 +91,7 @@ public class Vote implements Serializable {
 	}
 	
 	public void add(){
-		SimpleDateFormat   formatter   =   new   SimpleDateFormat   ("yyyy-MM-dd HH:mm:ss");
+		
 		try {
 			sql = "INSERT INTO VOTE(VOTEID, DESC, INITIATOR, DEADLINE) VALUES(?,?,?,?)";
 			conn = db.getConnection();
@@ -97,7 +99,7 @@ public class Vote implements Serializable {
 			ps.setString(1, voteID);
 			ps.setString(2, desc);
 			ps.setString(3, initiator);
-			ps.setString(4, formatter.format(deadline));
+			ps.setString(4, format.format(deadline));
 			ps.executeUpdate();
 			conn.close();
 		} catch (SQLException e) {
@@ -125,8 +127,39 @@ public class Vote implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	public List all(){
-		DateFormat format= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");   
+	public Vote select(String voteID){
+		Vote vote = null;
+		try {
+			sql = "select DESC, INITIATOR, DEADLINE from vote where VOTEID=?";
+			conn = db.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, voteID);
+			rs = ps.executeQuery();
+
+			while(rs.next()){
+				vote = new Vote();
+				vote.setVoteID(voteID);
+				vote.setDesc(rs.getString("desc"));
+				vote.setInitiator(rs.getString("initiator"));
+				try { 
+					vote.setDeadline(format.parse(rs.getString("deadline")));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return vote;
+	}
+	
+	public List all(){ 
 		List<Vote> list = new LinkedList<Vote>();
 		try {
 			sql = "select * from vote";
@@ -139,13 +172,13 @@ public class Vote implements Serializable {
 				tmpVote.setVoteID(rs.getString("voteid"));
 				tmpVote.setDesc(rs.getString("desc"));
 				tmpVote.setInitiator(rs.getString("initiator"));
-				list.add(tmpVote);
 				try {
 					tmpVote.setDeadline(format.parse(rs.getString("deadline")));
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				list.add(tmpVote);
 			}
 			conn.close();
 		} catch (SQLException e) {
