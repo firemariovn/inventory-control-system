@@ -1,8 +1,10 @@
 package org.ntu.eee.csn.oosd.jvoter.model;
 
-import java.net.InetAddress;
 
+import java.net.InetAddress;
+import java.net.*;
 import org.apache.log4j.Logger;
+import org.ntu.eee.csn.oosd.jvoter.util.JVoterProtocol;
 
 /**
  * 
@@ -10,7 +12,7 @@ import org.apache.log4j.Logger;
  * @author WangDing
  * 
  */
-public class Voter {
+public class Voter implements JVoterProtocol{
 	
 	/**
 	 * Please use LOGGER to records the vote the user has initiated and 
@@ -21,7 +23,19 @@ public class Voter {
 	private String hostAddress;
 
 	private InetAddress inetAddress;
+    
+	private String hostname;
+	private String guid;
+	
+	
+	
+	public String getGuid() {
+        return guid;
+    }
 
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
 	public String getHostAddress() {
 		return hostAddress;
 	}
@@ -38,5 +52,15 @@ public class Voter {
 	public void setInetAddress(InetAddress inetAddress) {
 		this.inetAddress = inetAddress;
 	}
-
+	public void setHostName(String hostname) {
+		this.hostname = hostname;
+	}
+	public String getHostName(){
+		return this.hostname;
+	}
+	public Voter(){
+		
+		
+	}
+	
 }
