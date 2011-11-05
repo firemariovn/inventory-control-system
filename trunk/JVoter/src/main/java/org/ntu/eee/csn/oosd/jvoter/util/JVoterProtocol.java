@@ -3,11 +3,16 @@ package org.ntu.eee.csn.oosd.jvoter.util;
 public interface JVoterProtocol {
 	
 	
-	String USER_ON_LINE ="";
+	int USER_ON_LINE =0;
 	
-	String USER_OFF_LINE="";
+	int USER_OFF_LINE=1;
 	
-	String RERESH ="";
+	int  RERESH =2;
+	String ss=""; 
+    int multicastPort = 6789;
 	
+	int unicastListenPort = 7789;
+	
+	int unicastSendPort = 8781;
 
 }
