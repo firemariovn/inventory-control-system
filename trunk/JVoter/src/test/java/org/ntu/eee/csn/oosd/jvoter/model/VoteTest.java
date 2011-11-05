@@ -54,24 +54,30 @@ public class VoteTest extends TestCase {
 	}
 
 	public void testVoteTable(){
-		
-		
-		
 		LOGGER.info("testVoteTable");
 		//fail("Not yet implemented");
 		Vote tVote = new Vote();
-		String voteID = "testVote";
+		String voteID = tVote.getUniqueID();
 		String desc = "which unit test do you like?";
-		String initiator = "junit";
+		String initiatorIp = "127.0.0.0.1";
+		String hostName = "wangyabin";
+		String hostIp = "127.0.0.1";
+		int isInitiator = 1;
+		int isValidate = 1;
 		Date deadline = new Date();
 		
 		tVote.setVoteID(voteID);
 		tVote.setDesc(desc);
-		tVote.setInitiator(initiator);
+		tVote.setInitiatorIp(initiatorIp);
 		tVote.setDeadline(deadline);
+		tVote.setHostIp(hostIp);
+		tVote.setHostName(hostName);
+		tVote.setIsInitiator(isInitiator);
+		tVote.setIsValidate(isValidate);
+		
 		
 		tVote.add();
-		assertEquals(voteID, tVote.select(voteID).getVoteID());
+		assertEquals(voteID, tVote.select().getVoteID());
 	    tVote.delete();
 	
 	}
