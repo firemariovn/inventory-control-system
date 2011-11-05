@@ -13,15 +13,19 @@ import java.util.UUID;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EtchedBorder;
 
 import org.ntu.eee.csn.oosd.jvoter.model.Voter;
 import org.ntu.eee.csn.oosd.jvoter.util.JVoterProtocol;
+import org.pushingpixels.substance.api.SubstanceLookAndFeel;
+import org.pushingpixels.substance.api.skin.CremeCoffeeSkin;
 /**
  * This is the Main Frame of JVoter in UI Layer
  *  
@@ -44,8 +48,11 @@ public class MainUI implements JVoterProtocol {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+		JFrame.setDefaultLookAndFeelDecorated(true);
+		JDialog.setDefaultLookAndFeelDecorated(true);
+		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
+				SubstanceLookAndFeel.setSkin(new CremeCoffeeSkin());
 				try {
 					MainUI window = new MainUI();
 					window.frame.setVisible(true);
