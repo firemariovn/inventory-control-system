@@ -1,13 +1,82 @@
 package org.ntu.eee.csn.oosd.jvoter.ui;
 
+//This class is used by users to view all the unanswered votes
+//@Author: LU Mukai G1101045F
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+
+import java.awt.Component;
 import java.awt.Font;
+import java.awt.Rectangle;
+
 import javax.swing.border.EtchedBorder;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.ListCellRenderer;
+
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.util.ArrayList;
+
+import javax.swing.border.BevelBorder;
+import javax.swing.ListSelectionModel;
+
+import org.ntu.eee.csn.oosd.jvoter.model.Vote;
+import org.ntu.eee.csn.oosd.jvoter.model.VoteReply;
+import org.ntu.eee.csn.oosd.jvoter.util.JVoterProtocol;
 
 public class VoteResultSelectionUI extends JPanel{
+	
+	
+	private DatagramSocket socket;
+	private DefaultListModel lItems= new DefaultListModel();
+	private JLabel lblVoteName;
+	private JLabel lblInitiator;
+	private JLabel lblDeadline;
+	private JTextArea tAreaDiscription;
+	private JList listOptions;
+	private Vote vote;
+	private DefaultListModel items;
+	private int index;
+	private JButton unRepliedVotesButton;
+	private ArrayList<Vote> votes;
+	
+	public  VoteResultSelectionUI(Vote v, DatagramSocket socket,DefaultListModel items,int index,JButton unRepliedVotesButton,ArrayList<Vote> votes)
+	{
+		this();
+		this.socket = socket;
+		this.vote=v;
+		this.items=items;
+		this.index=index; //get the index which is selected in VoteListUI and also is the index of this vote in the ArrayList
+		this.unRepliedVotesButton =unRepliedVotesButton;
+		this.votes=votes;
+		
+		lblVoteName.setText(v.getName());
+		lblInitiator.setText(v.getInitiator()+"/"+v.getInitiatorIP());
+		tAreaDiscription.setText(v.getDesc());
+		
+		ArrayList<String> ops= v.getOptions(); //display the options
+		for(int i =0; i<ops.size();i++)
+		{
+			lItems.addElement(ops.get(i));
+		}
+		lblDeadline.setText(v.getDeadline().toString());
+		
+		
+		
+	}
+	
 	public VoteResultSelectionUI() {
 		setLayout(null);
 		
@@ -16,34 +85,132 @@ public class VoteResultSelectionUI extends JPanel{
 		panel.setBounds(6, 6, 438, 46);
 		add(panel);
 		
-		JLabel lblVoteName = new JLabel("Vote Name: NTU or NUS ?");
+		lblVoteName = new JLabel("Vote Name: NTU or NUS ?");
 		panel.add(lblVoteName);
 		lblVoteName.setFont(new Font("Lucida Grande", Font.BOLD, 17));
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panel_1.setBounds(6, 457, 438, 66);
+		panel_1.setBounds(20, 401, 424, 37);
 		add(panel_1);
 		
 		JButton voteButton = new JButton("Vote it!");
+		voteButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				try
+				{
+				    
+				    DatagramPacket packet;
+				    InetAddress ip = InetAddress.getByName(vote.getInitiatorIP());//get the Initiator's IP
+		            String flag =String.valueOf( JVoterProtocol.flagReplyVote); //set the flag
+		            String op =String.valueOf( listOptions.getSelectedIndex()); //get the choice index from the JList
+		            String data = flag+"|"+vote.getVoteID()+"|"+op +"|"+InetAddress.getLocalHost().getHostAddress();
+					byte[] buff = data.getBytes();
+					packet = new DatagramPacket(buff, buff.length,ip,JVoterProtocol.unicastListenPort);
+			        socket.send(packet);
+				}
+				catch(Exception e)
+				{
+					System.out.println(e.toString());
+				}
+				
+				System.out.println("sent");
+				
+				JOptionPane.showMessageDialog(null, 
+		                "You have successfully initiated a vote!", "Congradulations!",JOptionPane.INFORMATION_MESSAGE);
+				  
+				items.remove(index); //remove the item from the VoteListUI after successfully replying it
+				votes.remove(index); //remove the item from the ArrayList after successfully replying it
+				unRepliedVotesButton.setText("Unreplied Votes["+votes.size()+"]"); //reset the text of the unRepliedVotesButton in MainUI after successfully replying it
+				
+				Component cmp= arg0.getComponent(); //close the windows
+				  while(!(cmp instanceof JFrame ) || cmp.getParent() !=null ){
+				  cmp = cmp.getParent();
+				  }
+				((JFrame)cmp).dispose();
+				
+				
+			}
+		}
+				
+		);
 		panel_1.add(voteButton);
 		
 		JButton cancelButton = new JButton("Cancel");
+		cancelButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				Component cmp= arg0.getComponent();
+				  while(!(cmp instanceof JFrame ) || cmp.getParent() !=null ){
+				  cmp = cmp.getParent();
+				  }
+				((JFrame)cmp).dispose();
+			}
+		});
 		panel_1.add(cancelButton);
 		
-		JLabel lblNewLabel = new JLabel("Description:");
-		lblNewLabel.setBounds(67, 77, 162, 16);
-		add(lblNewLabel);
+		JLabel lbl1 = new JLabel("Initiator:");
+		lbl1.setBounds(16, 63, 46, 14);
+		add(lbl1);
 		
-		JLabel lblNewLabel_1 = new JLabel("Accroding to a vote, generate option items dynamically");
-		lblNewLabel_1.setBounds(67, 299, 356, 16);
-		add(lblNewLabel_1);
+		JLabel lblDiscription = new JLabel("Discription:");
+		lblDiscription.setBounds(16, 88, 64, 14);
+		add(lblDiscription);
 		
-		JTextArea txtrAGreatGlobal = new JTextArea();
-		txtrAGreatGlobal.setWrapStyleWord(true);
-		txtrAGreatGlobal.setLineWrap(true);
-		txtrAGreatGlobal.setText("A great global university founded on science and technology. Nurturing creative and entrepreneurial leaders through a broad education in diverse disciplines.");
-		txtrAGreatGlobal.setBounds(6, 112, 438, 132);
-		add(txtrAGreatGlobal);
+		lblInitiator = new JLabel("Host/192.168.1.1");
+		lblInitiator.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblInitiator.setBounds(72, 63, 338, 14);
+		add(lblInitiator);
+		
+		tAreaDiscription = new JTextArea();
+		tAreaDiscription.setEditable(false);
+		tAreaDiscription.setBounds(16, 109, 424, 81);
+		add(tAreaDiscription);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(16, 202, 424, 163);
+		add(scrollPane);
+		
+		listOptions = new JList(lItems);
+		listOptions.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listOptions.setCellRenderer(new CheckListRender());
+		scrollPane.setViewportView(listOptions);
+		
+		lblDeadline = new JLabel("Host/192.168.1.1");
+		lblDeadline.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblDeadline.setBounds(72, 376, 338, 14);
+		add(lblDeadline);
+		
+		JLabel lbl2 = new JLabel("Deadline:");
+		lbl2.setBounds(16, 376, 46, 14);
+		add(lbl2);
+		
+		
+		
+		
+		
+		
+		
+		
 	}
+	private static class __Tmp {
+		private static void __tmp() {
+			  javax.swing.JPanel __wbp_panel = new javax.swing.JPanel();
+		}
+	}
+}
+
+class CheckListRender extends JCheckBox  implements ListCellRenderer {
+
+	public Component getListCellRendererComponent(JList list, Object value,
+			int index, boolean isSelected, boolean cellHasFocus) {
+
+        this.setText(value.toString());
+        this.setFont(list.getFont());
+        this.setSelected(isSelected);
+        return this;
+	}
+
 }
