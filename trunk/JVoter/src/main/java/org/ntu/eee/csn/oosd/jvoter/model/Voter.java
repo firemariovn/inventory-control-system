@@ -69,7 +69,10 @@ public class Voter implements JVoterProtocol{
 	}
 	
 	public boolean equals(Object obj){
-	    Voter v= (Voter)obj;
+	   if(this==obj)
+		   return true;
+	   
+		Voter v= (Voter)obj;
 	    
 	    if(guid.equals(v.guid))
 		return true;
