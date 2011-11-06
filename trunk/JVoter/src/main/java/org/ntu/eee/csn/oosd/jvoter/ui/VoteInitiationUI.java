@@ -77,6 +77,7 @@ public class VoteInitiationUI extends JPanel{
 	private Date date; //store the current time
 	private ArrayList<Voter> voters; //store all the online user info
 	
+
 	public VoteInitiationUI(ArrayList<Voter> v,DatagramSocket socket)
 	{
 		
