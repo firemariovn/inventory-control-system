@@ -190,6 +190,7 @@ public class VoteInitiationUI extends JPanel{
 				     	}
 				    }
 				    LOGGER.info("The JVoter initiates a vote named:"+v.getName());
+				    v.add();//add v to database
 				}
 				    catch(Exception e)
 					{
