@@ -47,6 +47,8 @@ public class Vote implements Serializable {
 	
 	private boolean isOrignial;
 	private boolean isCanceled;
+	
+	private boolean isReply = false;
 
 	Date deadline = new Date();
 	
