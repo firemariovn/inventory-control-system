@@ -44,6 +44,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JButton;
+
+import org.apache.log4j.Logger;
 import org.ntu.eee.csn.oosd.jvoter.model.*;
 import org.ntu.eee.csn.oosd.jvoter.util.JVoterProtocol;
 
@@ -53,7 +55,11 @@ import javax.swing.JRadioButton;;
 
 public class VoteInitiationUI extends JPanel{
 	
-	
+	/**
+	 * Please use LOGGER to records the vote the user has initiated and 
+     * participated.
+	 */
+	private static Logger LOGGER = Logger.getLogger(VoteInitiationUI.class);
 	private JTextField tfVoteName;
 	private JTextField tfOption1;
 	private JTextField tfOption2;
@@ -178,10 +184,11 @@ public class VoteInitiationUI extends JPanel{
 			        
 			               
 					       socket.send(packet);
-
+					       
 					       System.out.println(ip);
 				     	}
 				    }
+				    LOGGER.info("The JVoter initiates a vote named:"+v.getName());
 				}
 				    catch(Exception e)
 					{
@@ -282,6 +289,7 @@ public class VoteInitiationUI extends JPanel{
 		add(lblVoteName);
 		
 		rdbtnAfterHalfHr = new JRadioButton("After 30 min");
+		rdbtnAfterHalfHr.setSelected(true);
 		rdbtnAfterHalfHr.setBounds(92, 371, 100, 23);
 		add(rdbtnAfterHalfHr);
 		

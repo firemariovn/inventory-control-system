@@ -32,12 +32,14 @@ import java.util.ArrayList;
 import javax.swing.border.BevelBorder;
 import javax.swing.ListSelectionModel;
 
+import org.apache.log4j.Logger;
 import org.ntu.eee.csn.oosd.jvoter.model.Vote;
 import org.ntu.eee.csn.oosd.jvoter.model.VoteReply;
 import org.ntu.eee.csn.oosd.jvoter.util.JVoterProtocol;
 
 public class VoteResultSelectionUI extends JPanel{
 	
+	private static Logger LOGGER = Logger.getLogger(VoteResultSelectionUI.class);
 	
 	private DatagramSocket socket;
 	private DefaultListModel lItems= new DefaultListModel();
@@ -118,12 +120,12 @@ public class VoteResultSelectionUI extends JPanel{
 				System.out.println("sent");
 				
 				JOptionPane.showMessageDialog(null, 
-		                "You have successfully initiated a vote!", "Congradulations!",JOptionPane.INFORMATION_MESSAGE);
+		                "You have successfully replied a vote!", "Congradulations!",JOptionPane.INFORMATION_MESSAGE);
 				  
 				items.remove(index); //remove the item from the VoteListUI after successfully replying it
 				votes.remove(index); //remove the item from the ArrayList after successfully replying it
 				unRepliedVotesButton.setText("Unreplied Votes["+votes.size()+"]"); //reset the text of the unRepliedVotesButton in MainUI after successfully replying it
-				
+				LOGGER.info("The JVoter has repied a vote named: "+vote.getName()+" to "+vote.getInitiatorIP());
 				Component cmp= arg0.getComponent(); //close the windows
 				  while(!(cmp instanceof JFrame ) || cmp.getParent() !=null ){
 				  cmp = cmp.getParent();

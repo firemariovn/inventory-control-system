@@ -38,6 +38,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 /**
  * This is the Main Frame of JVoter in UI Layer
  *  
@@ -93,6 +95,16 @@ public class MainUI implements JVoterProtocol {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent e) {
+				broadcast(USER_OFF_LINE);
+			}
+			@Override
+			public void windowClosing(WindowEvent e) {
+				broadcast(USER_OFF_LINE);
+			}
+		});
 		frame.setBounds(100, 100, 449, 603);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -231,6 +243,20 @@ public class MainUI implements JVoterProtocol {
 	                                 break;
 	                             case 1:
 	                                 //removeUser(uid);
+	                            	 Voter user = new Voter();
+                                     user.setGuid(uid);
+                                     user.setInetAddress(dp.getAddress().toString());
+                                	 user.setHostAddress(dp.getAddress().getHostAddress());
+                                	 try{ 
+                                	 String name=dp.getAddress().getCanonicalHostName();
+                                	
+                                	 String username=name.substring(0, name.indexOf('.'));
+                                     user.setHostName(username);
+                                	 }catch(Exception e){
+                                		 String username=user.getHostAddress().substring(0, user.getHostAddress().indexOf('.'));
+                                		 user.setHostName(username);
+                                	 }
+                                	 removeUser(user);
 	                                 break;
 	                             case 2:
 	                                 if (!guid.equals(uid)) {
@@ -258,6 +284,16 @@ public class MainUI implements JVoterProtocol {
 	        lblOnlineUsers.setText("Online Users:"+usernum);
 	        voters.add(user);
 	        
+	    }
+	    public void removeUser(Voter user){
+	    	userTable.remove(user.getGuid());
+	    	usernum--;
+	    	DefaultListModel voterlist=(DefaultListModel)onlineUserList.getModel();
+	        String msg=user.getHostName()+"/"+user.getHostAddress();
+	        voterlist.removeElement(msg);
+	        
+	        lblOnlineUsers.setText("Online Users:"+usernum);
+	        voters.remove(user);
 	    }
 	    public void unicastlisten(){
 	    	  try {
