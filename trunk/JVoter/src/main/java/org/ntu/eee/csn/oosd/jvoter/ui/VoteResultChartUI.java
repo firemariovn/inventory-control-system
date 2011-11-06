@@ -17,6 +17,8 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.ApplicationFrame;
 import org.ntu.eee.csn.oosd.jvoter.model.VoteResult;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * This is the chart component for presentation of vote results.
@@ -30,6 +32,13 @@ public class VoteResultChartUI extends ApplicationFrame {
 	
 	public VoteResultChartUI(VoteResult r) {
 		super("Vote Title : "+r.getName());
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				setVisible(false);
+				dispose();
+			}
+		});
 		this.setContentPane(createPanel(r));
 	}
 
@@ -90,7 +99,9 @@ public class VoteResultChartUI extends ApplicationFrame {
 		
 		//Pass an instance of VoteResult to the constructor
 		VoteResultChartUI chart = new VoteResultChartUI(r);
+		chart.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		chart.pack();
 		chart.setVisible(true);
+
 	}
 }
