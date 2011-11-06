@@ -148,6 +148,9 @@ public class VoteResultSelectionUI extends JPanel{
 					byte[] buff = data.getBytes();
 					packet = new DatagramPacket(buff, buff.length,ip,JVoterProtocol.UNICAST_LISTEN_PORT);
 			        socket.send(packet);
+			        
+			        VoteReply vr = new VoteReply(vote.getVoteID(),listOptions.getSelectedIndex(), InetAddress.getLocalHost().getHostAddress());
+			        vr.add();
 				}
 				catch(Exception e)
 				{
@@ -163,6 +166,7 @@ public class VoteResultSelectionUI extends JPanel{
 				votes.remove(index); //remove the item from the ArrayList after successfully replying it
 				unRepliedVotesButton.setText("Unreplied Votes["+votes.size()+"]"); //reset the text of the unRepliedVotesButton in MainUI after successfully replying it
 				LOGGER.info("The JVoter has repied a vote named: "+vote.getName()+" to "+vote.getInitiatorIP());
+				
 				Component cmp= arg0.getComponent(); //close the windows
 				  while(!(cmp instanceof JFrame ) || cmp.getParent() !=null ){
 				  cmp = cmp.getParent();

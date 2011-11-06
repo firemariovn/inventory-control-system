@@ -206,42 +206,14 @@ public class MainUI implements JVoterProtocol {
 		viewAllButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				VoteResult r = new VoteResult();
-				r.setName("What Phone do you want?");
-				ArrayList<String> options = new ArrayList<String>();
-				options.add("Nokia");
-				options.add("iPhone");
-				options.add("BlackBerry");
-				options.add("Adnroid");
-				ArrayList<Integer> result =new ArrayList<Integer>();
-				r.setOptions(options);
-				result.add(200);
-				result.add(300);
-				result.add(400);
-				result.add(900);
-				r.setResult(result);
+			
+				ArrayList<VoteResult> vrInit = VoteResult.getAllVoteResult();
 				
-				VoteResult r2 = new VoteResult();
-				r2.setName("What Phone do you want?");
-				ArrayList<String> options2 = new ArrayList<String>();
-				options2.add("Nokia");
-				options2.add("iPhone");
-				options2.add("BlackBerry");
-				options2.add("Adnroid");
-				ArrayList<Integer> result2 =new ArrayList<Integer>();
-				r2.setOptions(options);
-				result2.add(0);
-				result2.add(1);
-				result2.add(0);
-				result2.add(0);
-				r2.setResult(result2);
-				ArrayList<VoteResult> vr = new ArrayList<VoteResult>();
-				vr.add(r);
-				ArrayList<VoteResult> vr2 = new ArrayList<VoteResult>();
-				vr2.add(r2);
+				ArrayList<VoteResult> vrPart = VoteResult.getAllJoinedVotes();
+				
 				
 				try {
-					VoteView vv = new VoteView(vr,vr2);
+					VoteView vv = new VoteView(vrInit,vrPart);
 					vv.setBounds(0, 0, 400,520);
 		            vv.setResizable(false);
 					vv.setVisible(true);
@@ -447,11 +419,12 @@ public class MainUI implements JVoterProtocol {
 					                		op.add(seg[6]);
 					                		Date date = new Date(seg[7]);		
 					                		Vote v = new Vote(seg[1],seg[2],op,date,seg[8],false,false);
+					                		v.setReply(false);
 					                		votes.add(v);
 							                unRepliedVotesButton.setText("Unreplied Votes["+votes.size()+"]");
 							                JOptionPane.showMessageDialog(null, 
 					        		                "You have been invited to a new vote", "New Vote",JOptionPane.INFORMATION_MESSAGE);
-					                		v.add();//add v to database
+							                v.add();//add v to database
 							                break;
 					                		
 					                	case JVoterProtocol.REPLY_VOTE:  //vote reply message 
@@ -459,7 +432,7 @@ public class MainUI implements JVoterProtocol {
 					                		
 					                		JOptionPane.showMessageDialog(null, 
 					        		                "A reply from "+vr.getReplierHost()+" has been received", "New Reply",JOptionPane.INFORMATION_MESSAGE);
-					                		
+					                		vr.add();
 					                		break;
 					                		
 					                	case 0:

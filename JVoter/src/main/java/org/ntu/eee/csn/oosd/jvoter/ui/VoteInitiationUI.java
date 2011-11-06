@@ -168,6 +168,8 @@ public class VoteInitiationUI extends JPanel{
 					System.out.println(dt.toString());
 					
 					Vote v = new Vote(tfVoteName.getText(),tfDesc.getText(),op,dt,InetAddress.getLocalHost().getHostAddress(),true,false);
+					v.setReply(true);
+					
 					System.out.println("ready to send");
 					
 					String flag = String.valueOf(JVoterProtocol.NEW_VOTE);
