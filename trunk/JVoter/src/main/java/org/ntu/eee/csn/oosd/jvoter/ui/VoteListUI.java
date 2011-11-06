@@ -40,12 +40,11 @@ public class VoteListUI extends JPanel{
 		this();
 		this.socket=socket;
 		this.unRepliedVotesButton =unRepliedVotesButton;
-	   votes = v;
-	   for(int i = 0; i<votes.size();i++) //display all the unanswered votes
+	     votes = v;
+	    for(int i = 0; i<votes.size();i++) //display all the unanswered votes
 		{
 			lItems.addElement(votes.get(i));
 			
-
 		}
 	}
 	public VoteListUI() {
