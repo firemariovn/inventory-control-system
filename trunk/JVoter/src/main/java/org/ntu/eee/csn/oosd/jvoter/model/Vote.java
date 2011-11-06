@@ -161,7 +161,7 @@ public class Vote implements Serializable {
 		
 		try {
 			sql = "INSERT INTO VOTE(VOTEID, DESC, INITIATORIP, INITIATOR, NAME," +
-					"DEADLINE, ISINITIATOR, ISCANCElED, ISREPLY, OPTION1, OPTION2, OPTION3, OPTION4) VALUES(?,?,?,?,?,?,?,?)";
+					"DEADLINE, ISINITIATOR, ISCANCELED, ISREPLY, OPTION1, OPTION2, OPTION3, OPTION4) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			conn = db.getConnection();
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, this.voteID);
