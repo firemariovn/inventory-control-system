@@ -37,6 +37,7 @@ import org.ntu.eee.csn.oosd.jvoter.model.Vote;
 import org.ntu.eee.csn.oosd.jvoter.model.VoteReply;
 import org.ntu.eee.csn.oosd.jvoter.model.VoteResult;
 import org.ntu.eee.csn.oosd.jvoter.util.JVoterProtocol;
+import java.awt.SystemColor;
 
 public class VoteResultSelectionUI extends JPanel{
 	
@@ -112,9 +113,11 @@ public class VoteResultSelectionUI extends JPanel{
 	}
 	
 	public VoteResultSelectionUI() {
+		setBackground(Color.WHITE);
 		setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
 		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panel.setBounds(6, 6, 438, 46);
 		add(panel);
@@ -124,11 +127,13 @@ public class VoteResultSelectionUI extends JPanel{
 		lblVoteName.setFont(new Font("Lucida Grande", Font.BOLD, 17));
 		
 		panel_1 = new JPanel();
+		panel_1.setBackground(Color.WHITE);
 		panel_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panel_1.setBounds(20, 401, 424, 37);
 		add(panel_1);
 		
 		JButton voteButton = new JButton("Vote it!");
+		voteButton.setBackground(Color.WHITE);
 		voteButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -172,6 +177,7 @@ public class VoteResultSelectionUI extends JPanel{
 		panel_1.add(voteButton);
 		
 		JButton cancelButton = new JButton("Cancel");
+		cancelButton.setBackground(Color.WHITE);
 		cancelButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -199,6 +205,7 @@ public class VoteResultSelectionUI extends JPanel{
 		add(lblInitiator);
 		
 		tAreaDiscription = new JTextArea();
+		tAreaDiscription.setBackground(Color.WHITE);
 		tAreaDiscription.setEditable(false);
 		tAreaDiscription.setBounds(16, 109, 424, 81);
 		add(tAreaDiscription);
@@ -208,6 +215,7 @@ public class VoteResultSelectionUI extends JPanel{
 		add(scrollPane);
 		
 		listOptions = new JList(lItems);
+		listOptions.setBackground(Color.WHITE);
 		listOptions.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listOptions.setCellRenderer(new CheckListRender());
 		scrollPane.setViewportView(listOptions);
