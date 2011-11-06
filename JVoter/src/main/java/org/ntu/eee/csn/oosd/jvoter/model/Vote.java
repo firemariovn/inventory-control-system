@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.h2.command.ddl.CreateAggregate;
 import org.ntu.eee.csn.oosd.jvoter.util.DBUtil;
 import org.ntu.eee.csn.oosd.jvoter.util.JVoterProtocol;
 import org.omg.CORBA.TRANSACTION_MODE;
@@ -30,7 +31,8 @@ public class Vote implements Serializable {
 	 * Sytem Generated ID, don't remove!
 	 */
 	private static final long serialVersionUID = -7039854193326114361L;
-
+	
+	
 	String voteID;
 
 	// Note : by default, there is only no more than 4 options for a vote
@@ -207,7 +209,7 @@ public class Vote implements Serializable {
 	public static ArrayList<Vote> getUnAnsweredVotes(){ 
 		ArrayList<Vote> vlist = new ArrayList<Vote>();
 		try {
-			String sql = "select * vote where isreplay=false";
+			String sql = "select * vote where isReply=false";
 			DBUtil db = new DBUtil();
 			Connection conn = db.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -252,43 +254,43 @@ public class Vote implements Serializable {
 		return vlist;
 	}
 	
-	public static ArrayList<Vote> getAllJoinedVotes(){
-		ArrayList<Vote>  vlist = new ArrayList<Vote> ();
+	public static ArrayList<VoteResult> getAllJoinedVotes(){
+		ArrayList<VoteResult> rlist = new ArrayList<VoteResult>();
+		
+		ArrayList<Integer> optionRes = new ArrayList<Integer>(4);
+		optionRes.add(0);
+		optionRes.add(0);
+		optionRes.add(0);
+		optionRes.add(0);
+		PreparedStatement psRes = null;
+		ResultSet rsRes = null;
+		String sql = "select * vote where isInitiate=false";
+		String sqlRes = "select choice, count('choice') cnt from votereply where voteid=? group by choice";
+		String voteID = null;
 		try {
-			String sql = "select * vote where isInitiate=false";
-			
 			DBUtil db = new DBUtil();
+			SimpleDateFormat   format   =   new   SimpleDateFormat   ("yyyy-MM-dd HH:mm:ss");
+			
 			Connection conn = db.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
-			SimpleDateFormat   format   =   new   SimpleDateFormat   ("yyyy-MM-dd HH:mm:ss");
-			
+
 			while(rs.next()){
-				Vote tmpVote = new Vote();
-				ArrayList<String> tmpoptions = new ArrayList<String>();
-				
-				tmpVote.setVoteID(rs.getString("voteid"));
-				tmpVote.setDesc(rs.getString("desc"));
-				tmpVote.setInitiatorIP(rs.getString("initiatorip"));
-				try { 
-					tmpVote.setDeadline(format.parse(rs.getString("deadline")));
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				voteID = rs.getString("voteid");
+				psRes = conn.prepareStatement(sqlRes);
+				psRes.setString(1, voteID);
+				rsRes = psRes.executeQuery();
+				while(rsRes.next()){
+					optionRes.set(rsRes.getInt("option"),rsRes.getInt("cnt"));
 				}
-				tmpVote.setInitiator(rs.getString("initiator"));
-				tmpVote.setName(rs.getString("name"));
-				tmpVote.setIsInitiator(rs.getBoolean("isInitiator"));
-				tmpVote.setCanceled(rs.getBoolean("iscanceled"));
-				tmpVote.setReply(rs.getBoolean("isreply"));
+				VoteResult tmpVoteResult = new VoteResult();
+				tmpVoteResult.setResult(optionRes);
+				rlist.add(tmpVoteResult);
+				optionRes.set(0, 0);
+				optionRes.set(1, 0);
+				optionRes.set(2, 0);
+				optionRes.set(3, 0);
 				
-				tmpoptions.add(rs.getString("option1"));
-				tmpoptions.add(rs.getString("option2"));
-				tmpoptions.add(rs.getString("option3"));
-				tmpoptions.add(rs.getString("option4"));
-				tmpVote.setOptions(tmpoptions);
-			
-				vlist.add(tmpVote);
 			}
 			conn.close();
 		} catch (SQLException e) {
@@ -298,7 +300,8 @@ public class Vote implements Serializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return vlist;
+
+		return rlist;
 	}
 	public static ArrayList<VoteResult> getAllVoteResult(){
 		ArrayList<VoteResult> rlist = new ArrayList<VoteResult>();
