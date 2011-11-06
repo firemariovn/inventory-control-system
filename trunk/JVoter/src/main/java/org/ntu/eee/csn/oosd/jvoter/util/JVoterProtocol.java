@@ -9,15 +9,15 @@ public interface JVoterProtocol {
 	
 	int  RERESH =2;
 	
-    int multicastPort = 6789;
+    int MULTICAST_PORT = 6789;
 	
-	int unicastListenPort = 7789;
+	int UNICAST_LISTEN_PORT = 7789;
 	
-	int unicastSendPort = 8781;
+	int UNICAST_SEND_PORT = 8781;
 	
-    int flagNewVote = 5;
+    int NEW_VOTE = 5;
 	
-    int flagReplyVote = 6;
+    int REPLY_VOTE = 6;
 
 
 }
