@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.UUID;
 
 import javax.swing.DefaultListModel;
@@ -68,6 +70,7 @@ public class MainUI implements JVoterProtocol {
     private DatagramSocket da;
     private DatagramSocket db;
     private ArrayList<Vote> votes= new ArrayList<Vote>();
+    private Timer timer;
 	ImageIcon ic = new ImageIcon();
 	
 	/**
@@ -99,6 +102,10 @@ public class MainUI implements JVoterProtocol {
         broadcast(USER_ON_LINE);
         System.out.println("hello!");
         votes= Vote.getUnAnsweredVotes();
+        
+        timer = new Timer();
+        startTimer();
+        
 	}
 
 	/**
@@ -379,6 +386,7 @@ public class MainUI implements JVoterProtocol {
 	        {
 	        	if(votes.get(i).getInitiatorIP().equals(user.getInetAddress()))
 	        	{
+	        		votes.get(i).delete();
 	        		votes.remove(i);
 	        	}
 	        }
@@ -505,4 +513,57 @@ public class MainUI implements JVoterProtocol {
 	             jfVI.setVisible(true);
 	         }
 		 };
+		 
+		 public void startTimer()
+		 {
+			 
+			 timer.schedule(new TimerTask() { 
+				 
+		           public void run() { 
+		        	   Date date = new Date();
+		        	   for(int i = 0; i<votes.size();i++)
+		        	   {
+		        		   
+		        		   System.out.println(date.toString());
+		        		   if(!votes.get(i).getDeadline().after(date))
+		        		   {
+		        			   try
+		       				   {
+		       				    
+		       				    DatagramPacket packet;
+		       				    InetAddress ip = InetAddress.getByName(votes.get(i).getInitiatorIP());//get the Initiator's IP
+		       		            String flag =String.valueOf( JVoterProtocol.REPLY_VOTE); //set the flag
+		       		            String op =String.valueOf(0); //get the choice index from the JList
+		       		            String data = flag+"|"+votes.get(i).getVoteID()+"|"+op +"|"+InetAddress.getLocalHost().getHostAddress();
+		       					byte[] buff = data.getBytes();
+		       					packet = new DatagramPacket(buff, buff.length,ip,JVoterProtocol.UNICAST_LISTEN_PORT);
+		       			        da.send(packet);
+		       			        
+		       			        VoteReply vr = new VoteReply(votes.get(i).getVoteID(),0, InetAddress.getLocalHost().getHostAddress());
+		       			        vr.add();
+		       			        voters.remove(i);
+		       			        unRepliedVotesButton.setText("Unreplied Votes["+votes.size()+"]");
+		       				   }
+		       				   catch(Exception e)
+		       				   {
+		       					    System.out.println(e.toString());
+		       				   }
+		        			   
+		        			   System.out.println("timer:expired");
+		        		   }
+		        		   else
+		        		   {
+		        			   System.out.println("timer:not expired");
+		        		   }
+		        	   }
+		        	   
+		               
+		            } 
+		         
+		       }, 5000,600000);
+		 }
+		
+		 
+		
+         
 }
