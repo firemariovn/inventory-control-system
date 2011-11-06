@@ -296,7 +296,50 @@ public class Vote implements Serializable {
 		return vlist;
 	}
 	public List getAllInitiateVoteResult(){
+		List<VoteResult> rlist = new LinkedList<VoteResult>();
 		
+		ArrayList<Integer> optionRes = new ArrayList<Integer>(4);
+		optionRes.add(0);
+		optionRes.add(0);
+		optionRes.add(0);
+		optionRes.add(0);
+		PreparedStatement psRes = null;
+		ResultSet rsRes = null;
+		sql = "select * vote where isInitiate=true";
+		String sqlRes = "select option, count('option') cnt from voteresult where voteid=? group by option";
+		String voteID = null;
+		try {
+			conn = db.getConnection();
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			while(rs.next()){
+				voteID = rs.getString("voteid");
+				psRes = conn.prepareStatement(sqlRes);
+				psRes.setString(1, voteID);
+				rsRes = psRes.executeQuery();
+				while(rsRes.next()){
+					optionRes.set(rsRes.getInt("option"),rsRes.getInt("cnt"));
+				}
+				VoteResult tmpVoteResult = new VoteResult();
+				tmpVoteResult.setResult(optionRes);
+				rlist.add(tmpVoteResult);
+				optionRes.set(0, 0);
+				optionRes.set(1, 0);
+				optionRes.set(2, 0);
+				optionRes.set(3, 0);
+				
+			}
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return rlist;
 	}
 	
 }
