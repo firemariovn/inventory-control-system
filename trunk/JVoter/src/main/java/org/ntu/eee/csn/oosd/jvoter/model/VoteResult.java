@@ -1,5 +1,6 @@
 package org.ntu.eee.csn.oosd.jvoter.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -11,28 +12,27 @@ import java.util.HashMap;
 public class VoteResult extends Vote {
 
 	/**
-	 * For example: for option 1 , there is 10 users to vote, I put this
-	 * key-value pair "1:10" to a hashmap. for option 2, there is 20 users to
-	 * vote, I put this key-value pair "2:20" to a hashmap.
+	 * For example: for option 1 , there is 10 users to vote, I put a number "10"
+	 * to the ArrayList. 
 	 */
-	HashMap result = new HashMap();
+	ArrayList<Integer> result = new ArrayList<Integer>();
+
 
 	public VoteResult() {
 
 		// The below is just test statements
-		result.put(1, 10);
-		result.put(2, 20);
-		result.put(3, 30);
-		result.put(4, 40);
+	
 	}
-
-	public HashMap getResult() {
+	public ArrayList<Integer> getResult() {
 		return result;
 	}
 
-	public void setResult(HashMap result) {
+	public void setResult(ArrayList<Integer> result) {
 		this.result = result;
 	}
-	
+
+
+
+
 	
 }
