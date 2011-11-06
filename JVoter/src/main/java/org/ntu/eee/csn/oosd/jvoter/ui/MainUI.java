@@ -229,7 +229,7 @@ public class MainUI implements JVoterProtocol {
 				VoteListUI vlUI = new  VoteListUI(votes,da,unRepliedVotesButton);
 	             JFrame jfVI = new JFrame();
 	             jfVI.getContentPane().add(vlUI);
-	             jfVI.setBounds(0, 0, 465,520);
+	             jfVI.setBounds(0, 0, 450,520);
 	             jfVI.setResizable(false);
 	             jfVI.setVisible(true);
 			}
