@@ -87,9 +87,9 @@ public class VoteInitiationUI extends JPanel{
 		
 		for(int i = 0; i<voters.size();i++) //scan all user info from the arraylist and add them to the defaultListModel used by JList
 		{
-			String s = voters.get(i).getHostAddress();
+			String s = voters.get(i).getHostName();
 			String sn = voters.get(i).getInetAddress();
-			ListItem item = new ListItem(false,s,sn);
+			ListItem item = new ListItem(false,sn,s);
 			lItems.addElement(item);
 
 		}

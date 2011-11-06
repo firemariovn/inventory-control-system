@@ -214,16 +214,18 @@ public class MainUI implements JVoterProtocol {
 	                                 if (!userTable.containsKey(uid)) {
 	                                	 Voter user = new Voter();
 	                                     user.setGuid(uid);
-	                                     user.setInetAddress(dp.getAddress().toString());
-	                                	 user.setHostAddress(dp.getAddress().getHostAddress());
+	                                     user.setInetAddress(dp.getAddress().getHostAddress());
+	                                     //user.setInetAddress(dp.getAddress().toString());
+	                                	// user.setHostAddress(dp.getAddress().getHostAddress());
 	                                	 try{ 
 	                                	 String name=dp.getAddress().getCanonicalHostName();
-	                                	
-	                                	 String username=name.substring(0, name.indexOf('.'));
-                                         user.setHostName(username);
+	                                	 
+	                                	 //String username=name.substring(0, name.indexOf('.'));
+                                         user.setHostName(name);
 	                                	 }catch(Exception e){
-	                                		 String username=user.getHostAddress().substring(0, user.getHostAddress().indexOf('.'));
-	                                		 user.setHostName(username);
+	                                		 System.out.println(e.toString());
+	                                		 //String username=user.getInetAddress().substring(0, user.getInetAddress().indexOf('.'));
+	                                		 //user.setHostName(username);
 	                                	 }
 	                                     addUser(user);
 	                                      System.out.println("新用户上线");
@@ -245,17 +247,19 @@ public class MainUI implements JVoterProtocol {
 	                                 //removeUser(uid);
 	                            	 Voter user = new Voter();
                                      user.setGuid(uid);
-                                     user.setInetAddress(dp.getAddress().toString());
-                                	 user.setHostAddress(dp.getAddress().getHostAddress());
-                                	 try{ 
-                                	 String name=dp.getAddress().getCanonicalHostName();
-                                	
-                                	 String username=name.substring(0, name.indexOf('.'));
-                                     user.setHostName(username);
-                                	 }catch(Exception e){
-                                		 String username=user.getHostAddress().substring(0, user.getHostAddress().indexOf('.'));
-                                		 user.setHostName(username);
-                                	 }
+                                     user.setInetAddress(dp.getAddress().getHostAddress());
+                                     //user.setInetAddress(dp.getAddress().toString());
+                                	 //user.setHostAddress(dp.getAddress().getHostAddress());
+                                     try{ 
+	                                	 String name=dp.getAddress().getCanonicalHostName();
+	                                	 
+	                                	 //String username=name.substring(0, name.indexOf('.'));
+                                         user.setHostName(name);
+	                                	 }catch(Exception e){
+	                                		 System.out.println(e.toString());
+	                                		 //String username=user.getInetAddress().substring(0, user.getInetAddress().indexOf('.'));
+	                                		 //user.setHostName(username);
+	                                	 }
                                 	 removeUser(user);
 	                                 break;
 	                             case 2:
@@ -279,7 +283,7 @@ public class MainUI implements JVoterProtocol {
 	        userTable.put(user.getGuid(), user);
 	        usernum++;
 	        DefaultListModel voterlist=(DefaultListModel)onlineUserList.getModel();
-	        String msg=user.getHostName()+"/"+user.getHostAddress();
+	        String msg=user.getHostName()+"/"+user.getInetAddress();
 	        voterlist.insertElementAt(msg,0);
 	        lblOnlineUsers.setText("Online Users:"+usernum);
 	        voters.add(user);
@@ -289,7 +293,7 @@ public class MainUI implements JVoterProtocol {
 	    	userTable.remove(user.getGuid());
 	    	usernum--;
 	    	DefaultListModel voterlist=(DefaultListModel)onlineUserList.getModel();
-	        String msg=user.getHostName()+"/"+user.getHostAddress();
+	        String msg=user.getHostName()+"/"+user.getInetAddress();
 	        voterlist.removeElement(msg);
 	        
 	        lblOnlineUsers.setText("Online Users:"+usernum);
@@ -346,21 +350,22 @@ public class MainUI implements JVoterProtocol {
 			                                 if (!userTable.containsKey(uid)) {
 			                                	 Voter user = new Voter();
 			                                     user.setGuid(uid);
-			                                     
-			                                     user.setInetAddress(dp.getAddress().toString());
-			                                	 user.setHostAddress(dp.getAddress().getHostAddress());
+			                                     user.setInetAddress(dp.getAddress().getHostAddress());
+			                                     //user.setInetAddress(dp.getAddress().toString());
+			                                	// user.setHostAddress(dp.getAddress().getHostAddress());
 			                                	 //String name=dp.getAddress().getCanonicalHostName();
 			                                	 //String username=name.substring(0, name.indexOf('.'));
 		                                         //user.setHostName(username);
 			                                	 
-			                                	 try{ 
+			                                     try{ 
 				                                	 String name=dp.getAddress().getCanonicalHostName();
-				                                	
-				                                	 String username=name.substring(0, name.indexOf('.'));
-			                                         user.setHostName(username);
+				                                	 
+				                                	 //String username=name.substring(0, name.indexOf('.'));
+			                                         user.setHostName(name);
 				                                	 }catch(Exception e){
-				                                		 String username=user.getHostAddress().substring(0, user.getHostAddress().indexOf('.'));
-				                                		 user.setHostName(username);
+				                                		 System.out.println(e.toString());
+				                                		 //String username=user.getInetAddress().substring(0, user.getInetAddress().indexOf('.'));
+				                                		 //user.setHostName(username);
 				                                	 }
 			                                	 
 			                                     addUser(user);
