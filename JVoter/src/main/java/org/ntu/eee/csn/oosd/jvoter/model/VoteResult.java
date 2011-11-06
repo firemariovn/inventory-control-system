@@ -31,8 +31,5 @@ public class VoteResult extends Vote {
 		this.result = result;
 	}
 
-
-
-
 	
 }
