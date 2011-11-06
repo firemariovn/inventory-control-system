@@ -103,11 +103,11 @@ public class VoteResultSelectionUI extends JPanel{
 				    
 				    DatagramPacket packet;
 				    InetAddress ip = InetAddress.getByName(vote.getInitiatorIP());//get the Initiator's IP
-		            String flag =String.valueOf( JVoterProtocol.flagReplyVote); //set the flag
+		            String flag =String.valueOf( JVoterProtocol.REPLY_VOTE); //set the flag
 		            String op =String.valueOf( listOptions.getSelectedIndex()); //get the choice index from the JList
 		            String data = flag+"|"+vote.getVoteID()+"|"+op +"|"+InetAddress.getLocalHost().getHostAddress();
 					byte[] buff = data.getBytes();
-					packet = new DatagramPacket(buff, buff.length,ip,JVoterProtocol.unicastListenPort);
+					packet = new DatagramPacket(buff, buff.length,ip,JVoterProtocol.UNICAST_LISTEN_PORT);
 			        socket.send(packet);
 				}
 				catch(Exception e)

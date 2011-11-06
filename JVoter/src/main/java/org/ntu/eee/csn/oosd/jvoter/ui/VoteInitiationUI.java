@@ -158,7 +158,7 @@ public class VoteInitiationUI extends JPanel{
 					Vote v = new Vote(tfVoteName.getText(),tfDesc.getText(),op,dt,InetAddress.getLocalHost().getHostAddress(),true,false);
 					System.out.println("ready to send");
 					
-					String flag = String.valueOf(JVoterProtocol.flagNewVote);
+					String flag = String.valueOf(JVoterProtocol.NEW_VOTE);
 					String data = flag+"|"+v.getName()+"|"+v.getDesc()+"|"+v.getOptions().get(0)+"|"+v.getOptions().get(1)+"|"+v.getOptions().get(2)+"|"+v.getOptions().get(3)+"|"+v.getDeadline().toGMTString()+"|"+v.getInitiatorIP();
 					byte[] buff = data.getBytes();
 					
@@ -174,7 +174,7 @@ public class VoteInitiationUI extends JPanel{
 					       ip = InetAddress.getByName(item.getIp());
 					       System.out.println(ip);
 					
-					       packet = new DatagramPacket(buff, buff.length,ip,JVoterProtocol.unicastListenPort);
+					       packet = new DatagramPacket(buff, buff.length,ip,JVoterProtocol.UNICAST_LISTEN_PORT);
 			        
 			               
 					       socket.send(packet);

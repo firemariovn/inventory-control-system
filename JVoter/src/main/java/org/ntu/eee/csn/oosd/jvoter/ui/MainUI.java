@@ -160,7 +160,7 @@ public class MainUI implements JVoterProtocol {
 	                //da=new DatagramSocket(8789);
 	                byte[] data = (flag + guid ).getBytes("UTF-8");
 	                //ds.joinGroup(InetAddress.getByName("230.0.0.2"));
-	                da.send(new DatagramPacket(data, 0, data.length, InetAddress.getByName("230.0.0.2"), multicastPort));
+	                da.send(new DatagramPacket(data, 0, data.length, InetAddress.getByName("230.0.0.2"), MULTICAST_PORT));
 	            
 	        } catch (Exception e) {
 	            e.printStackTrace();
@@ -171,7 +171,7 @@ public class MainUI implements JVoterProtocol {
 	 public void Multicastlisten(){
 		 System.out.println("2");
 	    	try {
-	            ds = new MulticastSocket(multicastPort);
+	            ds = new MulticastSocket(MULTICAST_PORT);
 	            //da=new DatagramSocket(7788);
 	            ds.joinGroup(InetAddress.getByName("230.0.0.2"));
 	        } catch (Exception e) {
@@ -220,7 +220,7 @@ public class MainUI implements JVoterProtocol {
 	                                      //sleep(3000);
 	                                 
 	                                     byte[] data = (USER_ON_LINE +"|"+ guid).getBytes("UTF-8");
-	                                     DatagramPacket p = new DatagramPacket(data, data.length, dp.getAddress(), unicastListenPort);
+	                                     DatagramPacket p = new DatagramPacket(data, data.length, dp.getAddress(), UNICAST_LISTEN_PORT);
 	                                     
 	                                     da.send(p);
 	                                     //ds.close();
@@ -261,8 +261,8 @@ public class MainUI implements JVoterProtocol {
 	    }
 	    public void unicastlisten(){
 	    	  try {
-	                da=new DatagramSocket(unicastSendPort);
-	                db=new DatagramSocket(unicastListenPort); 
+	                da=new DatagramSocket(UNICAST_SEND_PORT);
+	                db=new DatagramSocket(UNICAST_LISTEN_PORT); 
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
@@ -284,7 +284,7 @@ public class MainUI implements JVoterProtocol {
 					                
 					                switch(flag)
 					                {
-					                	case JVoterProtocol.flagNewVote:  //vote invitation message
+					                	case JVoterProtocol.NEW_VOTE:  //vote invitation message
 					                		ArrayList<String> op = new ArrayList<String>();
 					                		op.add(seg[3]);
 					                		op.add(seg[4]);
@@ -298,7 +298,7 @@ public class MainUI implements JVoterProtocol {
 					        		                "You have been invited to a new vote", "New Vote",JOptionPane.INFORMATION_MESSAGE);
 					                		break;
 					                		
-					                	case JVoterProtocol.flagReplyVote:  //vote reply message 
+					                	case JVoterProtocol.REPLY_VOTE:  //vote reply message 
 					                		VoteReply vr = new VoteReply(seg[1],Integer.valueOf(seg[2]),seg[3]);
 					                		
 					                		JOptionPane.showMessageDialog(null, 
