@@ -36,21 +36,15 @@ public class Vote implements Serializable {
 	// Note : by default, there is only no more than 4 options for a vote
 	ArrayList<String> options = new ArrayList<String>();
 
-	String hostName;
-	String hostIp;
-	int isInitiator;
-	int isValidate;
 	private String initiator;
-	String desc;
-	private String name;
 	String InitiatorIP;
-	
-	private boolean isOrignial;
+	String desc;
+	private String name; // name represents the vote title
+	private boolean isInitiator;
 	private boolean isCanceled;
-	
 	private boolean isReply = false;
 
-	Date deadline = new Date();
+	private Date deadline = new Date();
 	
 	transient DBUtil db = new DBUtil();
 	Connection conn = null;
@@ -61,16 +55,16 @@ public class Vote implements Serializable {
 	
 	SimpleDateFormat   format   =   new   SimpleDateFormat   ("yyyy-MM-dd HH:mm:ss");
 	
-	public Vote(String nm,String descc, ArrayList<String> op, Date date,String ip,boolean isOri,boolean isCal)
+	public Vote(String nm,String descc, ArrayList<String> op, Date date,String ip,boolean isInitiator,boolean isCal)
 	{
 		this.voteID = "0001";
-		name=nm;
-		desc=descc;
-		options=op;
-		deadline=date;
-		InitiatorIP = ip;
-		isOrignial = isOri;
-		isCanceled = isCal;
+		this.name=nm;
+		this.desc=descc;
+		this.options=op;
+		this.deadline=date;
+		this.InitiatorIP = ip;
+		this.isInitiator = isInitiator;
+		this.isCanceled = isCal;
 	}
 	
 	public Vote(){
@@ -83,6 +77,11 @@ public class Vote implements Serializable {
 		
 		
 	}
+	
+	public void setVoteID(String voteID) {
+		this.voteID = voteID;
+	}
+	
 	public String getVoteID() {
 	 
 		return voteID;
@@ -94,10 +93,6 @@ public class Vote implements Serializable {
 
 	public void setReply(boolean isReply) {
 		this.isReply = isReply;
-	}
-	
-	public void setVoteID(String voteID) {
-		this.voteID = voteID;
 	}
 
 	public ArrayList<String> getOptions() {
@@ -116,12 +111,12 @@ public class Vote implements Serializable {
 		this.desc = desc;
 	}
 
-	public String getInitiatorIp() {
+	public String getInitiatorIP() {
 		return InitiatorIP;
 	}
 
-	public void setInitiatorIp(String initiatorIp) {
-		this.InitiatorIP = initiatorIp;
+	public void setInitiatorIP(String initiatorIP) {
+		this.InitiatorIP = initiatorIP;
 	}
 
 	public Date getDeadline() {
@@ -132,34 +127,13 @@ public class Vote implements Serializable {
 		this.deadline = deadline;
 	}
 
-	public String getHostName() {
-		return hostName;
-	}
 
-	public void setHostName(String hostName) {
-		this.hostName = hostName;
-	}
-	
-	public String getHostIp() {
-		return hostName;
-	}
-
-	public void setHostIp(String hostIp) {
-		this.hostIp = hostIp;
-	}
-	public int getIsInitiator() {
+	public boolean getIsInitiator() {
 		return isInitiator;
 	}
 
-	public void setIsInitiator(int isInitiator) {
+	public void setIsInitiator(boolean isInitiator) {
 		this.isInitiator = isInitiator;
-	}
-	public int getIsValidate() {
-		return isValidate;
-	}
-
-	public void setIsValidate(int isValidate) {
-		this.isValidate = isValidate;
 	}
 	
 	public String getInitiator() {
@@ -174,12 +148,7 @@ public class Vote implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public boolean isOrignial() {
-		return isOrignial;
-	}
-	public void setOrignial(boolean isOrignial) {
-		this.isOrignial = isOrignial;
-	}
+
 	public boolean isCanceled() {
 		return isCanceled;
 	}
@@ -189,18 +158,23 @@ public class Vote implements Serializable {
 	public void add(){
 		
 		try {
-			sql = "INSERT INTO VOTE(VOTEID, HOSTNAME, HOSTIP, DESC, INITIATORIP," +
-					"DEADLINE, ISINITIATOR, ISVALIDATE) VALUES(?,?,?,?,?,?,?,?)";
+			sql = "INSERT INTO VOTE(VOTEID, DESC, INITIATORIP, INITIATOR, NAME," +
+					"DEADLINE, ISINITIATOR, ISCANCElED, ISREPLY, OPTION1, OPTION2, OPTION3, OPTION4) VALUES(?,?,?,?,?,?,?,?)";
 			conn = db.getConnection();
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, this.voteID);
-			ps.setString(2, this.hostName);
-			ps.setString(3, this.hostIp);
-			ps.setString(4, this.desc);
-			ps.setString(5, this.InitiatorIP);
+			ps.setString(2, this.desc);
+			ps.setString(3, this.InitiatorIP);
+			ps.setString(4, this.initiator);
+			ps.setString(5, this.name);
 			ps.setString(6, format.format(deadline));
-			ps.setInt(7, this.isInitiator);
-			ps.setInt(8, this.isValidate);
+			ps.setBoolean(7, this.isInitiator);
+			ps.setBoolean(8, this.isCanceled);
+			ps.setBoolean(9, this.isReply);
+			ps.setString(10, this.options.get(0));
+			ps.setString(11, this.options.get(1));
+			ps.setString(12, this.options.get(2));
+			ps.setString(13, this.options.get(3));
 			ps.executeUpdate();
 			conn.close();
 		} catch (SQLException e) {
@@ -228,109 +202,41 @@ public class Vote implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	public Vote select(){
-		Vote vote = null;
-		try {
-			sql = "select * from vote where VOTEID=?";
-			conn = db.getConnection();
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, this.voteID);
-			rs = ps.executeQuery();
-
-			while(rs.next()){
-				vote = new Vote();
-				vote.setVoteID(rs.getString("voteid"));
-				vote.setDesc(rs.getString("desc"));
-				vote.setInitiatorIp(rs.getString("initiatorip"));
-				try { 
-					vote.setDeadline(format.parse(rs.getString("deadline")));
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				vote.setHostName(rs.getString("hostname"));
-				vote.setHostIp(rs.getString("hostip"));
-				vote.setIsInitiator(rs.getInt("isinitiator"));
-				vote.setIsValidate(rs.getInt("isvalidate"));
-			}
-			conn.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return vote;
-	}
 	
-	public List all(){ 
+
+	public List getUnAnsweredVotes(){ 
 		List<Vote> vlist = new LinkedList<Vote>();
 		try {
-			sql = "select * from vote";
+			sql = "select * vote where isreplay=false";
 			conn = db.getConnection();
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 
 			while(rs.next()){
 				Vote tmpVote = new Vote();
-				tmpVote.setVoteID(voteID);
-				tmpVote.setDesc(rs.getString("desc"));
-				tmpVote.setInitiatorIp(rs.getString("initiatorip"));
-				try { 
-					tmpVote.setDeadline(format.parse(rs.getString("deadline")));
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				tmpVote.setHostName(rs.getString("hostname"));
-				tmpVote.setHostIp(rs.getString("hostip"));
-				tmpVote.setIsInitiator(rs.getInt("isinitiator"));
-				tmpVote.setIsValidate(rs.getInt("isvalidate"));
-				vlist.add(tmpVote);
-			}
-			conn.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return vlist;
-	}
-	public String getInitiatorIP() {
-		return InitiatorIP;
-	}
-
-	public void setInitiatorIP(String initiatorIP) {
-		InitiatorIP = initiatorIP;
-	}
-
-	public List getVoteByIsValidate(int isValidate){ 
-		List<Vote> vlist = new LinkedList<Vote>();
-		try {
-			sql = "select * vote where isvalidate=?";
-			conn = db.getConnection();
-			ps = conn.prepareStatement(sql);
-			ps.setInt(1, isValidate);
-			rs = ps.executeQuery();
-
-			while(rs.next()){
-				Vote tmpVote = new Vote();
+				ArrayList<String> tmpoptions = new ArrayList<String>();
+				
 				tmpVote.setVoteID(rs.getString("voteid"));
 				tmpVote.setDesc(rs.getString("desc"));
-				tmpVote.setInitiatorIp(rs.getString("initiatorip"));
+				tmpVote.setInitiatorIP(rs.getString("initiatorip"));
 				try { 
 					tmpVote.setDeadline(format.parse(rs.getString("deadline")));
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				tmpVote.setHostName(rs.getString("hostname"));
-				tmpVote.setHostIp(rs.getString("hostip"));
-				tmpVote.setIsInitiator(rs.getInt("isinitiator"));
-				tmpVote.setIsValidate(isValidate);
+				tmpVote.setInitiator(rs.getString("initiator"));
+				tmpVote.setName(rs.getString("name"));
+				tmpVote.setIsInitiator(rs.getBoolean("isInitiator"));
+				tmpVote.setCanceled(rs.getBoolean("iscanceled"));
+				tmpVote.setReply(rs.getBoolean("isreply"));
+				
+				tmpoptions.add(rs.getString("option1"));
+				tmpoptions.add(rs.getString("option2"));
+				tmpoptions.add(rs.getString("option3"));
+				tmpoptions.add(rs.getString("option4"));
+				tmpVote.setOptions(tmpoptions);
+			
 				vlist.add(tmpVote);
 			}
 			conn.close();
@@ -342,6 +248,55 @@ public class Vote implements Serializable {
 			e.printStackTrace();
 		}
 		return vlist;
+	}
+	
+	public List getAllJoinedVotes(){
+		List<Vote> vlist = new LinkedList<Vote>();
+		try {
+			sql = "select * vote where isInitiate=false";
+			conn = db.getConnection();
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			while(rs.next()){
+				Vote tmpVote = new Vote();
+				ArrayList<String> tmpoptions = new ArrayList<String>();
+				
+				tmpVote.setVoteID(rs.getString("voteid"));
+				tmpVote.setDesc(rs.getString("desc"));
+				tmpVote.setInitiatorIP(rs.getString("initiatorip"));
+				try { 
+					tmpVote.setDeadline(format.parse(rs.getString("deadline")));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				tmpVote.setInitiator(rs.getString("initiator"));
+				tmpVote.setName(rs.getString("name"));
+				tmpVote.setIsInitiator(rs.getBoolean("isInitiator"));
+				tmpVote.setCanceled(rs.getBoolean("iscanceled"));
+				tmpVote.setReply(rs.getBoolean("isreply"));
+				
+				tmpoptions.add(rs.getString("option1"));
+				tmpoptions.add(rs.getString("option2"));
+				tmpoptions.add(rs.getString("option3"));
+				tmpoptions.add(rs.getString("option4"));
+				tmpVote.setOptions(tmpoptions);
+			
+				vlist.add(tmpVote);
+			}
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return vlist;
+	}
+	public List getAllInitiateVoteResult(){
+		
 	}
 	
 }
