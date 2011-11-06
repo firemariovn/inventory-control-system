@@ -57,7 +57,7 @@ public class Vote implements Serializable {
 	
 	public Vote(String nm,String descc, ArrayList<String> op, Date date,String ip,boolean isInitiator,boolean isCal)
 	{
-		this.voteID = "0001";
+		this.voteID = getUniqueID();
 		this.name=nm;
 		this.desc=descc;
 		this.options=op;
@@ -204,13 +204,15 @@ public class Vote implements Serializable {
 	}
 	
 
-	public List getUnAnsweredVotes(){ 
-		List<Vote> vlist = new LinkedList<Vote>();
+	public static ArrayList<Vote> getUnAnsweredVotes(){ 
+		ArrayList<Vote> vlist = new ArrayList<Vote>();
 		try {
-			sql = "select * vote where isreplay=false";
-			conn = db.getConnection();
-			ps = conn.prepareStatement(sql);
-			rs = ps.executeQuery();
+			String sql = "select * vote where isreplay=false";
+			DBUtil db2 = new DBUtil();
+			Connection conn = db2.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			SimpleDateFormat   format   =   new   SimpleDateFormat   ("yyyy-MM-dd HH:mm:ss");
 
 			while(rs.next()){
 				Vote tmpVote = new Vote();
@@ -254,6 +256,7 @@ public class Vote implements Serializable {
 		List<Vote> vlist = new LinkedList<Vote>();
 		try {
 			sql = "select * vote where isInitiate=false";
+			
 			conn = db.getConnection();
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();

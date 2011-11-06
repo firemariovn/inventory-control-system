@@ -89,6 +89,7 @@ public class MainUI implements JVoterProtocol {
 		Multicastlisten();
         broadcast(USER_ON_LINE);
         System.out.println("hello!");
+        votes= Vote.getUnAnsweredVotes();
 	}
 
 	/**
@@ -432,13 +433,15 @@ public class MainUI implements JVoterProtocol {
 							                unRepliedVotesButton.setText("Unreplied Votes["+votes.size()+"]");
 							                JOptionPane.showMessageDialog(null, 
 					        		                "You have been invited to a new vote", "New Vote",JOptionPane.INFORMATION_MESSAGE);
-					                		break;
+					                		v.add();//add v to database
+							                break;
 					                		
 					                	case JVoterProtocol.REPLY_VOTE:  //vote reply message 
 					                		VoteReply vr = new VoteReply(seg[1],Integer.valueOf(seg[2]),seg[3]);
 					                		
 					                		JOptionPane.showMessageDialog(null, 
 					        		                "A reply from "+vr.getReplierHost()+" has been received", "New Reply",JOptionPane.INFORMATION_MESSAGE);
+					                		
 					                		break;
 					                		
 					                	case 0:
