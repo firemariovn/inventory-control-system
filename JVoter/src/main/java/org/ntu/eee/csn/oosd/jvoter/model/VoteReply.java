@@ -21,6 +21,14 @@ public class VoteReply implements Serializable {
 	Integer choice;
 
 	String replierHost;
+	
+	public VoteReply(String id,int op,String ip)
+	{
+	  this.voteID=id;
+	  this.choice=op;
+	  this.replierHost=ip;
+			  
+	}
 
 	public String getVoteID() {
 		return voteID;
