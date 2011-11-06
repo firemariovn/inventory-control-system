@@ -95,6 +95,7 @@ public class MainUI implements JVoterProtocol {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setTitle("JVoter MainFrame");
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent e) {
@@ -329,6 +330,7 @@ public class MainUI implements JVoterProtocol {
 	    	usernum--;
 	    	DefaultListModel voterlist=(DefaultListModel)onlineUserList.getModel();
 	        String msg=user.getHostName()+"/"+user.getInetAddress();
+	        System.out.println(msg);
 	        voterlist.removeElement(msg);
 	        
 	        lblOnlineUsers.setText("Online Users:"+usernum);
