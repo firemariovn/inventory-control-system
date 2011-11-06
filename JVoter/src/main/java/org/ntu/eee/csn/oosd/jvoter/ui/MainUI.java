@@ -2,6 +2,7 @@ package org.ntu.eee.csn.oosd.jvoter.ui;
 
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.Image;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -13,6 +14,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -41,6 +43,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.Color;
+import javax.swing.UIManager;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.awt.Panel;
 /**
  * This is the Main Frame of JVoter in UI Layer
  *  
@@ -61,6 +68,8 @@ public class MainUI implements JVoterProtocol {
     private DatagramSocket da;
     private DatagramSocket db;
     private ArrayList<Vote> votes= new ArrayList<Vote>();
+	ImageIcon ic = new ImageIcon();
+	
 	/**
 	 * Launch the application.
 	 */
@@ -96,7 +105,11 @@ public class MainUI implements JVoterProtocol {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+	
 		frame = new JFrame();
+		frame.setBackground(Color.WHITE);
+		frame.getContentPane().setBackground(Color.WHITE);
+		
 		frame.setTitle("JVoter MainFrame");
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
@@ -143,11 +156,11 @@ public class MainUI implements JVoterProtocol {
 			    }
 			}
 		});
-		frame.setBounds(100, 100, 449, 603);
+		frame.setBounds(100, 100, 285, 589);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(6, 47, 437, 412);
+		scrollPane.setBounds(6, 47, 257, 412);
 		frame.getContentPane().add(scrollPane);
 		
 		
@@ -157,36 +170,39 @@ public class MainUI implements JVoterProtocol {
 		
 		 voters = new ArrayList<Voter>();
 		
+		JPanel topPanel = new JPanel();
+		topPanel.setBackground(Color.WHITE);
+		topPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		topPanel.setBounds(6, 6, 257, 30);
+		frame.getContentPane().add(topPanel);
+		topPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		
-		
-		
-		
-		
-		JPanel panel = new JPanel();
-		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panel.setBounds(6, 461, 437, 102);
-		frame.getContentPane().add(panel);
-		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+	    lblOnlineUsers = new JLabel("Online Users:");
+		topPanel.add(lblOnlineUsers);
 		
 		JButton initialiteVoteButton = new JButton("Initiate a Vote");
-		initialiteVoteButton.addActionListener(bl);
-		panel.add(initialiteVoteButton);
+		initialiteVoteButton.setVerticalAlignment(SwingConstants.TOP);
+		initialiteVoteButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		initialiteVoteButton.setForeground(Color.BLACK);
+		initialiteVoteButton.setBackground(Color.WHITE);
+		initialiteVoteButton.setBounds(16, 470, 114, 23);
+		frame.getContentPane().add(initialiteVoteButton);
 		
 		unRepliedVotesButton = new JButton("Unreplied Votes[0]");
-		unRepliedVotesButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				VoteListUI vlUI = new  VoteListUI(votes,da,unRepliedVotesButton);
-	             JFrame jfVI = new JFrame();
-	             jfVI.getContentPane().add(vlUI);
-	             jfVI.setBounds(0, 0, 465,520);
-	             jfVI.setResizable(false);
-	             jfVI.setVisible(true);
-			}
-		});
-		panel.add(unRepliedVotesButton);
+		unRepliedVotesButton.setForeground(Color.BLACK);
+		unRepliedVotesButton.setVerticalAlignment(SwingConstants.TOP);
+		unRepliedVotesButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		unRepliedVotesButton.setBackground(Color.WHITE);
+		unRepliedVotesButton.setBounds(26, 504, 221, 23);
+		frame.getContentPane().add(unRepliedVotesButton);
 		
 		JButton viewAllButton = new JButton("View All Votes");
+		viewAllButton.setForeground(Color.BLACK);
+		viewAllButton.setVerticalAlignment(SwingConstants.TOP);
+		viewAllButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		viewAllButton.setBackground(Color.WHITE);
+		viewAllButton.setBounds(140, 470, 119, 23);
+		frame.getContentPane().add(viewAllButton);
 		viewAllButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -235,16 +251,18 @@ public class MainUI implements JVoterProtocol {
 				
 			}
 		});
-		panel.add(viewAllButton);
-		
-		JPanel topPanel = new JPanel();
-		topPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		topPanel.setBounds(6, 6, 437, 39);
-		frame.getContentPane().add(topPanel);
-		topPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
-		
-	    lblOnlineUsers = new JLabel("Online Users:");
-		topPanel.add(lblOnlineUsers);
+		unRepliedVotesButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				VoteListUI vlUI = new  VoteListUI(votes,da,unRepliedVotesButton);
+	             JFrame jfVI = new JFrame();
+	             jfVI.getContentPane().add(vlUI);
+	             jfVI.setBounds(0, 0, 465,520);
+	             jfVI.setResizable(false);
+	             jfVI.setVisible(true);
+			}
+		});
+		initialiteVoteButton.addActionListener(bl);
 	
 	
 	}
@@ -513,5 +531,4 @@ public class MainUI implements JVoterProtocol {
 	             jfVI.setVisible(true);
 	         }
 		 };
-	    
 }

@@ -51,7 +51,9 @@ import org.ntu.eee.csn.oosd.jvoter.util.JVoterProtocol;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JRadioButton;;
+import javax.swing.JRadioButton;
+import javax.swing.UIManager;
+import java.awt.SystemColor;;
 
 public class VoteInitiationUI extends JPanel{
 	
@@ -101,6 +103,7 @@ public class VoteInitiationUI extends JPanel{
 	
 	
 	public VoteInitiationUI() {
+		setBackground(Color.WHITE);
 		
 		
 		
@@ -127,12 +130,14 @@ public class VoteInitiationUI extends JPanel{
 		add(lblVoteForm);
 		
 		JPanel buttonPanel = new JPanel();
+		buttonPanel.setBackground(Color.WHITE);
 		buttonPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		buttonPanel.setBounds(6, 424, 369, 43);
 		add(buttonPanel);
 		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JButton sendButton = new JButton("Send");
+		sendButton.setBackground(Color.WHITE);
 		sendButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -218,6 +223,7 @@ public class VoteInitiationUI extends JPanel{
 		buttonPanel.add(sendButton);
 		
 		JButton cancelButton = new JButton("Cancel");  //close this windows
+		cancelButton.setBackground(Color.WHITE);
 		cancelButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -232,6 +238,8 @@ public class VoteInitiationUI extends JPanel{
 		buttonPanel.add(cancelButton);
 		
 		tfDesc = new JTextArea();
+		tfDesc.setLineWrap(true);
+		tfDesc.setBackground(SystemColor.control);
 		tfDesc.setBounds(92, 82, 251, 114);
 		add(tfDesc);
 		tfDesc.setColumns(10);
@@ -291,16 +299,19 @@ public class VoteInitiationUI extends JPanel{
 		add(lblVoteName);
 		
 		rdbtnAfterHalfHr = new JRadioButton("After 30 min");
+		rdbtnAfterHalfHr.setBackground(Color.WHITE);
 		rdbtnAfterHalfHr.setSelected(true);
 		rdbtnAfterHalfHr.setBounds(92, 371, 100, 23);
 		add(rdbtnAfterHalfHr);
 		
 		
 		rdbtnAfterOneHr = new JRadioButton("After 1 hr");
+		rdbtnAfterOneHr.setBackground(Color.WHITE);
 		rdbtnAfterOneHr.setBounds(194, 371, 91, 23);
 		add(rdbtnAfterOneHr);
 		
 		rdbtnAfterTwoHr = new JRadioButton("After 2 hr");
+		rdbtnAfterTwoHr.setBackground(Color.WHITE);
 		rdbtnAfterTwoHr.setBounds(281, 371, 84, 23);
 		add(rdbtnAfterTwoHr);
 		

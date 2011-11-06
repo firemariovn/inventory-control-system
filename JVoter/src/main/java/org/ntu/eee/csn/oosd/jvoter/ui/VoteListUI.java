@@ -26,6 +26,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
+import java.awt.Color;
 
 public class VoteListUI extends JPanel{
 	
@@ -48,6 +49,7 @@ public class VoteListUI extends JPanel{
 		}
 	}
 	public VoteListUI() {
+		setBackground(Color.WHITE);
 		setLayout(null);
 		
 		JLabel lblVoteList = new JLabel("Vote List :");
@@ -67,6 +69,7 @@ public class VoteListUI extends JPanel{
 		scrollPane.setViewportView(voteList);
 		
 		JButton btnReply = new JButton("Reply");
+		btnReply.setBackground(Color.WHITE);
 		btnReply.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -85,6 +88,7 @@ public class VoteListUI extends JPanel{
 		add(btnReply);
 		
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.setBackground(Color.WHITE);
 		btnCancel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
