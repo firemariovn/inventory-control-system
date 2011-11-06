@@ -86,8 +86,8 @@ public class MainUI implements JVoterProtocol {
 	public MainUI() {
 		initialize();
 		unicastlisten();
-		Multicastlisten();// 监听收到的消息
-        broadcast(USER_ON_LINE);// 广播上线
+		Multicastlisten();
+        broadcast(USER_ON_LINE);
         System.out.println("hello!");
 	}
 
