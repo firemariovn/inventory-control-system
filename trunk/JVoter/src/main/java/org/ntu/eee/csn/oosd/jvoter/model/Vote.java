@@ -256,6 +256,11 @@ public class Vote implements Serializable {
 	
 	public static ArrayList<VoteResult> getAllJoinedVotes(){
 		ArrayList<VoteResult> rlist = new ArrayList<VoteResult>();
+		ArrayList<String> options = new ArrayList<String>();
+		options.add("");
+		options.add("");
+		options.add("");
+		options.add("");
 		
 		ArrayList<Integer> optionRes = new ArrayList<Integer>(4);
 		optionRes.add(0);
@@ -267,6 +272,21 @@ public class Vote implements Serializable {
 		String sql = "select * from vote where isInitiator=false";
 		String sqlRes = "select choice, count('choice') cnt from votereply where voteid=? group by choice";
 		String voteID = null;
+		
+		String initiator;
+		String InitiatorIP;
+		String desc;
+		String name; // name represents the vote title
+		boolean isInitiator;
+		boolean isCanceled;
+		boolean isReply;
+		Date deadline;
+		String option1;
+		String option2;
+		String option3;
+		String option4;
+		
+		
 		try {
 			DBUtil db = new DBUtil();
 			SimpleDateFormat   format   =   new   SimpleDateFormat   ("yyyy-MM-dd HH:mm:ss");
@@ -276,16 +296,51 @@ public class Vote implements Serializable {
 			ResultSet rs = ps.executeQuery();
 
 			while(rs.next()){
+				VoteResult tmpVoteResult = new VoteResult();
 				voteID = rs.getString("voteid");
+				initiator = rs.getString("initiator");
+				InitiatorIP = rs.getString("initiatorip");
+				desc = rs.getString("desc");
+				name = rs.getString("name");
+				isInitiator = rs.getBoolean("isinitiator");
+				isCanceled = rs.getBoolean("iscanceled");
+				isReply = rs.getBoolean("isReply");
+				try {
+					deadline = format.parse(rs.getString("deadline"));
+					tmpVoteResult.setDeadline(deadline);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				option1 = rs.getString("option1");
+				option2 = rs.getString("option2");
+				option3 = rs.getString("option3");
+				option4 = rs.getString("option4");
+				options.set(0, option1);
+				options.set(1, option2);
+				options.set(2, option3);
+				options.set(3, option4);
+				
 				psRes = conn.prepareStatement(sqlRes);
 				psRes.setString(1, voteID);
 				rsRes = psRes.executeQuery();
 				while(rsRes.next()){
 					optionRes.set(rsRes.getInt("option"),rsRes.getInt("cnt"));
 				}
-				VoteResult tmpVoteResult = new VoteResult();
+				
 				tmpVoteResult.setResult(optionRes);
+				tmpVoteResult.setCanceled(isCanceled);
+				
+				tmpVoteResult.setDesc(desc);
+				tmpVoteResult.setInitiator(initiator);
+				tmpVoteResult.setInitiatorIP(InitiatorIP);
+				tmpVoteResult.setIsInitiator(isInitiator);
+				tmpVoteResult.setReply(isReply);
+				tmpVoteResult.setName(name);
+				tmpVoteResult.setOptions(options);
+				
 				rlist.add(tmpVoteResult);
+				
 				optionRes.set(0, 0);
 				optionRes.set(1, 0);
 				optionRes.set(2, 0);
@@ -305,7 +360,7 @@ public class Vote implements Serializable {
 	}
 	public static ArrayList<VoteResult> getAllVoteResult(){
 		ArrayList<VoteResult> rlist = new ArrayList<VoteResult>();
-		
+		ArrayList<String> options = new ArrayList<String>();
 		ArrayList<Integer> optionRes = new ArrayList<Integer>(4);
 		optionRes.add(0);
 		optionRes.add(0);
@@ -316,6 +371,20 @@ public class Vote implements Serializable {
 		String sql = "select * from vote where isInitiator=true";
 		String sqlRes = "select choice, count('choice') cnt from votereply where voteid=? group by choice";
 		String voteID = null;
+		
+		String initiator;
+		String InitiatorIP;
+		String desc;
+		String name; // name represents the vote title
+		boolean isInitiator;
+		boolean isCanceled;
+		boolean isReply;
+		Date deadline;
+		String option1;
+		String option2;
+		String option3;
+		String option4;
+
 		try {
 			DBUtil db = new DBUtil();
 			SimpleDateFormat   format   =   new   SimpleDateFormat   ("yyyy-MM-dd HH:mm:ss");
@@ -325,16 +394,52 @@ public class Vote implements Serializable {
 			ResultSet rs = ps.executeQuery();
 
 			while(rs.next()){
+				VoteResult tmpVoteResult = new VoteResult();
 				voteID = rs.getString("voteid");
+				initiator = rs.getString("initiator");
+				InitiatorIP = rs.getString("initiatorip");
+				desc = rs.getString("desc");
+				name = rs.getString("name");
+				isInitiator = rs.getBoolean("isinitiator");
+				isCanceled = rs.getBoolean("iscanceled");
+				isReply = rs.getBoolean("isReply");
+				try {
+					deadline = format.parse(rs.getString("deadline"));
+					tmpVoteResult.setDeadline(deadline);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				option1 = rs.getString("option1");
+				option2 = rs.getString("option2");
+				option3 = rs.getString("option3");
+				option4 = rs.getString("option4");
+				options.add(0, option1);
+				options.add(1, option2);
+				options.add(2, option3);
+				options.add(3, option4);	
+				
+				
 				psRes = conn.prepareStatement(sqlRes);
 				psRes.setString(1, voteID);
 				rsRes = psRes.executeQuery();
 				while(rsRes.next()){
 					optionRes.set(rsRes.getInt("option"),rsRes.getInt("cnt"));
 				}
-				VoteResult tmpVoteResult = new VoteResult();
+				
 				tmpVoteResult.setResult(optionRes);
+				tmpVoteResult.setCanceled(isCanceled);
+				
+				tmpVoteResult.setDesc(desc);
+				tmpVoteResult.setInitiator(initiator);
+				tmpVoteResult.setInitiatorIP(InitiatorIP);
+				tmpVoteResult.setIsInitiator(isInitiator);
+				tmpVoteResult.setReply(isReply);
+				tmpVoteResult.setName(name);
+				tmpVoteResult.setOptions(options);
+				
 				rlist.add(tmpVoteResult);
+				
 				optionRes.set(0, 0);
 				optionRes.set(1, 0);
 				optionRes.set(2, 0);
