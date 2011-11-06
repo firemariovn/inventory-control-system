@@ -40,10 +40,13 @@ public class Vote implements Serializable {
 	String hostIp;
 	int isInitiator;
 	int isValidate;
-	
+	private String initiator;
 	String desc;
-
-	String initiatorIp;
+	private String name;
+	String InitiatorIP;
+	
+	private boolean isOrignial;
+	private boolean isCanceled;
 
 	Date deadline = new Date();
 	
@@ -55,6 +58,23 @@ public class Vote implements Serializable {
 	PreparedStatement ps = null;
 	
 	SimpleDateFormat   format   =   new   SimpleDateFormat   ("yyyy-MM-dd HH:mm:ss");
+	
+	public Vote(String nm,String descc, ArrayList<String> op, Date date,String ip,boolean isOri,boolean isCal)
+	{
+		this.voteID = "0001";
+		name=nm;
+		desc=descc;
+		options=op;
+		deadline=date;
+		InitiatorIP = ip;
+		isOrignial = isOri;
+		isCanceled = isCal;
+	}
+	
+	public Vote(){
+		
+		
+	}
 
 	public String getUniqueID(){
 		return DBUtil.generateGUID();
@@ -87,11 +107,11 @@ public class Vote implements Serializable {
 	}
 
 	public String getInitiatorIp() {
-		return initiatorIp;
+		return InitiatorIP;
 	}
 
 	public void setInitiatorIp(String initiatorIp) {
-		this.initiatorIp = initiatorIp;
+		this.InitiatorIP = initiatorIp;
 	}
 
 	public Date getDeadline() {
@@ -131,6 +151,31 @@ public class Vote implements Serializable {
 	public void setIsValidate(int isValidate) {
 		this.isValidate = isValidate;
 	}
+	
+	public String getInitiator() {
+		return initiator;
+	}
+	public void setInitiator(String initiator) {
+		this.initiator = initiator;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public boolean isOrignial() {
+		return isOrignial;
+	}
+	public void setOrignial(boolean isOrignial) {
+		this.isOrignial = isOrignial;
+	}
+	public boolean isCanceled() {
+		return isCanceled;
+	}
+	public void setCanceled(boolean isCanceled) {
+		this.isCanceled = isCanceled;
+	}
 	public void add(){
 		
 		try {
@@ -142,7 +187,7 @@ public class Vote implements Serializable {
 			ps.setString(2, this.hostName);
 			ps.setString(3, this.hostIp);
 			ps.setString(4, this.desc);
-			ps.setString(5, this.initiatorIp);
+			ps.setString(5, this.InitiatorIP);
 			ps.setString(6, format.format(deadline));
 			ps.setInt(7, this.isInitiator);
 			ps.setInt(8, this.isValidate);
@@ -244,6 +289,14 @@ public class Vote implements Serializable {
 		}
 		return vlist;
 	}
+	public String getInitiatorIP() {
+		return InitiatorIP;
+	}
+
+	public void setInitiatorIP(String initiatorIP) {
+		InitiatorIP = initiatorIP;
+	}
+
 	public List getVoteByIsValidate(int isValidate){ 
 		List<Vote> vlist = new LinkedList<Vote>();
 		try {

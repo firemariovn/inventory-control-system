@@ -7,6 +7,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.UUID;
@@ -17,15 +18,26 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EtchedBorder;
 
+import org.ntu.eee.csn.oosd.jvoter.model.Vote;
+import org.ntu.eee.csn.oosd.jvoter.model.VoteReply;
 import org.ntu.eee.csn.oosd.jvoter.model.Voter;
+import org.ntu.eee.csn.oosd.jvoter.ui.VoteInitiationUI;
+import org.ntu.eee.csn.oosd.jvoter.ui.VoteListUI;
+import org.ntu.eee.csn.oosd.jvoter.util.DBUtil;
 import org.ntu.eee.csn.oosd.jvoter.util.JVoterProtocol;
 import org.pushingpixels.substance.api.SubstanceLookAndFeel;
 import org.pushingpixels.substance.api.skin.CremeCoffeeSkin;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 /**
  * This is the Main Frame of JVoter in UI Layer
  *  
@@ -38,21 +50,23 @@ public class MainUI implements JVoterProtocol {
 	private JLabel lblOnlineUsers;
 	private JFrame frame;
 	private MulticastSocket ds;
-    private final String guid = UUID.randomUUID().toString().replace("-", "").toUpperCase();
+	private JButton unRepliedVotesButton;
+    private final String guid = DBUtil.generateGUID();
     private Map<String, Voter> userTable = new Hashtable<String, Voter>();
     private int usernum=0;
     private ArrayList<Voter> voters;
     private DatagramSocket da;
     private DatagramSocket db;
+    private ArrayList<Vote> votes= new ArrayList<Vote>();
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		JFrame.setDefaultLookAndFeelDecorated(true);
-		JDialog.setDefaultLookAndFeelDecorated(true);
+	//	JFrame.setDefaultLookAndFeelDecorated(true);
+	//	JDialog.setDefaultLookAndFeelDecorated(true);
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				SubstanceLookAndFeel.setSkin(new CremeCoffeeSkin());
+			//	SubstanceLookAndFeel.setSkin(new CremeCoffeeSkin());
 				try {
 					MainUI window = new MainUI();
 					window.frame.setVisible(true);
@@ -105,9 +119,21 @@ public class MainUI implements JVoterProtocol {
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JButton initialiteVoteButton = new JButton("Initiate a Vote");
+		initialiteVoteButton.addActionListener(bl);
 		panel.add(initialiteVoteButton);
 		
-		JButton unRepliedVotesButton = new JButton("Unreplied Votes[0]");
+		unRepliedVotesButton = new JButton("Unreplied Votes[0]");
+		unRepliedVotesButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				VoteListUI vlUI = new  VoteListUI(votes,da,unRepliedVotesButton);
+	             JFrame jfVI = new JFrame();
+	             jfVI.getContentPane().add(vlUI);
+	             jfVI.setBounds(0, 0, 465,520);
+	             jfVI.setResizable(false);
+	             jfVI.setVisible(true);
+			}
+		});
 		panel.add(unRepliedVotesButton);
 		
 		JButton viewAllButton = new JButton("View All Votes");
@@ -176,7 +202,7 @@ public class MainUI implements JVoterProtocol {
 	                                 if (!userTable.containsKey(uid)) {
 	                                	 Voter user = new Voter();
 	                                     user.setGuid(uid);
-	                                     user.setInetAddress(dp.getAddress());
+	                                     user.setInetAddress(dp.getAddress().toString());
 	                                	 user.setHostAddress(dp.getAddress().getHostAddress());
 	                                	 try{ 
 	                                	 String name=dp.getAddress().getCanonicalHostName();
@@ -191,9 +217,9 @@ public class MainUI implements JVoterProtocol {
 	                                      System.out.println("新用户上线");
 	                                      System.out.println(user.getGuid());
 	                                      System.out.println(guid+"aa");
-	                                      sleep(3000);
+	                                      //sleep(3000);
 	                                 
-	                                     byte[] data = (USER_ON_LINE + guid).getBytes("UTF-8");
+	                                     byte[] data = (USER_ON_LINE +"|"+ guid).getBytes("UTF-8");
 	                                     DatagramPacket p = new DatagramPacket(data, data.length, dp.getAddress(), unicastListenPort);
 	                                     
 	                                     da.send(p);
@@ -230,6 +256,7 @@ public class MainUI implements JVoterProtocol {
 	        String msg=user.getHostName()+"/"+user.getHostAddress();
 	        voterlist.insertElementAt(msg,0);
 	        lblOnlineUsers.setText("Online Users:"+usernum);
+	        voters.add(user);
 	        
 	    }
 	    public void unicastlisten(){
@@ -246,52 +273,81 @@ public class MainUI implements JVoterProtocol {
 		                         DatagramPacket dp = new DatagramPacket(new byte[1024], 1024);
 		                         //ds.joinGroup(InetAddress.getByName("230.0.0.2"));
 		                         db.receive(dp);
-
 		                         
-		                         String msg = new String(dp.getData(), 0, dp.getLength(), "UTF-8");
 
-		                         if (msg != null && msg.length() > 0) {
+					                String data = new String(dp.getData(),0, dp.getLength(), "UTF-8");
+					                System.out.println(data);
+					                
+					                String[] seg =data.split("\\|"); //split the message received to get the flag
+					                System.out.println(seg[0]);
+					                int flag = Integer.parseInt(seg[0]);
+					                
+					                switch(flag)
+					                {
+					                	case JVoterProtocol.flagNewVote:  //vote invitation message
+					                		ArrayList<String> op = new ArrayList<String>();
+					                		op.add(seg[3]);
+					                		op.add(seg[4]);
+					                		op.add(seg[5]);
+					                		op.add(seg[6]);
+					                		Date date = new Date(seg[7]);		
+					                		Vote v = new Vote(seg[1],seg[2],op,date,seg[8],false,false);
+					                		votes.add(v);
+							                unRepliedVotesButton.setText("Unreplied Votes["+votes.size()+"]");
+							                JOptionPane.showMessageDialog(null, 
+					        		                "You have been invited to a new vote", "New Vote",JOptionPane.INFORMATION_MESSAGE);
+					                		break;
+					                		
+					                	case JVoterProtocol.flagReplyVote:  //vote reply message 
+					                		VoteReply vr = new VoteReply(seg[1],Integer.valueOf(seg[2]),seg[3]);
+					                		
+					                		JOptionPane.showMessageDialog(null, 
+					        		                "A reply from "+vr.getReplierHost()+" has been received", "New Reply",JOptionPane.INFORMATION_MESSAGE);
+					                		break;
+					                		
+					                	case 0:
+					                		String uid=seg[1].toString();
+			                                 if (!userTable.containsKey(uid)) {
+			                                	 Voter user = new Voter();
+			                                     user.setGuid(uid);
+			                                     
+			                                     user.setInetAddress(dp.getAddress().toString());
+			                                	 user.setHostAddress(dp.getAddress().getHostAddress());
+			                                	 //String name=dp.getAddress().getCanonicalHostName();
+			                                	 //String username=name.substring(0, name.indexOf('.'));
+		                                         //user.setHostName(username);
+			                                	 
+			                                	 try{ 
+				                                	 String name=dp.getAddress().getCanonicalHostName();
+				                                	
+				                                	 String username=name.substring(0, name.indexOf('.'));
+			                                         user.setHostName(username);
+				                                	 }catch(Exception e){
+				                                		 String username=user.getHostAddress().substring(0, user.getHostAddress().indexOf('.'));
+				                                		 user.setHostName(username);
+				                                	 }
+			                                	 
+			                                     addUser(user);
+			                                      System.out.println("新用户上线");
+			                                      System.out.println(user.getGuid());
+			                                      System.out.println(guid+"aa");
+			                                      //sleep(3000);
+			                                 
+			                                 
+			                                     //ds.close();
+			                                 }
+			                                else{
+			                                 	System.out.println("已经存在111");
+			                                 }
+			                                 break;
+					                	default:
+					                		System.out.println("no");
+					                		break;
+					                		
+					                }
 
-		                             int msgType = Integer.parseInt(msg.substring(0, 1));
-		                             String uid = msg.substring(1, 33);
-
-		                             switch (msgType) {
-		                             case 0:
-		                                 if (!userTable.containsKey(uid)) {
-		                                	 Voter user = new Voter();
-		                                     user.setGuid(uid);
-		                                     user.setInetAddress(dp.getAddress());
-		                                	 user.setHostAddress(dp.getAddress().getHostAddress());
-		                                	 //String name=dp.getAddress().getCanonicalHostName();
-		                                	 //String username=name.substring(0, name.indexOf('.'));
-	                                         //user.setHostName(username);
-		                                	 try{ 
-			                                	 String name=dp.getAddress().getCanonicalHostName();
-			                                	
-			                                	 String username=name.substring(0, name.indexOf('.'));
-		                                         user.setHostName(username);
-			                                	 }catch(Exception e){
-			                                		 String username=user.getHostAddress().substring(0, user.getHostAddress().indexOf('.'));
-			                                		 user.setHostName(username);
-			                                	 }
-		                                     addUser(user);
-		                                      System.out.println("新用户上线");
-		                                      System.out.println(user.getGuid());
-		                                      System.out.println(guid+"aa");
-		                                      sleep(3000);
-		                                 
-		                                 
-		                                     //ds.close();
-		                                 }
-		                                else{
-		                                 	System.out.println("已经存在111");
-		                                 }
-		                                 break;
-		                             
-	    			  
-		                             }
-		                         }
-		                     } catch (Exception e) {
+		                     } 
+		                     catch (Exception e) {
 		                         e.printStackTrace();
 		                     }
 		                 }
@@ -299,5 +355,23 @@ public class MainUI implements JVoterProtocol {
 	    		  
 	    	  }.start();
 	    }
+	    
+	    //OPen a new windows to initiate a new vote
+		//@Author: LU Mukai G1101045F
+		 private ActionListener bl = new ActionListener()
+		 {
+			 
+			 public void actionPerformed(ActionEvent e)
+	         {
+	             //Execute when button is pressed
+	             VoteInitiationUI viUI = new VoteInitiationUI(voters,da);
+	             JFrame jfVI = new JFrame();
+	             jfVI.getContentPane().add(viUI);
+	             jfVI.setBounds(0, 0, 585,510);
+	             jfVI.setResizable(false);
+	             
+	             jfVI.setVisible(true);
+	         }
+		 };
 	    
 }

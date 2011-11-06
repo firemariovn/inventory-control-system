@@ -22,7 +22,7 @@ public class Voter implements JVoterProtocol{
 
 	private String hostAddress;
 
-	private InetAddress inetAddress;
+	private String inetAddress;
     
 	private String hostname;
 	private String guid;
@@ -39,19 +39,23 @@ public class Voter implements JVoterProtocol{
 	public String getHostAddress() {
 		return hostAddress;
 	}
+	
+	
 
 	public void setHostAddress(String hostAddress) {
 		
 		this.hostAddress = hostAddress;
 	}
 
-	public InetAddress getInetAddress() {
+
+	public String getInetAddress() {
 		return inetAddress;
 	}
 
-	public void setInetAddress(InetAddress inetAddress) {
+	public void setInetAddress(String inetAddress) {
 		this.inetAddress = inetAddress;
 	}
+
 	public void setHostName(String hostname) {
 		this.hostname = hostname;
 	}
