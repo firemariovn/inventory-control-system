@@ -208,8 +208,8 @@ public class Vote implements Serializable {
 		ArrayList<Vote> vlist = new ArrayList<Vote>();
 		try {
 			String sql = "select * vote where isreplay=false";
-			DBUtil db2 = new DBUtil();
-			Connection conn = db2.getConnection();
+			DBUtil db = new DBUtil();
+			Connection conn = db.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			SimpleDateFormat   format   =   new   SimpleDateFormat   ("yyyy-MM-dd HH:mm:ss");
@@ -252,15 +252,17 @@ public class Vote implements Serializable {
 		return vlist;
 	}
 	
-	public List getAllJoinedVotes(){
-		List<Vote> vlist = new LinkedList<Vote>();
+	public static ArrayList<Vote> getAllJoinedVotes(){
+		ArrayList<Vote>  vlist = new ArrayList<Vote> ();
 		try {
-			sql = "select * vote where isInitiate=false";
+			String sql = "select * vote where isInitiate=false";
 			
-			conn = db.getConnection();
-			ps = conn.prepareStatement(sql);
-			rs = ps.executeQuery();
-
+			DBUtil db = new DBUtil();
+			Connection conn = db.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			SimpleDateFormat   format   =   new   SimpleDateFormat   ("yyyy-MM-dd HH:mm:ss");
+			
 			while(rs.next()){
 				Vote tmpVote = new Vote();
 				ArrayList<String> tmpoptions = new ArrayList<String>();
@@ -298,8 +300,8 @@ public class Vote implements Serializable {
 		}
 		return vlist;
 	}
-	public List getAllInitiateVoteResult(){
-		List<VoteResult> rlist = new LinkedList<VoteResult>();
+	public static ArrayList<VoteResult> getAllVoteResult(){
+		ArrayList<VoteResult> rlist = new ArrayList<VoteResult>();
 		
 		ArrayList<Integer> optionRes = new ArrayList<Integer>(4);
 		optionRes.add(0);
@@ -308,13 +310,16 @@ public class Vote implements Serializable {
 		optionRes.add(0);
 		PreparedStatement psRes = null;
 		ResultSet rsRes = null;
-		sql = "select * vote where isInitiate=true";
-		String sqlRes = "select option, count('option') cnt from voteresult where voteid=? group by option";
+		String sql = "select * vote where isInitiate=true";
+		String sqlRes = "select choice, count('choice') cnt from votereply where voteid=? group by choice";
 		String voteID = null;
 		try {
-			conn = db.getConnection();
-			ps = conn.prepareStatement(sql);
-			rs = ps.executeQuery();
+			DBUtil db = new DBUtil();
+			SimpleDateFormat   format   =   new   SimpleDateFormat   ("yyyy-MM-dd HH:mm:ss");
+			
+			Connection conn = db.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
 
 			while(rs.next()){
 				voteID = rs.getString("voteid");
