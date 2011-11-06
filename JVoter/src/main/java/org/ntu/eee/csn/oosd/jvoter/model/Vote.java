@@ -209,7 +209,7 @@ public class Vote implements Serializable {
 	public static ArrayList<Vote> getUnAnsweredVotes(){ 
 		ArrayList<Vote> vlist = new ArrayList<Vote>();
 		try {
-			String sql = "select * vote where isReply=false";
+			String sql = "select * vote where isReply='false'";
 			DBUtil db = new DBUtil();
 			Connection conn = db.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -264,7 +264,7 @@ public class Vote implements Serializable {
 		optionRes.add(0);
 		PreparedStatement psRes = null;
 		ResultSet rsRes = null;
-		String sql = "select * vote where isInitiate=false";
+		String sql = "select * vote where isInitiate='false'";
 		String sqlRes = "select choice, count('choice') cnt from votereply where voteid=? group by choice";
 		String voteID = null;
 		try {
@@ -313,7 +313,7 @@ public class Vote implements Serializable {
 		optionRes.add(0);
 		PreparedStatement psRes = null;
 		ResultSet rsRes = null;
-		String sql = "select * vote where isInitiate=true";
+		String sql = "select * vote where isInitiate='true'";
 		String sqlRes = "select choice, count('choice') cnt from votereply where voteid=? group by choice";
 		String voteID = null;
 		try {
