@@ -313,7 +313,7 @@ public class MainUI implements JVoterProtocol {
 	                                		 //user.setHostName(username);
 	                                	 }
 	                                     addUser(user);
-	                                      System.out.println("新用户上线");
+	                                      System.out.println("New User Get Online");
 	                                      System.out.println(user.getGuid());
 	                                      System.out.println(guid+"aa");
 	                                      //sleep(3000);
@@ -325,7 +325,7 @@ public class MainUI implements JVoterProtocol {
 	                                     //ds.close();
 	                                 }
 	                                else{
-	                                 	System.out.println("已经存在111");
+	                                 	System.out.println("isExisted");
 	                                 }
 	                                 break;
 	                             case 1:
@@ -465,7 +465,7 @@ public class MainUI implements JVoterProtocol {
 				                                	 }
 			                                	 
 			                                     addUser(user);
-			                                      System.out.println("新用户上线");
+			                                      System.out.println("New user gets online");
 			                                      System.out.println(user.getGuid());
 			                                      System.out.println(guid+"aa");
 			                                      //sleep(3000);
@@ -474,7 +474,7 @@ public class MainUI implements JVoterProtocol {
 			                                     //ds.close();
 			                                 }
 			                                else{
-			                                 	System.out.println("已经存在111");
+			                                 	System.out.println("isExisted");
 			                                 }
 			                                 break;
 					                	default:
