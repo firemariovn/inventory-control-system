@@ -420,6 +420,7 @@ public class MainUI implements JVoterProtocol {
 					                		Date date = new Date(seg[7]);		
 					                		Vote v = new Vote(seg[1],seg[2],op,date,seg[8],false,false);
 					                		v.setReply(false);
+					                		v.setInitiator(InetAddress.getByName(seg[8]).getCanonicalHostName() );
 					                		votes.add(v);
 							                unRepliedVotesButton.setText("Unreplied Votes["+votes.size()+"]");
 							                JOptionPane.showMessageDialog(null, 
