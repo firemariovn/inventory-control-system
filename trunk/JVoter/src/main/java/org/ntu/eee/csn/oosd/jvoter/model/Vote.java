@@ -88,6 +88,14 @@ public class Vote implements Serializable {
 		return voteID;
 	}
 
+	public boolean isReply() {
+		return isReply;
+	}
+
+	public void setReply(boolean isReply) {
+		this.isReply = isReply;
+	}
+	
 	public void setVoteID(String voteID) {
 		this.voteID = voteID;
 	}
