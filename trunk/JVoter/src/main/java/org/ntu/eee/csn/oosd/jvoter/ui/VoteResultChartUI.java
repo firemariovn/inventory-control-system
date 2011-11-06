@@ -56,18 +56,18 @@ public class VoteResultChartUI extends ApplicationFrame {
 		return dataset;
 	}
 
-	private static JFreeChart createJFreeChart(CategoryDataset dataset) {
+	private static JFreeChart createJFreeChart(CategoryDataset dataset,String title) {
 		/**
 		 * Construct JFreeChart
 		 */
 	
-		JFreeChart jfreeChart = ChartFactory.createBarChart3D("What Phone do you want? ",
+		JFreeChart jfreeChart = ChartFactory.createBarChart3D(title,
 				"Distribution", "Quantity", dataset, PlotOrientation.VERTICAL, true, false,
 				false);
 		/**
 		 * Set JFreeChart's Properties
 		 */
-		jfreeChart.setTitle(new TextTitle("What Phone do you want? ", new Font("Arial", Font.BOLD
+		jfreeChart.setTitle(new TextTitle(title, new Font("Arial", Font.BOLD
 				+ Font.ITALIC, 20)));
 		CategoryPlot plot = (CategoryPlot) jfreeChart.getPlot();
 		CategoryAxis categoryAxis = plot.getDomainAxis();
@@ -76,7 +76,7 @@ public class VoteResultChartUI extends ApplicationFrame {
 	}
 
 	public static JPanel createPanel(VoteResult r) {
-		JFreeChart chart = createJFreeChart(createDataSet(r));
+		JFreeChart chart = createJFreeChart(createDataSet(r),r.getName());
 		return new ChartPanel(chart);
 	}
 
