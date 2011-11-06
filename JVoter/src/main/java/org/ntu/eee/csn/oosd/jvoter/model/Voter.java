@@ -29,6 +29,7 @@ public class Voter implements JVoterProtocol{
 	
 	
 	
+	
 	public String getGuid() {
         return guid;
     }
@@ -65,6 +66,15 @@ public class Voter implements JVoterProtocol{
 	public Voter(){
 		
 		
+	}
+	
+	public boolean equals(Object obj){
+	    Voter v= (Voter)obj;
+	    
+	    if(guid.equals(v.guid))
+		return true;
+	    else
+	    return false;
 	}
 	
 }
