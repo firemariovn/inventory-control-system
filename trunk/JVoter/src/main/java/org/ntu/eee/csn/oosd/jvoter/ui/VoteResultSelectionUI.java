@@ -60,6 +60,7 @@ public class VoteResultSelectionUI extends JPanel{
 	{
 		this();
 		lblVoteName.setText(v.getName());
+		
 		lblInitiator.setText(v.getInitiator()+"/"+v.getInitiatorIP());
 		tAreaDiscription.setText(v.getDesc());
 		
@@ -71,7 +72,18 @@ public class VoteResultSelectionUI extends JPanel{
 		lblDeadline.setText(v.getDeadline().toString());
 		panel_1.setVisible(false);
 		listOptions.setEnabled(false);
-		listOptions.setSelectedIndex(1);
+		
+		ArrayList<Integer> result=v.getResult();
+		
+		for(int i =0; i<result.size();i++)
+		{
+			System.out.println("luke: "+result.get(i));
+			if(result.get(i)==1)
+			{
+				
+				listOptions.setSelectedIndex(i);
+			}
+		}
 	}
 	
 	public  VoteResultSelectionUI(Vote v, DatagramSocket socket,DefaultListModel items,int index,JButton unRepliedVotesButton,ArrayList<Vote> votes)
@@ -202,11 +214,11 @@ public class VoteResultSelectionUI extends JPanel{
 		
 		lblDeadline = new JLabel("Host/192.168.1.1");
 		lblDeadline.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblDeadline.setBounds(72, 376, 338, 14);
+		lblDeadline.setBounds(100, 376, 310, 14);
 		add(lblDeadline);
 		
 		JLabel lbl2 = new JLabel("Deadline:");
-		lbl2.setBounds(16, 376, 46, 14);
+		lbl2.setBounds(16, 376, 74, 14);
 		add(lbl2);
 		
 		
