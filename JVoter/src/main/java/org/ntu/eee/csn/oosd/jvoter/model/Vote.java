@@ -264,7 +264,7 @@ public class Vote implements Serializable {
 		optionRes.add(0);
 		PreparedStatement psRes = null;
 		ResultSet rsRes = null;
-		String sql = "select * from vote where isInitiate=false";
+		String sql = "select * from vote where isInitiator=false";
 		String sqlRes = "select choice, count('choice') cnt from votereply where voteid=? group by choice";
 		String voteID = null;
 		try {
@@ -313,7 +313,7 @@ public class Vote implements Serializable {
 		optionRes.add(0);
 		PreparedStatement psRes = null;
 		ResultSet rsRes = null;
-		String sql = "select * from vote where isInitiate=true";
+		String sql = "select * from vote where isInitiator=true";
 		String sqlRes = "select choice, count('choice') cnt from votereply where voteid=? group by choice";
 		String voteID = null;
 		try {
