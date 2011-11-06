@@ -32,15 +32,15 @@ public class VoteResultChartUI extends ApplicationFrame {
 	
 	public VoteResultChartUI(VoteResult r) {
 		super("Vote Title : "+r.getName());
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				setVisible(false);
-				dispose();
-			}
-		});
+	
 		this.setContentPane(createPanel(r));
 	}
+	
+	public void windowClosing(final WindowEvent event) { 
+		 if (event.getWindow() == this) { 
+		  dispose(); 
+		 }
+		} 
 
 	
 	private static CategoryDataset createDataSet(VoteResult r) {
@@ -99,7 +99,6 @@ public class VoteResultChartUI extends ApplicationFrame {
 		
 		//Pass an instance of VoteResult to the constructor
 		VoteResultChartUI chart = new VoteResultChartUI(r);
-		chart.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		chart.pack();
 		chart.setVisible(true);
 
