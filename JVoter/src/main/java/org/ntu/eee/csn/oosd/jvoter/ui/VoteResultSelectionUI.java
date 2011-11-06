@@ -35,6 +35,7 @@ import javax.swing.ListSelectionModel;
 import org.apache.log4j.Logger;
 import org.ntu.eee.csn.oosd.jvoter.model.Vote;
 import org.ntu.eee.csn.oosd.jvoter.model.VoteReply;
+import org.ntu.eee.csn.oosd.jvoter.model.VoteResult;
 import org.ntu.eee.csn.oosd.jvoter.util.JVoterProtocol;
 
 public class VoteResultSelectionUI extends JPanel{
@@ -53,6 +54,25 @@ public class VoteResultSelectionUI extends JPanel{
 	private int index;
 	private JButton unRepliedVotesButton;
 	private ArrayList<Vote> votes;
+	private JPanel panel_1;
+	
+	public  VoteResultSelectionUI(VoteResult v)
+	{
+		this();
+		lblVoteName.setText(v.getName());
+		lblInitiator.setText(v.getInitiator()+"/"+v.getInitiatorIP());
+		tAreaDiscription.setText(v.getDesc());
+		
+		ArrayList<String> ops= v.getOptions(); //display the options
+		for(int i =0; i<ops.size();i++)
+		{
+			lItems.addElement(ops.get(i));
+		}
+		lblDeadline.setText(v.getDeadline().toString());
+		panel_1.setVisible(false);
+		listOptions.setEnabled(false);
+		listOptions.setSelectedIndex(1);
+	}
 	
 	public  VoteResultSelectionUI(Vote v, DatagramSocket socket,DefaultListModel items,int index,JButton unRepliedVotesButton,ArrayList<Vote> votes)
 	{
@@ -91,7 +111,7 @@ public class VoteResultSelectionUI extends JPanel{
 		panel.add(lblVoteName);
 		lblVoteName.setFont(new Font("Lucida Grande", Font.BOLD, 17));
 		
-		JPanel panel_1 = new JPanel();
+		panel_1 = new JPanel();
 		panel_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panel_1.setBounds(20, 401, 424, 37);
 		add(panel_1);

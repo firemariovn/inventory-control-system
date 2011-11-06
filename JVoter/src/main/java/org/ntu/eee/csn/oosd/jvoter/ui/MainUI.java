@@ -98,11 +98,46 @@ public class MainUI implements JVoterProtocol {
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent e) {
-				broadcast(USER_OFF_LINE);
+				
+				/*
+				Object[] options = { "Yes", "No" };
+			    JOptionPane jp = new JOptionPane("All the votes which haven't been replied will be canceled, still wanna close?", JOptionPane.QUESTION_MESSAGE,
+			        JOptionPane.YES_NO_OPTION, null, options, options[1]);
+			    JDialog dialog =jp.createDialog("Warning!");
+			    dialog.setVisible(true);
+			    Object selectedValue = jp.getValue();
+			    if (selectedValue == null || selectedValue == options[1]) 
+			    {
+			    	
+			        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+			    } 
+			    else if (selectedValue == options[0])
+			    {
+			    	broadcast(USER_OFF_LINE);
+			    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			    }
+			    */
+			
+	           
 			}
 			@Override
 			public void windowClosing(WindowEvent e) {
-				broadcast(USER_OFF_LINE);
+				Object[] options = { "Yes", "No" };
+			    JOptionPane jp = new JOptionPane("All the votes which haven't been replied will be canceled, still wanna close?", JOptionPane.QUESTION_MESSAGE,
+			        JOptionPane.YES_NO_OPTION, null, options, options[1]);
+			    JDialog dialog =jp.createDialog("Warning!");
+			    dialog.setVisible(true);
+			    Object selectedValue = jp.getValue();
+			    if (selectedValue == null || selectedValue == options[1]) 
+			    {
+			    	
+			        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+			    } 
+			    else if (selectedValue == options[0])
+			    {
+			    	broadcast(USER_OFF_LINE);
+			    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			    }
 			}
 		});
 		frame.setBounds(100, 100, 449, 603);
@@ -298,6 +333,15 @@ public class MainUI implements JVoterProtocol {
 	        
 	        lblOnlineUsers.setText("Online Users:"+usernum);
 	        voters.remove(user);
+	        for(int i =0; i<votes.size();i++)
+	        {
+	        	if(votes.get(i).getInitiatorIP().equals(user.getInetAddress()))
+	        	{
+	        		votes.remove(i);
+	        	}
+	        }
+	        JOptionPane.showMessageDialog(null, 
+	                user.getHostName()+"has left, all votes initiated by him/her are canceled", "Cancel Vote",JOptionPane.INFORMATION_MESSAGE);
 	    }
 	    public void unicastlisten(){
 	    	  try {
