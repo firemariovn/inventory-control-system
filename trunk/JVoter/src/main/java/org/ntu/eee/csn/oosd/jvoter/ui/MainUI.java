@@ -340,8 +340,9 @@ public class MainUI implements JVoterProtocol {
 	        		votes.remove(i);
 	        	}
 	        }
+	        unRepliedVotesButton.setText("Unreplied Votes["+votes.size()+"]");
 	        JOptionPane.showMessageDialog(null, 
-	                user.getHostName()+"has left, all votes initiated by him/her are canceled", "Cancel Vote",JOptionPane.INFORMATION_MESSAGE);
+	                user.getHostName()+" has left, all votes initiated by him/her are canceled.", "Cancel Vote",JOptionPane.INFORMATION_MESSAGE);
 	    }
 	    public void unicastlisten(){
 	    	  try {
