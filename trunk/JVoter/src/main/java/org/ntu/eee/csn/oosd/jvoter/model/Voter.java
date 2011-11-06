@@ -20,7 +20,7 @@ public class Voter implements JVoterProtocol{
 	 */
 	private static Logger LOGGER = Logger.getLogger(Voter.class);
 
-	private String hostAddress;
+	//private String hostAddress;
 
 	private String inetAddress;
     
@@ -37,16 +37,16 @@ public class Voter implements JVoterProtocol{
     public void setGuid(String guid) {
         this.guid = guid;
     }
-	public String getHostAddress() {
-		return hostAddress;
-	}
+	//public String getHostAddress() {
+	//	return hostAddress;
+	//}
 	
 	
 
-	public void setHostAddress(String hostAddress) {
+	//public void setHostAddress(String hostAddress) {
 		
-		this.hostAddress = hostAddress;
-	}
+		//this.hostAddress = hostAddress;
+	//}
 
 
 	public String getInetAddress() {
