@@ -72,7 +72,7 @@ public class VoteReply implements Serializable {
 		this.replierHost = replierHost;
 	}
 	public void add(){
-		sql = "INSERT INTO VOTE(VOTEID, CHOICE, REPLIERHOST)VALUES(?,?,?)";
+		sql = "INSERT INTO VOTEREPLY(VOTEID, CHOICE, REPLIERHOST)VALUES(?,?,?)";
 		try {
 			conn = db.getConnection();
 			ps = conn.prepareStatement(sql);
