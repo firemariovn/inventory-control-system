@@ -469,5 +469,22 @@ public class Vote implements Serializable {
 
 		return rlist;
 	}
+	public void updateReply(){
+			try {
+				sql = "update vote set isreply=true where voteid=?";
+				conn = db.getConnection();
+				ps = conn.prepareStatement(sql);
+				ps.setString(1,this.voteID);
+				ps.executeUpdate();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+	}
 	
 }
