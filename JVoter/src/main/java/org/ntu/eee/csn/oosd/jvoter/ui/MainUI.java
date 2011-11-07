@@ -541,6 +541,7 @@ public class MainUI implements JVoterProtocol {
 		       			        
 		       			        VoteReply vr = new VoteReply(votes.get(i).getVoteID(),0, InetAddress.getLocalHost().getHostAddress());
 		       			        vr.add();
+		       			        votes.get(i).updateReply();
 		       			        voters.remove(i);
 		       			        unRepliedVotesButton.setText("Unreplied Votes["+votes.size()+"]");
 		       				   }
