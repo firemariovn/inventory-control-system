@@ -148,7 +148,7 @@ public class VoteResultSelectionUI extends JPanel{
 					byte[] buff = data.getBytes();
 					packet = new DatagramPacket(buff, buff.length,ip,JVoterProtocol.UNICAST_LISTEN_PORT);
 			        socket.send(packet);
-			        
+			        vote.updateReply();
 			        VoteReply vr = new VoteReply(vote.getVoteID(),listOptions.getSelectedIndex(), InetAddress.getLocalHost().getHostAddress());
 			        vr.add();
 				}
