@@ -256,17 +256,18 @@ public class Vote implements Serializable {
 	
 	public static ArrayList<VoteResult> getAllJoinedVotes(){
 		ArrayList<VoteResult> rlist = new ArrayList<VoteResult>();
-		ArrayList<String> options = new ArrayList<String>();
-		options.add("");
-		options.add("");
-		options.add("");
-		options.add("");
-		
+		//ArrayList<String> options = new ArrayList<String>();
+		//options.add("");
+		//options.add("");
+		//options.add("");
+		//options.add("");
+		/*
 		ArrayList<Integer> optionRes = new ArrayList<Integer>(4);
 		optionRes.add(0);
 		optionRes.add(0);
 		optionRes.add(0);
 		optionRes.add(0);
+		*/
 		PreparedStatement psRes = null;
 		ResultSet rsRes = null;
 		String sql = "select * from vote where isInitiator=false";
@@ -296,6 +297,14 @@ public class Vote implements Serializable {
 			ResultSet rs = ps.executeQuery();
 
 			while(rs.next()){
+				
+				ArrayList<String> options = new ArrayList<String>();
+				ArrayList<Integer> optionRes = new ArrayList<Integer>();
+				optionRes.add(0);
+				optionRes.add( 0);
+				optionRes.add(0);
+				optionRes.add(0);
+				
 				VoteResult tmpVoteResult = new VoteResult();
 				voteID = rs.getString("voteid");
 				initiator = rs.getString("initiator");
@@ -316,16 +325,16 @@ public class Vote implements Serializable {
 				option2 = rs.getString("option2");
 				option3 = rs.getString("option3");
 				option4 = rs.getString("option4");
-				options.set(0, option1);
-				options.set(1, option2);
-				options.set(2, option3);
-				options.set(3, option4);
+				options.add(0, option1);
+				options.add(1, option2);
+				options.add(2, option3);
+				options.add(3, option4);
 				
 				psRes = conn.prepareStatement(sqlRes);
 				psRes.setString(1, voteID);
 				rsRes = psRes.executeQuery();
 				while(rsRes.next()){
-					optionRes.set(rsRes.getInt("option"),rsRes.getInt("cnt"));
+					optionRes.set(rsRes.getInt("choice"),rsRes.getInt("cnt"));
 				}
 				
 				tmpVoteResult.setResult(optionRes);
@@ -341,10 +350,9 @@ public class Vote implements Serializable {
 				
 				rlist.add(tmpVoteResult);
 				
-				optionRes.set(0, 0);
-				optionRes.set(1, 0);
-				optionRes.set(2, 0);
-				optionRes.set(3, 0);
+				
+				
+				
 				
 			}
 			conn.close();
@@ -360,12 +368,7 @@ public class Vote implements Serializable {
 	}
 	public static ArrayList<VoteResult> getAllVoteResult(){
 		ArrayList<VoteResult> rlist = new ArrayList<VoteResult>();
-		ArrayList<String> options = new ArrayList<String>();
-		ArrayList<Integer> optionRes = new ArrayList<Integer>(4);
-		optionRes.add(0);
-		optionRes.add(0);
-		optionRes.add(0);
-		optionRes.add(0);
+		
 		PreparedStatement psRes = null;
 		ResultSet rsRes = null;
 		String sql = "select * from vote where isInitiator=true";
@@ -394,6 +397,16 @@ public class Vote implements Serializable {
 			ResultSet rs = ps.executeQuery();
 
 			while(rs.next()){
+				ArrayList<String> options = new ArrayList<String>();
+				options.add("");
+				options.add("");
+				options.add("");
+				options.add("");
+				ArrayList<Integer> optionRes = new ArrayList<Integer>();
+				optionRes.add(0);
+				optionRes.add(0);
+				optionRes.add(0);
+				optionRes.add(0);
 				VoteResult tmpVoteResult = new VoteResult();
 				voteID = rs.getString("voteid");
 				initiator = rs.getString("initiator");
@@ -414,17 +427,19 @@ public class Vote implements Serializable {
 				option2 = rs.getString("option2");
 				option3 = rs.getString("option3");
 				option4 = rs.getString("option4");
-				options.add(0, option1);
-				options.add(1, option2);
-				options.add(2, option3);
-				options.add(3, option4);	
+				options.set(0, option1);
+				options.set(1, option2);
+				options.set(2, option3);
+				options.set(3, option4);	
 				
 				
 				psRes = conn.prepareStatement(sqlRes);
 				psRes.setString(1, voteID);
 				rsRes = psRes.executeQuery();
+				System.out.println("abc"+voteID);
 				while(rsRes.next()){
-					optionRes.set(rsRes.getInt("option"),rsRes.getInt("cnt"));
+					optionRes.set(rsRes.getInt("choice"),rsRes.getInt("cnt"));
+					System.out.println("abc: "+rsRes.getInt("choice")+rsRes.getInt("cnt"));
 				}
 				
 				tmpVoteResult.setResult(optionRes);
@@ -440,10 +455,7 @@ public class Vote implements Serializable {
 				
 				rlist.add(tmpVoteResult);
 				
-				optionRes.set(0, 0);
-				optionRes.set(1, 0);
-				optionRes.set(2, 0);
-				optionRes.set(3, 0);
+				
 				
 			}
 			conn.close();
