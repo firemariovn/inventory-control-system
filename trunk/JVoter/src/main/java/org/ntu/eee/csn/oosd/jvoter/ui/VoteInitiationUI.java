@@ -47,6 +47,7 @@ import javax.swing.JButton;
 
 import org.apache.log4j.Logger;
 import org.ntu.eee.csn.oosd.jvoter.model.*;
+import org.ntu.eee.csn.oosd.jvoter.util.DBUtil;
 import org.ntu.eee.csn.oosd.jvoter.util.JVoterProtocol;
 
 import java.awt.event.MouseAdapter;
@@ -166,14 +167,14 @@ public class VoteInitiationUI extends JPanel{
 						dt.setTime(date.getTime()+7200000);
 					}
 					System.out.println(dt.toString());
-					
-					Vote v = new Vote(tfVoteName.getText(),tfDesc.getText(),op,dt,InetAddress.getLocalHost().getHostAddress(),true,false);
+					String ID=DBUtil.generateGUID();
+					Vote v = new Vote(ID,tfVoteName.getText(),tfDesc.getText(),op,dt,InetAddress.getLocalHost().getHostAddress(),true,false);
 					v.setReply(true);
 					
 					System.out.println("ready to send");
 					
 					String flag = String.valueOf(JVoterProtocol.NEW_VOTE);
-					String data = flag+"|"+v.getName()+"|"+v.getDesc()+"|"+v.getOptions().get(0)+"|"+v.getOptions().get(1)+"|"+v.getOptions().get(2)+"|"+v.getOptions().get(3)+"|"+v.getDeadline().toGMTString()+"|"+v.getInitiatorIP();
+					String data = flag+"|"+v.getVoteID()+"|"+v.getName()+"|"+v.getDesc()+"|"+v.getOptions().get(0)+"|"+v.getOptions().get(1)+"|"+v.getOptions().get(2)+"|"+v.getOptions().get(3)+"|"+v.getDeadline().toGMTString()+"|"+v.getInitiatorIP();
 					byte[] buff = data.getBytes();
 					
 		            DatagramPacket packet;

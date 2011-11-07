@@ -421,12 +421,12 @@ public class MainUI implements JVoterProtocol {
 					                {
 					                	case JVoterProtocol.NEW_VOTE:  //vote invitation message
 					                		ArrayList<String> op = new ArrayList<String>();
-					                		op.add(seg[3]);
 					                		op.add(seg[4]);
 					                		op.add(seg[5]);
 					                		op.add(seg[6]);
-					                		Date date = new Date(seg[7]);		
-					                		Vote v = new Vote(seg[1],seg[2],op,date,seg[8],false,false);
+					                		op.add(seg[7]);
+					                		Date date = new Date(seg[8]);		
+					                		Vote v = new Vote(seg[1],seg[2],seg[3],op,date,seg[9],false,false);
 					                		v.setReply(false);
 					                		v.setInitiator(InetAddress.getByName(seg[8]).getCanonicalHostName() );
 					                		votes.add(v);
