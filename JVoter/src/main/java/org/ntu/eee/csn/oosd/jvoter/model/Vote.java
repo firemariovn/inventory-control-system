@@ -57,9 +57,9 @@ public class Vote implements Serializable {
 	
 	SimpleDateFormat   format   =   new   SimpleDateFormat   ("yyyy-MM-dd HH:mm:ss");
 	
-	public Vote(String nm,String descc, ArrayList<String> op, Date date,String ip,boolean isInitiator,boolean isCal)
+	public Vote(String ID,String nm,String descc, ArrayList<String> op, Date date,String ip,boolean isInitiator,boolean isCal)
 	{
-		this.voteID = getUniqueID();
+		this.voteID = ID;
 		this.name=nm;
 		this.desc=descc;
 		this.options=op;
