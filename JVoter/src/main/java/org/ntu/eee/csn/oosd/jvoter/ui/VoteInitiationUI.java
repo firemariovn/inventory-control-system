@@ -187,34 +187,39 @@ public class VoteInitiationUI extends JPanel{
 				    	if(item.getCheck())
 				    	{
 					       ip = InetAddress.getByName(item.getIp());
-					       System.out.println(ip);
+					       if(!ip.getHostAddress().toString().equals(v.getInitiatorIP()))
+					       {
+					         System.out.println(ip);
 					
-					       packet = new DatagramPacket(buff, buff.length,ip,JVoterProtocol.UNICAST_LISTEN_PORT);
+					         packet = new DatagramPacket(buff, buff.length,ip,JVoterProtocol.UNICAST_LISTEN_PORT);
 			        
 			               
-					       socket.send(packet);
+					         socket.send(packet);
 					       
-					       System.out.println(ip);
+					         System.out.println(ip);
+					         LOGGER.info("The JVoter initiates a vote named:"+v.getName());
+							 v.add();//add v to database
+							 System.out.println("sent");
+								
+								JOptionPane.showMessageDialog(null, 
+						                "You have successfully initiated a vote!", "Congradulations!",JOptionPane.INFORMATION_MESSAGE);  
+								
+								Component cmp= arg0.getComponent();  //close this windows
+								  while(!(cmp instanceof JFrame ) || cmp.getParent() !=null ){
+								  cmp = cmp.getParent();
+								  }
+								((JFrame)cmp).dispose();
+					       }
 				     	}
 				    }
-				    LOGGER.info("The JVoter initiates a vote named:"+v.getName());
-				    v.add();//add v to database
+				   
 				}
 				    catch(Exception e)
 					{
 						System.out.println(e.toString());
 					}	
 			
-				System.out.println("sent");
 				
-				JOptionPane.showMessageDialog(null, 
-		                "You have successfully initiated a vote!", "Congradulations!",JOptionPane.INFORMATION_MESSAGE);  
-				
-				Component cmp= arg0.getComponent();  //close this windows
-				  while(!(cmp instanceof JFrame ) || cmp.getParent() !=null ){
-				  cmp = cmp.getParent();
-				  }
-				((JFrame)cmp).dispose();
 				
 				}
 				
