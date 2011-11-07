@@ -6,6 +6,7 @@ package org.ntu.eee.csn.oosd.jvoter.ui;
 import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.ListCellRenderer;
@@ -73,14 +74,26 @@ public class VoteListUI extends JPanel{
 		btnReply.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				int index = voteList.getSelectedIndex();
+				 int index = voteList.getSelectedIndex();
 				 Vote v =(Vote)voteList.getModel().getElementAt(index);
-				 VoteResultSelectionUI vlUI = new VoteResultSelectionUI(v,socket,lItems,index,unRepliedVotesButton,votes);
-	             JFrame jfVI = new JFrame();
-	             jfVI.getContentPane().add(vlUI);
-	             jfVI.setBounds(0, 0, 465,520);
-	             jfVI.setResizable(false);
-	             jfVI.setVisible(true);
+				 
+						if(votes.get(index).getVoteID().equals(v.getVoteID()))
+						{
+							  
+				              VoteResultSelectionUI vlUI = new VoteResultSelectionUI(v,socket,lItems,index,unRepliedVotesButton,votes);
+	                          JFrame jfVI = new JFrame();
+	                          jfVI.getContentPane().add(vlUI);
+	                          jfVI.setBounds(0, 0, 465,520);
+	                          jfVI.setResizable(false);
+	                          jfVI.setVisible(true);
+						}
+					
+						else
+					    {
+						JOptionPane.showMessageDialog(null, 
+				                "This vote has already been canceld!", "Canceled!",JOptionPane.INFORMATION_MESSAGE);
+					   }
+					
 				
 			}
 		});

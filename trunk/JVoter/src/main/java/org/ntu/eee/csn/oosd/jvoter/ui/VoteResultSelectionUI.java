@@ -137,41 +137,56 @@ public class VoteResultSelectionUI extends JPanel{
 		voteButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				try
-				{
-				    
-				    DatagramPacket packet;
-				    InetAddress ip = InetAddress.getByName(vote.getInitiatorIP());//get the Initiator's IP
-		            String flag =String.valueOf( JVoterProtocol.REPLY_VOTE); //set the flag
-		            String op =String.valueOf( listOptions.getSelectedIndex()); //get the choice index from the JList
-		            String data = flag+"|"+vote.getVoteID()+"|"+op +"|"+InetAddress.getLocalHost().getHostAddress();
-					byte[] buff = data.getBytes();
-					packet = new DatagramPacket(buff, buff.length,ip,JVoterProtocol.UNICAST_LISTEN_PORT);
-			        socket.send(packet);
-			        vote.updateReply();
-			        VoteReply vr = new VoteReply(vote.getVoteID(),listOptions.getSelectedIndex(), InetAddress.getLocalHost().getHostAddress());
-			        vr.add();
-				}
-				catch(Exception e)
-				{
-					System.out.println(e.toString());
-				}
 				
-				System.out.println("sent");
 				
-				JOptionPane.showMessageDialog(null, 
-		                "You have successfully replied a vote!", "Congradulations!",JOptionPane.INFORMATION_MESSAGE);
-				  
-				items.remove(index); //remove the item from the VoteListUI after successfully replying it
-				votes.remove(index); //remove the item from the ArrayList after successfully replying it
-				unRepliedVotesButton.setText("Unreplied Votes["+votes.size()+"]"); //reset the text of the unRepliedVotesButton in MainUI after successfully replying it
-				LOGGER.info("The JVoter has repied a vote named: "+vote.getName()+" to "+vote.getInitiatorIP());
+					if(votes.get(index).getVoteID().equals(vote.getVoteID()))
+					{						
+						try
+						{
+						    
+						    DatagramPacket packet;
+						    InetAddress ip = InetAddress.getByName(vote.getInitiatorIP());//get the Initiator's IP
+				            String flag =String.valueOf( JVoterProtocol.REPLY_VOTE); //set the flag
+				            String op =String.valueOf( listOptions.getSelectedIndex()); //get the choice index from the JList
+				            String data = flag+"|"+vote.getVoteID()+"|"+op +"|"+InetAddress.getLocalHost().getHostAddress();
+							byte[] buff = data.getBytes();
+							packet = new DatagramPacket(buff, buff.length,ip,JVoterProtocol.UNICAST_LISTEN_PORT);
+					        socket.send(packet);
+					        vote.updateReply();
+					        VoteReply vr = new VoteReply(vote.getVoteID(),listOptions.getSelectedIndex(), InetAddress.getLocalHost().getHostAddress());
+					        vr.add();
+						}
+						catch(Exception e)
+						{
+							System.out.println(e.toString());
+						}
+						
+						System.out.println("sent");
+						
+						JOptionPane.showMessageDialog(null, 
+				                "You have successfully replied a vote!", "Congradulations!",JOptionPane.INFORMATION_MESSAGE);
+						  
+						items.remove(index); //remove the item from the VoteListUI after successfully replying it
+						votes.remove(index); //remove the item from the ArrayList after successfully replying it
+						unRepliedVotesButton.setText("Unreplied Votes["+votes.size()+"]"); //reset the text of the unRepliedVotesButton in MainUI after successfully replying it
+						LOGGER.info("The JVoter has repied a vote named: "+vote.getName()+" to "+vote.getInitiatorIP());
+						
+						Component cmp= arg0.getComponent(); //close the windows
+						  while(!(cmp instanceof JFrame ) || cmp.getParent() !=null ){
+						  cmp = cmp.getParent();
+						  }
+						((JFrame)cmp).dispose();
+						
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, 
+				                "This vote has already been canceld!", "Canceled!",JOptionPane.INFORMATION_MESSAGE);
+					}
+					
 				
-				Component cmp= arg0.getComponent(); //close the windows
-				  while(!(cmp instanceof JFrame ) || cmp.getParent() !=null ){
-				  cmp = cmp.getParent();
-				  }
-				((JFrame)cmp).dispose();
+			
+				
 				
 				
 			}
