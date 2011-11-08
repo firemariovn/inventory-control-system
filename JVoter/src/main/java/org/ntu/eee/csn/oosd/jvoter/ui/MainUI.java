@@ -363,14 +363,16 @@ public class MainUI implements JVoterProtocol {
 	         }.start();
 	    }
 	    public void addUser(Voter user) {
-	        userTable.put(user.getGuid(), user);
-	        usernum++;
-	        DefaultListModel voterlist=(DefaultListModel)onlineUserList.getModel();
-	        String msg=user.getHostName()+"/"+user.getInetAddress();
-	        voterlist.insertElementAt(msg,0);
-	        lblOnlineUsers.setText("Online Users:"+usernum);
-	        voters.add(user);
-	        
+	 
+	    	  
+	            userTable.put(user.getGuid(), user);
+	            usernum++;
+	            DefaultListModel voterlist=(DefaultListModel)onlineUserList.getModel();
+	            String msg=user.getHostName()+"/"+user.getInetAddress();
+	            voterlist.insertElementAt(msg,0);
+	            lblOnlineUsers.setText("Online Users:"+usernum);
+	             voters.add(user);
+	    	
 	    }
 	    public void removeUser(Voter user){
 	    	userTable.remove(user.getGuid());
@@ -382,7 +384,8 @@ public class MainUI implements JVoterProtocol {
 	        
 	        lblOnlineUsers.setText("Online Users:"+usernum);
 	        voters.remove(user);
-	        for(int i =0; i<votes.size();i++)
+	        int vs= votes.size();
+	        for(int i =vs-1; i>=0;i--)
 	        {
 	        	if(votes.get(i).getInitiatorIP().equals(user.getInetAddress()))
 	        	{

@@ -43,7 +43,12 @@ public class VoteListUI extends JPanel{
 		this.socket=socket;
 		this.unRepliedVotesButton =unRepliedVotesButton;
 	     votes = v;
-	    for(int i = 0; i<votes.size();i++) //display all the unanswered votes
+	    bindList();
+	}
+	public void bindList()
+	{
+		lItems.clear();
+		for(int i = 0; i<votes.size();i++) //display all the unanswered votes
 		{
 			lItems.addElement(votes.get(i));
 			
@@ -74,9 +79,11 @@ public class VoteListUI extends JPanel{
 		btnReply.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				try{
 				 int index = voteList.getSelectedIndex();
 				 Vote v =(Vote)voteList.getModel().getElementAt(index);
-				 
+				 if(votes.size()>index)
+				 {
 						if(votes.get(index).getVoteID().equals(v.getVoteID()))
 						{
 							  
@@ -90,9 +97,22 @@ public class VoteListUI extends JPanel{
 					
 						else
 					    {
-						JOptionPane.showMessageDialog(null, 
+							bindList();
+						    JOptionPane.showMessageDialog(null, 
 				                "This vote has already been canceld!", "Canceled!",JOptionPane.INFORMATION_MESSAGE);
 					   }
+				 }
+				 else
+				 {
+					 bindList();
+					 JOptionPane.showMessageDialog(null, 
+				                "This vote has already been canceld!", "Canceled!",JOptionPane.INFORMATION_MESSAGE);
+				}
+				}
+				catch(Exception e)
+				{
+				   
+				}
 					
 				
 			}
