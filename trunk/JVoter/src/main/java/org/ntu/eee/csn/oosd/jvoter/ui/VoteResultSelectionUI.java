@@ -137,10 +137,13 @@ public class VoteResultSelectionUI extends JPanel{
 		voteButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+		   if( votes.size()>index)
+			   
+				{
 				
-				
-					if(votes.get(index).getVoteID().equals(vote.getVoteID()))
-					{						
+			     if(votes.get(index).getVoteID().equals(vote.getVoteID()))
+			
+				  {						
 						try
 						{
 						    
@@ -166,16 +169,12 @@ public class VoteResultSelectionUI extends JPanel{
 						JOptionPane.showMessageDialog(null, 
 				                "You have successfully replied a vote!", "Congradulations!",JOptionPane.INFORMATION_MESSAGE);
 						  
-						items.remove(index); //remove the item from the VoteListUI after successfully replying it
+						//items.remove(index); //remove the item from the VoteListUI after successfully replying it
 						votes.remove(index); //remove the item from the ArrayList after successfully replying it
 						unRepliedVotesButton.setText("Unreplied Votes["+votes.size()+"]"); //reset the text of the unRepliedVotesButton in MainUI after successfully replying it
 						LOGGER.info("The JVoter has repied a vote named: "+vote.getName()+" to "+vote.getInitiatorIP());
 						
-						Component cmp= arg0.getComponent(); //close the windows
-						  while(!(cmp instanceof JFrame ) || cmp.getParent() !=null ){
-						  cmp = cmp.getParent();
-						  }
-						((JFrame)cmp).dispose();
+						
 						
 					}
 					else
@@ -183,7 +182,25 @@ public class VoteResultSelectionUI extends JPanel{
 						JOptionPane.showMessageDialog(null, 
 				                "This vote has already been canceld!", "Canceled!",JOptionPane.INFORMATION_MESSAGE);
 					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, 
+			                "This vote has already been canceld!", "Canceled!",JOptionPane.INFORMATION_MESSAGE);
+				}
+				
+				items.clear();
+				
+				for(int i = 0; i<votes.size();i++) //display all the unanswered votes
+				{
+					items.addElement(votes.get(i));
 					
+				}
+				
+				Component cmp= arg0.getComponent(); //close the windows
+				  while(!(cmp instanceof JFrame ) || cmp.getParent() !=null ){
+				  cmp = cmp.getParent();
+				  }
+				((JFrame)cmp).dispose();
 				
 			
 				
