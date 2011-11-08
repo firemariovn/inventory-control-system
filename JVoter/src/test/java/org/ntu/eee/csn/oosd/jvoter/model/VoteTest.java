@@ -63,22 +63,5 @@ public class VoteTest extends TestCase {
 		String hostName = "wangyabin";
 		String hostIp = "127.0.0.1";
 		int isInitiator = 1;
-		int isValidate = 1;
-		Date deadline = new Date();
-		
-		tVote.setVoteID(voteID);
-		tVote.setDesc(desc);
-		tVote.setInitiatorIp(initiatorIp);
-		tVote.setDeadline(deadline);
-		tVote.setHostIp(hostIp);
-		tVote.setHostName(hostName);
-		tVote.setIsInitiator(isInitiator);
-		tVote.setIsValidate(isValidate);
-		
-		
-		tVote.add();
-		assertEquals(voteID, tVote.select().getVoteID());
-	    tVote.delete();
-	
 	}
 }
