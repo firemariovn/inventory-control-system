@@ -53,7 +53,7 @@ import java.awt.Panel;
 /**
  * This is the Main Frame of JVoter in UI Layer
  *  
- * @author WangDing
+ *@author WangDing G1101030A
  *
  */
 public class MainUI implements JVoterProtocol {

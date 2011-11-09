@@ -22,33 +22,40 @@ import java.awt.event.WindowEvent;
 
 /**
  * This is the chart component for presentation of vote results.
- * @author WangDing
- *
+ * 
+ * @author WangDing G1101030A
+ * 
  */
 @SuppressWarnings("serial")
 public class VoteResultChartUI extends ApplicationFrame {
 
-
-	
+	/**
+	 * @author WangDing G1101030A
+	 * @param r
+	 */
 	public VoteResultChartUI(VoteResult r) {
-		super("Vote Title : "+r.getName());
-	
+		super("Vote Title : " + r.getName());
+
 		this.setContentPane(createPanel(r));
 	}
-	
-	public void windowClosing(final WindowEvent event) { 
-		 if (event.getWindow() == this) { 
-		  dispose(); 
-		 }
-		} 
 
-	
+	public void windowClosing(final WindowEvent event) {
+		if (event.getWindow() == this) {
+			dispose();
+		}
+	}
+
+	/**
+	 * @author WangDing G1101030A
+	 * @param r
+	 * @return
+	 */
 	private static CategoryDataset createDataSet(VoteResult r) {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        String option1 = r.getOptions().get(0);
-        String option2 = r.getOptions().get(1);
-        String option3 = r.getOptions().get(2);
-        String option4 = r.getOptions().get(3);
+		String option1 = r.getOptions().get(0);
+		String option2 = r.getOptions().get(1);
+		String option3 = r.getOptions().get(2);
+		String option4 = r.getOptions().get(3);
 		dataset.setValue(r.getResult().get(0), option1, option1);
 		dataset.setValue(r.getResult().get(1), option2, option2);
 		dataset.setValue(r.getResult().get(2), option3, option3);
@@ -56,14 +63,21 @@ public class VoteResultChartUI extends ApplicationFrame {
 		return dataset;
 	}
 
-	private static JFreeChart createJFreeChart(CategoryDataset dataset,String title) {
+	/**
+	 * @author WangDing G1101030A
+	 * @param dataset
+	 * @param title
+	 * @return
+	 */
+	private static JFreeChart createJFreeChart(CategoryDataset dataset,
+			String title) {
 		/**
 		 * Construct JFreeChart
 		 */
-	
+
 		JFreeChart jfreeChart = ChartFactory.createBarChart3D(title,
-				"Distribution", "Quantity", dataset, PlotOrientation.VERTICAL, true, false,
-				false);
+				"Distribution", "Quantity", dataset, PlotOrientation.VERTICAL,
+				true, false, false);
 		/**
 		 * Set JFreeChart's Properties
 		 */
@@ -75,13 +89,18 @@ public class VoteResultChartUI extends ApplicationFrame {
 		return jfreeChart;
 	}
 
+	/**
+	 * @author WangDing G1101030A
+	 * @param r
+	 * @return
+	 */
 	public static JPanel createPanel(VoteResult r) {
-		JFreeChart chart = createJFreeChart(createDataSet(r),r.getName());
+		JFreeChart chart = createJFreeChart(createDataSet(r), r.getName());
 		return new ChartPanel(chart);
 	}
 
 	public static void main(String[] args) {
-        //Construct an instance of VoteResult
+		// Construct an instance of VoteResult
 		VoteResult r = new VoteResult();
 		r.setName("What Phone do you want?");
 		ArrayList<String> options = new ArrayList<String>();
@@ -89,15 +108,15 @@ public class VoteResultChartUI extends ApplicationFrame {
 		options.add("iPhone");
 		options.add("BlackBerry");
 		options.add("Adnroid");
-		ArrayList<Integer> result =new ArrayList<Integer>();
+		ArrayList<Integer> result = new ArrayList<Integer>();
 		r.setOptions(options);
 		result.add(200);
 		result.add(300);
 		result.add(400);
 		result.add(900);
 		r.setResult(result);
-		
-		//Pass an instance of VoteResult to the constructor
+
+		// Pass an instance of VoteResult to the constructor
 		VoteResultChartUI chart = new VoteResultChartUI(r);
 		chart.pack();
 		chart.setVisible(true);

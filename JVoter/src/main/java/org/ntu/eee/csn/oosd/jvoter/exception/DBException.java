@@ -2,7 +2,7 @@ package org.ntu.eee.csn.oosd.jvoter.exception;
 
 /**
  * Exception when accessing database
- * @author WangDing
+ * @author WangDing G1101030A
  *
  */
 public class DBException extends Exception {
@@ -14,6 +14,7 @@ public class DBException extends Exception {
 
 	/**
 	 * Constructor
+	 * @author WangDing G1101030A
 	 */
 	public DBException() {
 		super();
@@ -24,6 +25,7 @@ public class DBException extends Exception {
 	 * 
 	 * @param msg
 	 *            Error message
+	 * @author WangDing G1101030A           
 	 */
 	public DBException(String msg) {
 		super(msg);
@@ -36,6 +38,7 @@ public class DBException extends Exception {
 	 *            Error message
 	 * @param t
 	 *            Stack trace
+	 * @author WangDing G1101030A           
 	 */
 	public DBException(String msg, Throwable t) {
 		super(msg, t);

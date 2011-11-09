@@ -6,18 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 
-import org.h2.command.ddl.CreateAggregate;
 import org.ntu.eee.csn.oosd.jvoter.util.DBUtil;
-import org.ntu.eee.csn.oosd.jvoter.util.JVoterProtocol;
-import org.omg.CORBA.TRANSACTION_MODE;
 
 /**
  * An instance of vote is used to save the vote content when initiating a vote

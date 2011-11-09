@@ -6,7 +6,7 @@ import java.util.HashMap;
 /**
  * A VoteResult is used to save final vote results for a vote
  * 
- * @author WangDing
+ * @author WangDing G1101030A
  * 
  */
 public class VoteResult extends Vote {

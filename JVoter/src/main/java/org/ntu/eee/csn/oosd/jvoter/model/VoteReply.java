@@ -17,7 +17,7 @@ import org.ntu.eee.csn.oosd.jvoter.util.DBUtil;
  * An instance of VoteReply is used to save reply data for a vote when selecting
  * a option
  * 
- * @author WangDing
+ * @author WangDing G1101030A
  * 
  */
 public class VoteReply implements Serializable {
