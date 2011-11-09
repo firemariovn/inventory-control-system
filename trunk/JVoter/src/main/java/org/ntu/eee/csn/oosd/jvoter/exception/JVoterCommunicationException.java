@@ -2,7 +2,7 @@ package org.ntu.eee.csn.oosd.jvoter.exception;
 
 /**
  * Exception during JVoter communication
- * @author WangDing
+ * @author WangDing G1101030A
  *
  */
 public class JVoterCommunicationException extends Exception{
@@ -24,6 +24,7 @@ public class JVoterCommunicationException extends Exception{
 	 * 
 	 * @param msg
 	 *            Error message
+	 * @author WangDing G1101030A
 	 */
 	public JVoterCommunicationException(String msg) {
 		super(msg);
@@ -36,6 +37,7 @@ public class JVoterCommunicationException extends Exception{
 	 *            Error message
 	 * @param t
 	 *            Stack trace
+	 * @author WangDing G1101030A           
 	 */
 	public JVoterCommunicationException(String msg, Throwable t) {
 		super(msg, t);

@@ -1,5 +1,10 @@
 package org.ntu.eee.csn.oosd.jvoter.util;
 
+/**
+ * 
+ *@author WangDing G1101030A
+ *
+ */
 public interface JVoterProtocol {
 	
 	

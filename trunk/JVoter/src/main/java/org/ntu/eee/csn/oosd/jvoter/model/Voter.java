@@ -9,7 +9,7 @@ import org.ntu.eee.csn.oosd.jvoter.util.JVoterProtocol;
 /**
  * 
  * 
- * @author WangDing
+ *@author WangDing G1101030A
  * 
  */
 public class Voter implements JVoterProtocol{
