@@ -3,6 +3,7 @@ package org.ntu.eee.csn.oosd.jvoter.model;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import junit.framework.TestCase;
@@ -14,7 +15,7 @@ import org.apache.log4j.Logger;
 
 /**
  * 
- * @author WangDing
+ * @author WangYabin
  *
  */
 public class VoteTest extends TestCase {
@@ -55,13 +56,42 @@ public class VoteTest extends TestCase {
 
 	public void testVoteTable(){
 		LOGGER.info("testVoteTable");
-		//fail("Not yet implemented");
+		
+		
 		Vote tVote = new Vote();
 		String voteID = tVote.getUniqueID();
+		String name = "test_01";
 		String desc = "which unit test do you like?";
-		String initiatorIp = "127.0.0.0.1";
-		String hostName = "wangyabin";
-		String hostIp = "127.0.0.1";
-		int isInitiator = 1;
+		String initiatorIP = "127.0.0.0.1";
+		String initiator = "wangyabin";
+		Date deadline = new Date();
+		boolean isInitiator = true;
+		boolean isCanceled = false;
+		boolean isReply = false;
+		String option1 = "a";
+		String option2 = "b";
+		String option3 = "c";
+		String option4 = "d";
+		ArrayList<String> options = new ArrayList<String>();
+		options.add(option1);
+		options.add(option2);
+		options.add(option3);
+		options.add(option4);
+		
+		tVote.setVoteID(voteID);
+		tVote.setName(name);
+		tVote.setDesc(desc);
+		tVote.setInitiatorIP(initiatorIP);
+		tVote.setInitiator(initiator);
+		tVote.setDeadline(deadline);
+		tVote.setIsInitiator(isInitiator);
+		tVote.setCanceled(isCanceled);
+		tVote.setReply(isReply);
+		tVote.setOptions(options);
+		
+		tVote.add();
+		assertEquals(voteID, tVote.select().getVoteID());
+		tVote.delete();
+		
 	}
 }
