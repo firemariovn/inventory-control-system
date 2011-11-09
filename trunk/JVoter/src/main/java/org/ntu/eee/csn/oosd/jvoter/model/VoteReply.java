@@ -6,7 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.ntu.eee.csn.oosd.jvoter.util.DBUtil;
@@ -47,6 +49,7 @@ public class VoteReply implements Serializable {
 	  this.replierHost=ip;
 			  
 	}
+	public VoteReply(){}
 
 	public String getVoteID() {
 		return voteID;
@@ -89,6 +92,45 @@ public class VoteReply implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
-
+	public VoteReply select(){
+		VoteReply tmpVoteReply = new VoteReply();
+		
+		try {
+			sql = "select * from votereply where voteid=?";
+			conn = db.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1,this.voteID);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				tmpVoteReply.setVoteID(rs.getString("voteid"));
+				tmpVoteReply.setReplierHost(rs.getString("replierHost"));
+				tmpVoteReply.setChoice(rs.getInt("choice"));
+			}
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return tmpVoteReply;
+	}
+	public void delete(){
+		try {
+			sql = "delete from votereply where voteid=?";
+			conn = db.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1,this.voteID);
+			ps.executeUpdate();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
