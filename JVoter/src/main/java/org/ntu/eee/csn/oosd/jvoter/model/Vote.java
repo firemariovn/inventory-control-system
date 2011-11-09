@@ -22,7 +22,7 @@ import org.omg.CORBA.TRANSACTION_MODE;
 /**
  * An instance of vote is used to save the vote content when initiating a vote
  * 
- * @author WangDing
+ * @author WangYabin G1101031G
  * 
  */
 public class Vote implements Serializable {
@@ -205,6 +205,50 @@ public class Vote implements Serializable {
 		}
 	}
 	
+	public Vote select(){
+		Vote tmpVote = new Vote();
+		ArrayList<String> tmpoptions = new ArrayList<String>();
+		
+		try {
+			sql = "select * from vote where voteid=?";
+			conn = db.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1,this.voteID);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				tmpVote.setVoteID(rs.getString("voteid"));
+				tmpVote.setDesc(rs.getString("desc"));
+				tmpVote.setInitiatorIP(rs.getString("initiatorip"));
+				try { 
+					tmpVote.setDeadline(format.parse(rs.getString("deadline")));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				tmpVote.setInitiator(rs.getString("initiator"));
+				tmpVote.setName(rs.getString("name"));
+				tmpVote.setIsInitiator(rs.getBoolean("isInitiator"));
+				tmpVote.setCanceled(rs.getBoolean("iscanceled"));
+				tmpVote.setReply(rs.getBoolean("isreply"));
+				
+				tmpoptions.add(rs.getString("option1"));
+				tmpoptions.add(rs.getString("option2"));
+				tmpoptions.add(rs.getString("option3"));
+				tmpoptions.add(rs.getString("option4"));
+				tmpVote.setOptions(tmpoptions);
+			}
+			
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return tmpVote;
+	}
 
 	public static ArrayList<Vote> getUnAnsweredVotes(){ 
 		ArrayList<Vote> vlist = new ArrayList<Vote>();
@@ -256,18 +300,6 @@ public class Vote implements Serializable {
 	
 	public static ArrayList<VoteResult> getAllJoinedVotes(){
 		ArrayList<VoteResult> rlist = new ArrayList<VoteResult>();
-		//ArrayList<String> options = new ArrayList<String>();
-		//options.add("");
-		//options.add("");
-		//options.add("");
-		//options.add("");
-		/*
-		ArrayList<Integer> optionRes = new ArrayList<Integer>(4);
-		optionRes.add(0);
-		optionRes.add(0);
-		optionRes.add(0);
-		optionRes.add(0);
-		*/
 		PreparedStatement psRes = null;
 		ResultSet rsRes = null;
 		String sql = "select * from vote where isInitiator=false";
