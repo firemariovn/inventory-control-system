@@ -1,7 +1,5 @@
 package org.ntu.eee.csn.oosd.jvoter.ui;
 
-//This class is used by users to initiate a new vote
-//@Author: LU Mukai G1101045F
 
 
 import java.io.Serializable;
@@ -55,7 +53,12 @@ import java.awt.event.MouseEvent;
 import javax.swing.JRadioButton;
 import javax.swing.UIManager;
 import java.awt.SystemColor;;
-
+/**
+ * This UI is used for users to initiate a new vote
+ *  
+ *@author LU Mukai G1101045F
+ *
+ */
 public class VoteInitiationUI extends JPanel{
 	
 	/**

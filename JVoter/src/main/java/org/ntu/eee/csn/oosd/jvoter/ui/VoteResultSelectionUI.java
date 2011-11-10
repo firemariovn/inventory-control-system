@@ -38,7 +38,12 @@ import org.ntu.eee.csn.oosd.jvoter.model.VoteReply;
 import org.ntu.eee.csn.oosd.jvoter.model.VoteResult;
 import org.ntu.eee.csn.oosd.jvoter.util.JVoterProtocol;
 import java.awt.SystemColor;
-
+/**
+ * This UI is used for users to reply a selected unanswered vote or check a already replied vote info
+ *  
+ *@author LU Mukai G1101045F
+ *
+ */
 public class VoteResultSelectionUI extends JPanel{
 	
 	private static Logger LOGGER = Logger.getLogger(VoteResultSelectionUI.class);
@@ -57,7 +62,7 @@ public class VoteResultSelectionUI extends JPanel{
 	private ArrayList<Vote> votes;
 	private JPanel panel_1;
 	
-	public  VoteResultSelectionUI(VoteResult v)
+	public  VoteResultSelectionUI(VoteResult v) //constructor for a UI to check a already replied vote info
 	{
 		this();
 		lblVoteName.setText(v.getName());
@@ -71,6 +76,7 @@ public class VoteResultSelectionUI extends JPanel{
 			lItems.addElement(ops.get(i));
 		}
 		lblDeadline.setText(v.getDeadline().toString());
+		//hide the reply button
 		panel_1.setVisible(false);
 		listOptions.setEnabled(false);
 		
@@ -82,11 +88,11 @@ public class VoteResultSelectionUI extends JPanel{
 			if(result.get(i)==1)
 			{
 				
-				listOptions.setSelectedIndex(i);
+				listOptions.setSelectedIndex(i); //show which option the user has voted fot
 			}
 		}
 	}
-	
+	//constructor for a UI to reply a selected unanswered vote
 	public  VoteResultSelectionUI(Vote v, DatagramSocket socket,DefaultListModel items,int index,JButton unRepliedVotesButton,ArrayList<Vote> votes)
 	{
 		this();
@@ -141,7 +147,7 @@ public class VoteResultSelectionUI extends JPanel{
 			   
 				{
 				
-			     if(votes.get(index).getVoteID().equals(vote.getVoteID()))
+			     if(votes.get(index).getVoteID().equals(vote.getVoteID())) //ensure this vote has not been canceled yet
 			
 				  {						
 						try
