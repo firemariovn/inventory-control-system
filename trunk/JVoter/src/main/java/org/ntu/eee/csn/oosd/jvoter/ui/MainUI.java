@@ -246,9 +246,14 @@ public class MainUI implements JVoterProtocol {
 	
 	}
 	
-	/*
-	 * background functions*/
-	 public void broadcast(final int flag) {
+	/**
+	 * This is the Main Frame of JVoter in background function layer
+	 *  
+	 *@author ZHAO LONGWEN G1101055D
+	 *
+	 */
+	 public void broadcast(final int flag) /* used to broadcast online message and off line message*/
+	 {
 		    
 		    	System.out.println("1");
 	        try {
@@ -263,7 +268,7 @@ public class MainUI implements JVoterProtocol {
 		    
 		 
 		    }
-	 public void Multicastlisten(){
+	 public void Multicastlisten(){/*creat a new thread to listen to multicast message*/
 		 System.out.println("2");
 	    	try {
 	            ds = new MulticastSocket(MULTICAST_PORT);
@@ -293,7 +298,7 @@ public class MainUI implements JVoterProtocol {
 	                             String uid = msg.substring(1, 33);
 
 	                             switch (msgType) {
-	                             case 0:
+	                             case 0:// online message
 	                                 if (!userTable.containsKey(uid)) {
 	                                	 Voter user = new Voter();
 	                                     user.setGuid(uid);
@@ -310,7 +315,7 @@ public class MainUI implements JVoterProtocol {
 	                                		 //String username=user.getInetAddress().substring(0, user.getInetAddress().indexOf('.'));
 	                                		 //user.setHostName(username);
 	                                	 }
-	                                     addUser(user);
+	                                     addUser(user);// add user to userlist
 	                                      System.out.println("New User Get Online");
 	                                      System.out.println(user.getGuid());
 	                                      System.out.println(guid+"aa");
@@ -326,7 +331,7 @@ public class MainUI implements JVoterProtocol {
 	                                 	System.out.println("isExisted");
 	                                 }
 	                                 break;
-	                             case 1:
+	                             case 1:// off line message
 	                                 //removeUser(uid);
 	                            	 Voter user = new Voter();
                                      user.setGuid(uid);
@@ -343,9 +348,9 @@ public class MainUI implements JVoterProtocol {
 	                                		 //String username=user.getInetAddress().substring(0, user.getInetAddress().indexOf('.'));
 	                                		 //user.setHostName(username);
 	                                	 }
-                                	 removeUser(user);
+                                	 removeUser(user);// remove user from userlist
 	                                 break;
-	                             case 2:
+	                             case 2:// fresh message
 	                                 if (!guid.equals(uid)) {
 	                                     
 	                                     byte[] data = (USER_ON_LINE + guid ).getBytes("UTF-8");
@@ -362,7 +367,7 @@ public class MainUI implements JVoterProtocol {
 	             }
 	         }.start();
 	    }
-	    public void addUser(Voter user) {
+	    public void addUser(Voter user) {// add user to online userlist 
 	 
 	    	  
 	            userTable.put(user.getGuid(), user);
@@ -374,7 +379,7 @@ public class MainUI implements JVoterProtocol {
 	             voters.add(user);
 	    	
 	    }
-	    public void removeUser(Voter user){
+	    public void removeUser(Voter user){// remove user from online userlist 
 	    	userTable.remove(user.getGuid());
 	    	usernum--;
 	    	DefaultListModel voterlist=(DefaultListModel)onlineUserList.getModel();
@@ -447,7 +452,7 @@ public class MainUI implements JVoterProtocol {
 					                		vr.add();
 					                		break;
 					                		
-					                	case 0:
+					                	/*@author ZHAO LONGWEN G1101055D*/case 0://handle the online message from destination
 					                		String uid=seg[1].toString();
 			                                 if (!userTable.containsKey(uid)) {
 			                                	 Voter user = new Voter();
