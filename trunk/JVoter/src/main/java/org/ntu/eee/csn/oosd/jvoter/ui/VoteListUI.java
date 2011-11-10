@@ -1,7 +1,6 @@
 package org.ntu.eee.csn.oosd.jvoter.ui;
 
-//This class is used by users to view all the unanswered votes
-//@Author: LU Mukai G1101045F
+
 
 import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
@@ -28,7 +27,12 @@ import java.awt.event.MouseEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 import java.awt.Color;
-
+/**
+ * This UI is used for users to check all unanswered votes
+ *  
+ *@author LU Mukai G1101045F
+ *
+ */
 public class VoteListUI extends JPanel{
 	
 	private ArrayList<Vote> votes;
@@ -85,9 +89,10 @@ public class VoteListUI extends JPanel{
 				 if(votes.size()>index)
 				 {
 						if(votes.get(index).getVoteID().equals(v.getVoteID()))
-						{
+						{ 
 							  
-				              VoteResultSelectionUI vlUI = new VoteResultSelectionUI(v,socket,lItems,index,unRepliedVotesButton,votes);
+				             //open the reply UI 
+							  VoteResultSelectionUI vlUI = new VoteResultSelectionUI(v,socket,lItems,index,unRepliedVotesButton,votes);
 	                          JFrame jfVI = new JFrame();
 	                          jfVI.getContentPane().add(vlUI);
 	                          jfVI.setBounds(0, 0, 465,520);

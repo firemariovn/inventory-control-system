@@ -19,7 +19,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 import javax.swing.JButton;
-
+/**
+ * This UI is used for users to check all the votes they have participated in or initiated
+ *  
+ *@author LU Mukai G1101045F
+ *
+ */
 public class VoteView extends JFrame {
 	
 	private DefaultListModel lItemsInitiated= new DefaultListModel();
@@ -36,12 +41,12 @@ public class VoteView extends JFrame {
 		this.voteInitiated=voteInitiated;
 		this.voteParticipated=voteParticipated;
 		
-		for(int i = 0; i<voteInitiated.size();i++) //display all the unanswered votes
+		for(int i = 0; i<voteInitiated.size();i++) //display all the votes they initiated
 		{
 			  lItemsInitiated.addElement(voteInitiated.get(i));	
 	    }
 		
-		for(int i = 0; i<voteParticipated.size();i++) //display all the unanswered votes
+		for(int i = 0; i<voteParticipated.size();i++) //display all the votes they have participated in
 		{
 			  lItemsParticipated.addElement(voteParticipated.get(i));	
 	    }
@@ -77,14 +82,14 @@ public class VoteView extends JFrame {
 				 
 				 switch(tabbedPane.getSelectedIndex())
 				 { 
-				 case 0:
+				 case 0: //view a selected vote initiated by this user
 					 VoteResult v =(VoteResult)listInitiated.getModel().getElementAt(listInitiated.getSelectedIndex());
 					 VoteResultChartUI chart = new VoteResultChartUI(v);
 					 chart.pack();
 					 chart.setVisible(true);
 					 break;
 					 
-				 case 1:
+				 case 1: //view a selected vote which this user has participated in
 					  VoteResult v2 =(VoteResult)listparticipated.getModel().getElementAt(listparticipated.getSelectedIndex());
 					  VoteResultSelectionUI vlUI = new VoteResultSelectionUI(v2);
 		              JFrame jfVI = new JFrame();

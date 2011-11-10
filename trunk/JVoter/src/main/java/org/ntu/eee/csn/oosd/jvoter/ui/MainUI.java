@@ -144,6 +144,13 @@ public class MainUI implements JVoterProtocol {
 	           
 			}
 			@Override
+			
+			/**
+			 * This function "windowClosing" is used to prompt users that all votes will be canceled when they click the close button of JVOTER
+			 *  
+			 *@author LU Mukai G1101045F
+			 *
+			 */
 			public void windowClosing(WindowEvent e) {
 				Object[] options = { "Yes", "No" };
 			    JOptionPane jp = new JOptionPane("All the votes which haven't been replied will be canceled, still wanna close?", JOptionPane.QUESTION_MESSAGE,
@@ -210,6 +217,12 @@ public class MainUI implements JVoterProtocol {
 		viewAllButton.setBackground(Color.WHITE);
 		viewAllButton.setBounds(140, 470, 119, 23);
 		frame.getContentPane().add(viewAllButton);
+		/**
+		 * Open the VoteView UI
+		 *  
+		 *@author LU Mukai G1101045F
+		 *
+		 */
 		viewAllButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -230,6 +243,13 @@ public class MainUI implements JVoterProtocol {
 				
 			}
 		});
+		
+		/**
+		 * Open the VoteList UI
+		 *  
+		 *@author LU Mukai G1101045F
+		 *
+		 */
 		unRepliedVotesButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -427,6 +447,12 @@ public class MainUI implements JVoterProtocol {
 					                
 					                switch(flag)
 					                {
+					                /**
+					        		 * Get the new vote user has been invited for
+					        		 *  
+					        		 *@author LU Mukai G1101045F
+					        		 *
+					        		 */
 					                	case JVoterProtocol.NEW_VOTE:  //vote invitation message
 					                		ArrayList<String> op = new ArrayList<String>();
 					                		op.add(seg[4]);
@@ -443,7 +469,12 @@ public class MainUI implements JVoterProtocol {
 					        		                "You have been invited to a new vote", "New Vote",JOptionPane.INFORMATION_MESSAGE);
 							                v.add();//add v to database
 							                break;
-					                		
+							                /**
+							        		 * Get the a vote reply info from other users
+							        		 *  
+							        		 *@author LU Mukai G1101045F
+							        		 *
+							        		 */	
 					                	case JVoterProtocol.REPLY_VOTE:  //vote reply message 
 					                		VoteReply vr = new VoteReply(seg[1],Integer.valueOf(seg[2]),seg[3]);
 					                		
@@ -521,7 +552,12 @@ public class MainUI implements JVoterProtocol {
 	             jfVI.setVisible(true);
 	         }
 		 };
-		 
+		 /**
+ 		 * This function "startTimer()" is used to scan the deadline all the unanswered votes the user has received, and send the default reply once the deadline has been exceeded
+ 		 *  
+ 		 *@author LU Mukai G1101045F
+ 		 *
+ 		 */
 		 public void startTimer()
 		 {
 			 
